@@ -2,30 +2,27 @@ package main
 
 import (
 	"fmt"
-	"io"
 
-	"github.com/golang/protobuf/proto"
 	WompattiService "github.com/koodinikkarit/wompatti/wompatti_service"
 	"golang.org/x/net/context"
 )
 
 type server struct{}
 
-func (s *server) addComputer(ctx context.Context, in WompattiService.AddComputer) WompattiService.ComputerAdded {
-
+func (s *server) addComputer(ctx context.Context, in WompattiService.AddComputerRequest) (*WompattiService.AddComputerResponse, error) {
+	return &WompattiService.AddComputerResponse{}, nil
 }
 
-func (s *server) fetchComputers(fetchComputers WompattiService.FetchComputers, stream WompattiService.FetchComputers) error {
-	stream.
-
+func (s *server) fetchComputers(fetchComputers WompattiService.FetchComputersRequest, stream WompattiService.Wompatti_FetchComputersServer) error {
+	return nil
 }
 
-func (s *server) fetchComputerById(ctx context.Context, in WompattiService.FetchComputerById) {
-
+func (s *server) fetchComputerByID(ctx context.Context, in WompattiService.FetchComputerByIdRequest) (*WompattiService.FetchComputerByIdResponse, error) {
+	return &WompattiService.FetchComputerByIdResponse{}, nil
 }
 
-func (s *server) wakeup(ctx context.Context, in WompattiService.Wakeup) {
-
+func (s *server) wakeup(ctx context.Context, in WompattiService.WakeupRequest) (*WompattiService.WakeupResponse, error) {
+	return &WompattiService.WakeupResponse{}, nil
 }
 
 func main() {
