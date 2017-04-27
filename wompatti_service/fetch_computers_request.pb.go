@@ -21,7 +21,7 @@ type FetchComputersRequest struct {
 func (m *FetchComputersRequest) Reset()                    { *m = FetchComputersRequest{} }
 func (m *FetchComputersRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchComputersRequest) ProtoMessage()               {}
-func (*FetchComputersRequest) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{0} }
+func (*FetchComputersRequest) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{0} }
 
 func (m *FetchComputersRequest) GetOffset() uint32 {
 	if m != nil {
@@ -41,9 +41,9 @@ func init() {
 	proto.RegisterType((*FetchComputersRequest)(nil), "WompattiService.FetchComputersRequest")
 }
 
-func init() { proto.RegisterFile("fetch_computers_request.proto", fileDescriptor5) }
+func init() { proto.RegisterFile("fetch_computers_request.proto", fileDescriptor7) }
 
-var fileDescriptor5 = []byte{
+var fileDescriptor7 = []byte{
 	// 124 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4d, 0x4b, 0x2d, 0x49,
 	0xce, 0x88, 0x4f, 0xce, 0xcf, 0x2d, 0x28, 0x2d, 0x49, 0x2d, 0x2a, 0x8e, 0x2f, 0x4a, 0x2d, 0x2c,

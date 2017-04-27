@@ -9,6 +9,8 @@ It is generated from these files:
 	add_computer_request.proto
 	add_computer_response.proto
 	computer.proto
+	edit_computer_request.proto
+	edit_computer_response.proto
 	fetch_computer_by_id_request.proto
 	fetch_computer_by_id_response.proto
 	fetch_computers_request.proto
@@ -20,6 +22,8 @@ It has these top-level messages:
 	AddComputerRequest
 	AddComputerResponse
 	Computer
+	EditComputerRequest
+	EditComputerResponse
 	FetchComputerByIdRequest
 	FetchComputerByIdResponse
 	FetchComputersRequest

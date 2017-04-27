@@ -20,7 +20,7 @@ type WakeupRequest struct {
 func (m *WakeupRequest) Reset()                    { *m = WakeupRequest{} }
 func (m *WakeupRequest) String() string            { return proto.CompactTextString(m) }
 func (*WakeupRequest) ProtoMessage()               {}
-func (*WakeupRequest) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
+func (*WakeupRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{0} }
 
 func (m *WakeupRequest) GetComputerId() uint32 {
 	if m != nil {
@@ -33,9 +33,9 @@ func init() {
 	proto.RegisterType((*WakeupRequest)(nil), "WompattiService.WakeupRequest")
 }
 
-func init() { proto.RegisterFile("wakeup_request.proto", fileDescriptor6) }
+func init() { proto.RegisterFile("wakeup_request.proto", fileDescriptor8) }
 
-var fileDescriptor6 = []byte{
+var fileDescriptor8 = []byte{
 	// 101 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x29, 0x4f, 0xcc, 0x4e,
 	0x2d, 0x2d, 0x88, 0x2f, 0x4a, 0x2d, 0x2c, 0x4d, 0x2d, 0x2e, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9,

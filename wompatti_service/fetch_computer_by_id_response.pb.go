@@ -19,15 +19,15 @@ type FetchComputerByIdResponse struct {
 func (m *FetchComputerByIdResponse) Reset()                    { *m = FetchComputerByIdResponse{} }
 func (m *FetchComputerByIdResponse) String() string            { return proto.CompactTextString(m) }
 func (*FetchComputerByIdResponse) ProtoMessage()               {}
-func (*FetchComputerByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{0} }
+func (*FetchComputerByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
 
 func init() {
 	proto.RegisterType((*FetchComputerByIdResponse)(nil), "WompattiService.FetchComputerByIdResponse")
 }
 
-func init() { proto.RegisterFile("fetch_computer_by_id_response.proto", fileDescriptor4) }
+func init() { proto.RegisterFile("fetch_computer_by_id_response.proto", fileDescriptor6) }
 
-var fileDescriptor4 = []byte{
+var fileDescriptor6 = []byte{
 	// 100 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x4e, 0x4b, 0x2d, 0x49,
 	0xce, 0x88, 0x4f, 0xce, 0xcf, 0x2d, 0x28, 0x2d, 0x49, 0x2d, 0x8a, 0x4f, 0xaa, 0x8c, 0xcf, 0x4c,
