@@ -6,6 +6,8 @@ import (
 
 	"github.com/koodinikkarit/wompatti/db"
 	WompattiService "github.com/koodinikkarit/wompatti/wompatti_service"
+
+	_ "github.com/jinzhu/gorm/dialects/mssql"
 )
 
 type server struct{}
