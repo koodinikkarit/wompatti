@@ -1,10 +1,11 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
-	"github.com/koodinikkarit/wompatti/db"
+	"golang.org/x/net/context"
+
+	"github.com/koodinikkarit/wompatti/wompatti"
 	WompattiService "github.com/koodinikkarit/wompatti/wompatti_service"
 
 	_ "github.com/jinzhu/gorm/dialects/mssql"
@@ -37,42 +38,15 @@ func (s *server) Wakeup(ctx context.Context, in *WompattiService.WakeupRequest) 
 	return &WompattiService.WakeupResponse{}, nil
 }
 
-type computer struct {
-	id   int
-	name string
-	mac  string
-}
-
 func main() {
-	fmt.Println("Hello, 世界")
-	var x float64
-	x = 20.5
-	fmt.Println("hello", x)
+	context := wompatti.CreateContext(
+		"jaska",
+		"asdf321",
+		"localhost",
+		"3306",
+		"wompatti",
+		"7856",
+	)
 
-	context := db.New()
-
-	context.Add()
-
-	// l := list.New()
-
-	// l.PushBack(&Book{ad: 5})
-
-	// for i := l.Front(); i != nil; i = i.Next() {
-	// 	fmt.Println(i.Value.(*Book).ad)
-	// }
-
-	/*
-		lis, err := net.Listen("tcp", ":7856")
-		if err != nil {
-			grpclog.Fatalf("failed to listen: %v", err)
-		}
-
-		s := grpc.NewServer()
-		WompattiService.RegisterWompattiServer(s, &server{})
-
-		// Register reflection service on gRPC server.
-		reflection.Register(s)
-		if err := s.Serve(lis); err != nil {
-			log.Fatalf("failed to serve: %v", err)
-		}*/
+	context.Start()
 }
