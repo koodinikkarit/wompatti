@@ -14,6 +14,8 @@ It is generated from these files:
 	fetch_computer_by_id_request.proto
 	fetch_computer_by_id_response.proto
 	fetch_computers_request.proto
+	passive_computer_request.proto
+	passive_computer_response.proto
 	wakeup_request.proto
 	wakeup_response.proto
 	wompatti_service.proto
@@ -27,6 +29,8 @@ It has these top-level messages:
 	FetchComputerByIdRequest
 	FetchComputerByIdResponse
 	FetchComputersRequest
+	PassiveComputerRequest
+	PassiveComputerResponse
 	WakeupRequest
 	WakeupResponse
 */

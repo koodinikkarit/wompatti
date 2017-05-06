@@ -19,15 +19,15 @@ type WakeupResponse struct {
 func (m *WakeupResponse) Reset()                    { *m = WakeupResponse{} }
 func (m *WakeupResponse) String() string            { return proto.CompactTextString(m) }
 func (*WakeupResponse) ProtoMessage()               {}
-func (*WakeupResponse) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{0} }
+func (*WakeupResponse) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{0} }
 
 func init() {
 	proto.RegisterType((*WakeupResponse)(nil), "WompattiService.WakeupResponse")
 }
 
-func init() { proto.RegisterFile("wakeup_response.proto", fileDescriptor9) }
+func init() { proto.RegisterFile("wakeup_response.proto", fileDescriptor11) }
 
-var fileDescriptor9 = []byte{
+var fileDescriptor11 = []byte{
 	// 79 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2d, 0x4f, 0xcc, 0x4e,
 	0x2d, 0x2d, 0x88, 0x2f, 0x4a, 0x2d, 0x2e, 0xc8, 0xcf, 0x2b, 0x4e, 0xd5, 0x2b, 0x28, 0xca, 0x2f,
