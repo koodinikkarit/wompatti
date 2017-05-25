@@ -19,15 +19,15 @@ type PassiveComputerRequest struct {
 func (m *PassiveComputerRequest) Reset()                    { *m = PassiveComputerRequest{} }
 func (m *PassiveComputerRequest) String() string            { return proto.CompactTextString(m) }
 func (*PassiveComputerRequest) ProtoMessage()               {}
-func (*PassiveComputerRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{0} }
+func (*PassiveComputerRequest) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{0} }
 
 func init() {
 	proto.RegisterType((*PassiveComputerRequest)(nil), "WompattiService.PassiveComputerRequest")
 }
 
-func init() { proto.RegisterFile("passive_computer_request.proto", fileDescriptor8) }
+func init() { proto.RegisterFile("passive_computer_request.proto", fileDescriptor9) }
 
-var fileDescriptor8 = []byte{
+var fileDescriptor9 = []byte{
 	// 91 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x2b, 0x48, 0x2c, 0x2e,
 	0xce, 0x2c, 0x4b, 0x8d, 0x4f, 0xce, 0xcf, 0x2d, 0x28, 0x2d, 0x49, 0x2d, 0x8a, 0x2f, 0x4a, 0x2d,

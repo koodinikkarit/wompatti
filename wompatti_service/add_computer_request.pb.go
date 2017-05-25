@@ -14,6 +14,7 @@ It is generated from these files:
 	fetch_computer_by_id_request.proto
 	fetch_computer_by_id_response.proto
 	fetch_computers_request.proto
+	keijo.proto
 	passive_computer_request.proto
 	passive_computer_response.proto
 	wakeup_request.proto
@@ -24,11 +25,26 @@ It has these top-level messages:
 	AddComputerRequest
 	AddComputerResponse
 	Computer
+	RemoveComputerRequest
+	RemoveComputerResponse
 	EditComputerRequest
 	EditComputerResponse
 	FetchComputerByIdRequest
 	FetchComputerByIdResponse
 	FetchComputersRequest
+	Keijo
+	AddKeijoRequest
+	AddKeijoResponse
+	TurnOnCecDeviceRequest
+	TurnOnCecDeviceResponse
+	ChangeKeijoSourceRequest
+	ChangeKeijoSourceResponse
+	ShutDownCecDeviceRequest
+	ShutDownCecDeviceResponse
+	FetchCecDevicePowerStatusRequest
+	FetchCecDevicePowerStatusResponse
+	FetchCecTvDeviceSourceByKeijoIdRequest
+	FetchCecTvDeviceSourceByKeijoIdResponse
 	PassiveComputerRequest
 	PassiveComputerResponse
 	WakeupRequest
