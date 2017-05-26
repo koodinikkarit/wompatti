@@ -35,14 +35,21 @@ It has these top-level messages:
 	Keijo
 	AddKeijoRequest
 	AddKeijoResponse
+	EditKeijoRequest
+	EditKeijoResponse
+	FetchKeijosRequest
+	FetchKeijoByIdRequest
+	FetchKeijoByIdResponse
+	RemoveKeijoRequest
+	RemoveKeijoResponse
 	TurnOnCecDeviceRequest
 	TurnOnCecDeviceResponse
 	ChangeKeijoSourceRequest
 	ChangeKeijoSourceResponse
 	ShutDownCecDeviceRequest
 	ShutDownCecDeviceResponse
-	FetchCecDevicePowerStatusRequest
-	FetchCecDevicePowerStatusResponse
+	FetchCecDevicePowerStatusByKeijoIdRequest
+	FetchCecDevicePowerStatusByKeijoIdResponse
 	FetchCecTvDeviceSourceByKeijoIdRequest
 	FetchCecTvDeviceSourceByKeijoIdResponse
 	PassiveComputerRequest

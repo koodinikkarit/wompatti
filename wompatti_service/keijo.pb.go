@@ -117,7 +117,6 @@ func (m *Keijo) GetPort() string {
 }
 
 type AddKeijoRequest struct {
-	Slug string `protobuf:"bytes,1,opt,name=slug" json:"slug,omitempty"`
 	Name string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
 	Ip   string `protobuf:"bytes,3,opt,name=ip" json:"ip,omitempty"`
 	Port string `protobuf:"bytes,4,opt,name=port" json:"port,omitempty"`
@@ -127,13 +126,6 @@ func (m *AddKeijoRequest) Reset()                    { *m = AddKeijoRequest{} }
 func (m *AddKeijoRequest) String() string            { return proto.CompactTextString(m) }
 func (*AddKeijoRequest) ProtoMessage()               {}
 func (*AddKeijoRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{1} }
-
-func (m *AddKeijoRequest) GetSlug() string {
-	if m != nil {
-		return m.Slug
-	}
-	return ""
-}
 
 func (m *AddKeijoRequest) GetName() string {
 	if m != nil {
@@ -172,6 +164,142 @@ func (m *AddKeijoResponse) GetKeijo() *Keijo {
 	return nil
 }
 
+type EditKeijoRequest struct {
+	KeijoId uint32 `protobuf:"varint,1,opt,name=keijoId" json:"keijoId,omitempty"`
+	Name    string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	Ip      string `protobuf:"bytes,3,opt,name=ip" json:"ip,omitempty"`
+	Port    string `protobuf:"bytes,4,opt,name=port" json:"port,omitempty"`
+}
+
+func (m *EditKeijoRequest) Reset()                    { *m = EditKeijoRequest{} }
+func (m *EditKeijoRequest) String() string            { return proto.CompactTextString(m) }
+func (*EditKeijoRequest) ProtoMessage()               {}
+func (*EditKeijoRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{3} }
+
+func (m *EditKeijoRequest) GetKeijoId() uint32 {
+	if m != nil {
+		return m.KeijoId
+	}
+	return 0
+}
+
+func (m *EditKeijoRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *EditKeijoRequest) GetIp() string {
+	if m != nil {
+		return m.Ip
+	}
+	return ""
+}
+
+func (m *EditKeijoRequest) GetPort() string {
+	if m != nil {
+		return m.Port
+	}
+	return ""
+}
+
+type EditKeijoResponse struct {
+	Keijo *Keijo `protobuf:"bytes,1,opt,name=keijo" json:"keijo,omitempty"`
+}
+
+func (m *EditKeijoResponse) Reset()                    { *m = EditKeijoResponse{} }
+func (m *EditKeijoResponse) String() string            { return proto.CompactTextString(m) }
+func (*EditKeijoResponse) ProtoMessage()               {}
+func (*EditKeijoResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{4} }
+
+func (m *EditKeijoResponse) GetKeijo() *Keijo {
+	if m != nil {
+		return m.Keijo
+	}
+	return nil
+}
+
+type FetchKeijosRequest struct {
+	Offset uint32 `protobuf:"varint,1,opt,name=offset" json:"offset,omitempty"`
+	Limit  uint32 `protobuf:"varint,2,opt,name=limit" json:"limit,omitempty"`
+}
+
+func (m *FetchKeijosRequest) Reset()                    { *m = FetchKeijosRequest{} }
+func (m *FetchKeijosRequest) String() string            { return proto.CompactTextString(m) }
+func (*FetchKeijosRequest) ProtoMessage()               {}
+func (*FetchKeijosRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{5} }
+
+func (m *FetchKeijosRequest) GetOffset() uint32 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+func (m *FetchKeijosRequest) GetLimit() uint32 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
+}
+
+type FetchKeijoByIdRequest struct {
+	KeijoId uint32 `protobuf:"varint,1,opt,name=keijoId" json:"keijoId,omitempty"`
+}
+
+func (m *FetchKeijoByIdRequest) Reset()                    { *m = FetchKeijoByIdRequest{} }
+func (m *FetchKeijoByIdRequest) String() string            { return proto.CompactTextString(m) }
+func (*FetchKeijoByIdRequest) ProtoMessage()               {}
+func (*FetchKeijoByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{6} }
+
+func (m *FetchKeijoByIdRequest) GetKeijoId() uint32 {
+	if m != nil {
+		return m.KeijoId
+	}
+	return 0
+}
+
+type FetchKeijoByIdResponse struct {
+	Keijo *Keijo `protobuf:"bytes,1,opt,name=keijo" json:"keijo,omitempty"`
+}
+
+func (m *FetchKeijoByIdResponse) Reset()                    { *m = FetchKeijoByIdResponse{} }
+func (m *FetchKeijoByIdResponse) String() string            { return proto.CompactTextString(m) }
+func (*FetchKeijoByIdResponse) ProtoMessage()               {}
+func (*FetchKeijoByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{7} }
+
+func (m *FetchKeijoByIdResponse) GetKeijo() *Keijo {
+	if m != nil {
+		return m.Keijo
+	}
+	return nil
+}
+
+type RemoveKeijoRequest struct {
+	KeijoId uint32 `protobuf:"varint,1,opt,name=keijoId" json:"keijoId,omitempty"`
+}
+
+func (m *RemoveKeijoRequest) Reset()                    { *m = RemoveKeijoRequest{} }
+func (m *RemoveKeijoRequest) String() string            { return proto.CompactTextString(m) }
+func (*RemoveKeijoRequest) ProtoMessage()               {}
+func (*RemoveKeijoRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{8} }
+
+func (m *RemoveKeijoRequest) GetKeijoId() uint32 {
+	if m != nil {
+		return m.KeijoId
+	}
+	return 0
+}
+
+type RemoveKeijoResponse struct {
+}
+
+func (m *RemoveKeijoResponse) Reset()                    { *m = RemoveKeijoResponse{} }
+func (m *RemoveKeijoResponse) String() string            { return proto.CompactTextString(m) }
+func (*RemoveKeijoResponse) ProtoMessage()               {}
+func (*RemoveKeijoResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{9} }
+
 type TurnOnCecDeviceRequest struct {
 	KeijoId uint32 `protobuf:"varint,1,opt,name=keijoId" json:"keijoId,omitempty"`
 	Address uint32 `protobuf:"varint,2,opt,name=address" json:"address,omitempty"`
@@ -180,7 +308,7 @@ type TurnOnCecDeviceRequest struct {
 func (m *TurnOnCecDeviceRequest) Reset()                    { *m = TurnOnCecDeviceRequest{} }
 func (m *TurnOnCecDeviceRequest) String() string            { return proto.CompactTextString(m) }
 func (*TurnOnCecDeviceRequest) ProtoMessage()               {}
-func (*TurnOnCecDeviceRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{3} }
+func (*TurnOnCecDeviceRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{10} }
 
 func (m *TurnOnCecDeviceRequest) GetKeijoId() uint32 {
 	if m != nil {
@@ -202,7 +330,7 @@ type TurnOnCecDeviceResponse struct {
 func (m *TurnOnCecDeviceResponse) Reset()                    { *m = TurnOnCecDeviceResponse{} }
 func (m *TurnOnCecDeviceResponse) String() string            { return proto.CompactTextString(m) }
 func (*TurnOnCecDeviceResponse) ProtoMessage()               {}
-func (*TurnOnCecDeviceResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{4} }
+func (*TurnOnCecDeviceResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{11} }
 
 type ChangeKeijoSourceRequest struct {
 	KeijoId      uint32 `protobuf:"varint,1,opt,name=keijoId" json:"keijoId,omitempty"`
@@ -212,7 +340,7 @@ type ChangeKeijoSourceRequest struct {
 func (m *ChangeKeijoSourceRequest) Reset()                    { *m = ChangeKeijoSourceRequest{} }
 func (m *ChangeKeijoSourceRequest) String() string            { return proto.CompactTextString(m) }
 func (*ChangeKeijoSourceRequest) ProtoMessage()               {}
-func (*ChangeKeijoSourceRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{5} }
+func (*ChangeKeijoSourceRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{12} }
 
 func (m *ChangeKeijoSourceRequest) GetKeijoId() uint32 {
 	if m != nil {
@@ -234,7 +362,7 @@ type ChangeKeijoSourceResponse struct {
 func (m *ChangeKeijoSourceResponse) Reset()                    { *m = ChangeKeijoSourceResponse{} }
 func (m *ChangeKeijoSourceResponse) String() string            { return proto.CompactTextString(m) }
 func (*ChangeKeijoSourceResponse) ProtoMessage()               {}
-func (*ChangeKeijoSourceResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{6} }
+func (*ChangeKeijoSourceResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{13} }
 
 type ShutDownCecDeviceRequest struct {
 	KeijoId uint32 `protobuf:"varint,1,opt,name=keijoId" json:"keijoId,omitempty"`
@@ -244,7 +372,7 @@ type ShutDownCecDeviceRequest struct {
 func (m *ShutDownCecDeviceRequest) Reset()                    { *m = ShutDownCecDeviceRequest{} }
 func (m *ShutDownCecDeviceRequest) String() string            { return proto.CompactTextString(m) }
 func (*ShutDownCecDeviceRequest) ProtoMessage()               {}
-func (*ShutDownCecDeviceRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{7} }
+func (*ShutDownCecDeviceRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{14} }
 
 func (m *ShutDownCecDeviceRequest) GetKeijoId() uint32 {
 	if m != nil {
@@ -266,42 +394,48 @@ type ShutDownCecDeviceResponse struct {
 func (m *ShutDownCecDeviceResponse) Reset()                    { *m = ShutDownCecDeviceResponse{} }
 func (m *ShutDownCecDeviceResponse) String() string            { return proto.CompactTextString(m) }
 func (*ShutDownCecDeviceResponse) ProtoMessage()               {}
-func (*ShutDownCecDeviceResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{8} }
+func (*ShutDownCecDeviceResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{15} }
 
-type FetchCecDevicePowerStatusRequest struct {
+type FetchCecDevicePowerStatusByKeijoIdRequest struct {
 	KeijoId uint32 `protobuf:"varint,1,opt,name=keijoId" json:"keijoId,omitempty"`
 	Address uint32 `protobuf:"varint,2,opt,name=address" json:"address,omitempty"`
 }
 
-func (m *FetchCecDevicePowerStatusRequest) Reset()         { *m = FetchCecDevicePowerStatusRequest{} }
-func (m *FetchCecDevicePowerStatusRequest) String() string { return proto.CompactTextString(m) }
-func (*FetchCecDevicePowerStatusRequest) ProtoMessage()    {}
-func (*FetchCecDevicePowerStatusRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor8, []int{9}
+func (m *FetchCecDevicePowerStatusByKeijoIdRequest) Reset() {
+	*m = FetchCecDevicePowerStatusByKeijoIdRequest{}
+}
+func (m *FetchCecDevicePowerStatusByKeijoIdRequest) String() string { return proto.CompactTextString(m) }
+func (*FetchCecDevicePowerStatusByKeijoIdRequest) ProtoMessage()    {}
+func (*FetchCecDevicePowerStatusByKeijoIdRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor8, []int{16}
 }
 
-func (m *FetchCecDevicePowerStatusRequest) GetKeijoId() uint32 {
+func (m *FetchCecDevicePowerStatusByKeijoIdRequest) GetKeijoId() uint32 {
 	if m != nil {
 		return m.KeijoId
 	}
 	return 0
 }
 
-func (m *FetchCecDevicePowerStatusRequest) GetAddress() uint32 {
+func (m *FetchCecDevicePowerStatusByKeijoIdRequest) GetAddress() uint32 {
 	if m != nil {
 		return m.Address
 	}
 	return 0
 }
 
-type FetchCecDevicePowerStatusResponse struct {
+type FetchCecDevicePowerStatusByKeijoIdResponse struct {
 }
 
-func (m *FetchCecDevicePowerStatusResponse) Reset()         { *m = FetchCecDevicePowerStatusResponse{} }
-func (m *FetchCecDevicePowerStatusResponse) String() string { return proto.CompactTextString(m) }
-func (*FetchCecDevicePowerStatusResponse) ProtoMessage()    {}
-func (*FetchCecDevicePowerStatusResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor8, []int{10}
+func (m *FetchCecDevicePowerStatusByKeijoIdResponse) Reset() {
+	*m = FetchCecDevicePowerStatusByKeijoIdResponse{}
+}
+func (m *FetchCecDevicePowerStatusByKeijoIdResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*FetchCecDevicePowerStatusByKeijoIdResponse) ProtoMessage() {}
+func (*FetchCecDevicePowerStatusByKeijoIdResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor8, []int{17}
 }
 
 type FetchCecTvDeviceSourceByKeijoIdRequest struct {
@@ -315,7 +449,7 @@ func (m *FetchCecTvDeviceSourceByKeijoIdRequest) Reset() {
 func (m *FetchCecTvDeviceSourceByKeijoIdRequest) String() string { return proto.CompactTextString(m) }
 func (*FetchCecTvDeviceSourceByKeijoIdRequest) ProtoMessage()    {}
 func (*FetchCecTvDeviceSourceByKeijoIdRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor8, []int{11}
+	return fileDescriptor8, []int{18}
 }
 
 func (m *FetchCecTvDeviceSourceByKeijoIdRequest) GetKeijoId() uint32 {
@@ -341,21 +475,28 @@ func (m *FetchCecTvDeviceSourceByKeijoIdResponse) Reset() {
 func (m *FetchCecTvDeviceSourceByKeijoIdResponse) String() string { return proto.CompactTextString(m) }
 func (*FetchCecTvDeviceSourceByKeijoIdResponse) ProtoMessage()    {}
 func (*FetchCecTvDeviceSourceByKeijoIdResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor8, []int{12}
+	return fileDescriptor8, []int{19}
 }
 
 func init() {
 	proto.RegisterType((*Keijo)(nil), "WompattiService.Keijo")
 	proto.RegisterType((*AddKeijoRequest)(nil), "WompattiService.AddKeijoRequest")
 	proto.RegisterType((*AddKeijoResponse)(nil), "WompattiService.AddKeijoResponse")
+	proto.RegisterType((*EditKeijoRequest)(nil), "WompattiService.EditKeijoRequest")
+	proto.RegisterType((*EditKeijoResponse)(nil), "WompattiService.EditKeijoResponse")
+	proto.RegisterType((*FetchKeijosRequest)(nil), "WompattiService.FetchKeijosRequest")
+	proto.RegisterType((*FetchKeijoByIdRequest)(nil), "WompattiService.FetchKeijoByIdRequest")
+	proto.RegisterType((*FetchKeijoByIdResponse)(nil), "WompattiService.FetchKeijoByIdResponse")
+	proto.RegisterType((*RemoveKeijoRequest)(nil), "WompattiService.RemoveKeijoRequest")
+	proto.RegisterType((*RemoveKeijoResponse)(nil), "WompattiService.RemoveKeijoResponse")
 	proto.RegisterType((*TurnOnCecDeviceRequest)(nil), "WompattiService.TurnOnCecDeviceRequest")
 	proto.RegisterType((*TurnOnCecDeviceResponse)(nil), "WompattiService.TurnOnCecDeviceResponse")
 	proto.RegisterType((*ChangeKeijoSourceRequest)(nil), "WompattiService.ChangeKeijoSourceRequest")
 	proto.RegisterType((*ChangeKeijoSourceResponse)(nil), "WompattiService.ChangeKeijoSourceResponse")
 	proto.RegisterType((*ShutDownCecDeviceRequest)(nil), "WompattiService.ShutDownCecDeviceRequest")
 	proto.RegisterType((*ShutDownCecDeviceResponse)(nil), "WompattiService.ShutDownCecDeviceResponse")
-	proto.RegisterType((*FetchCecDevicePowerStatusRequest)(nil), "WompattiService.FetchCecDevicePowerStatusRequest")
-	proto.RegisterType((*FetchCecDevicePowerStatusResponse)(nil), "WompattiService.FetchCecDevicePowerStatusResponse")
+	proto.RegisterType((*FetchCecDevicePowerStatusByKeijoIdRequest)(nil), "WompattiService.FetchCecDevicePowerStatusByKeijoIdRequest")
+	proto.RegisterType((*FetchCecDevicePowerStatusByKeijoIdResponse)(nil), "WompattiService.FetchCecDevicePowerStatusByKeijoIdResponse")
 	proto.RegisterType((*FetchCecTvDeviceSourceByKeijoIdRequest)(nil), "WompattiService.FetchCecTvDeviceSourceByKeijoIdRequest")
 	proto.RegisterType((*FetchCecTvDeviceSourceByKeijoIdResponse)(nil), "WompattiService.FetchCecTvDeviceSourceByKeijoIdResponse")
 	proto.RegisterEnum("WompattiService.CecDevices", CecDevices_name, CecDevices_value)
@@ -364,35 +505,40 @@ func init() {
 func init() { proto.RegisterFile("keijo.proto", fileDescriptor8) }
 
 var fileDescriptor8 = []byte{
-	// 473 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x94, 0x5f, 0x6f, 0xd3, 0x30,
-	0x14, 0xc5, 0x69, 0xd6, 0x76, 0xf4, 0xf6, 0xdf, 0x95, 0x1f, 0x46, 0xaa, 0xbd, 0x94, 0x20, 0xc1,
-	0x40, 0xa8, 0x52, 0xdb, 0x7d, 0x00, 0xd2, 0x24, 0xa0, 0xaa, 0xa3, 0x99, 0x9c, 0xac, 0x30, 0x09,
-	0x84, 0xb2, 0xc6, 0x5a, 0x03, 0x34, 0x09, 0xb1, 0xb3, 0x89, 0x2f, 0xcd, 0x67, 0x40, 0x71, 0x9a,
-	0x90, 0xc1, 0x04, 0x88, 0xf1, 0x76, 0x8f, 0xef, 0x2f, 0xe7, 0x1c, 0xfb, 0x21, 0xd0, 0xfe, 0xc4,
-	0x82, 0x8f, 0xd1, 0x28, 0x4e, 0x22, 0x11, 0x91, 0xfe, 0x9b, 0x68, 0x1b, 0x7b, 0x42, 0x04, 0x0e,
-	0x4b, 0xae, 0x82, 0x35, 0xd3, 0x6c, 0x68, 0x2c, 0xb2, 0x3d, 0xe9, 0x81, 0x12, 0xf8, 0x6a, 0x6d,
-	0x58, 0x3b, 0xea, 0x52, 0x25, 0xf0, 0x09, 0x81, 0x7a, 0xe8, 0x6d, 0x99, 0xaa, 0x0c, 0x6b, 0x47,
-	0x2d, 0x2a, 0x67, 0xc9, 0xc4, 0xea, 0x9e, 0x3c, 0x51, 0x82, 0x38, 0x63, 0xe2, 0x28, 0x11, 0x6a,
-	0x3d, 0x67, 0xb2, 0x59, 0x7b, 0x0f, 0x7d, 0xdd, 0xf7, 0xa5, 0x27, 0x65, 0x5f, 0x52, 0xc6, 0x45,
-	0x86, 0xf1, 0xcf, 0xe9, 0xa5, 0x34, 0x6f, 0x51, 0x39, 0xff, 0xb3, 0xfd, 0x0b, 0xc0, 0x1f, 0xf6,
-	0x3c, 0x8e, 0x42, 0xce, 0xc8, 0x73, 0x68, 0xc8, 0x3b, 0xca, 0x80, 0xf6, 0xe4, 0x60, 0xf4, 0xd3,
-	0x25, 0x47, 0x39, 0x9e, 0x43, 0xda, 0x09, 0x1c, 0xb8, 0x69, 0x12, 0xda, 0xa1, 0xc1, 0xd6, 0x26,
-	0xcb, 0xf6, 0x45, 0x4f, 0x15, 0xf6, 0x25, 0x32, 0x2f, 0xde, 0xa1, 0x90, 0xd9, 0xc6, 0xf3, 0xfd,
-	0x84, 0x71, 0x2e, 0x0b, 0x77, 0x69, 0x21, 0xb5, 0x01, 0x3c, 0xf8, 0xc5, 0x2d, 0xaf, 0xa5, 0xbd,
-	0x05, 0xd5, 0xd8, 0x78, 0xe1, 0x25, 0x93, 0xf1, 0x4e, 0x94, 0x26, 0x7f, 0x13, 0xa5, 0x41, 0x87,
-	0x4b, 0x74, 0x99, 0x6e, 0x2f, 0x58, 0xb2, 0xcb, 0xbb, 0x71, 0xa6, 0x1d, 0xc2, 0xe0, 0x16, 0xe7,
-	0x5d, 0xec, 0x12, 0x54, 0x67, 0x93, 0x0a, 0x33, 0xba, 0xfe, 0x3f, 0x37, 0x3c, 0x84, 0xc1, 0x2d,
-	0x7e, 0xbb, 0xb0, 0x15, 0x0c, 0x5f, 0x32, 0xb1, 0xde, 0x94, 0x9b, 0xd3, 0xe8, 0x9a, 0x25, 0x8e,
-	0xf0, 0x44, 0xca, 0xef, 0x12, 0xfa, 0x08, 0x1e, 0xfe, 0xc6, 0x77, 0x17, 0xfe, 0x0e, 0x1e, 0x17,
-	0x90, 0x7b, 0x95, 0x63, 0xf9, 0x5b, 0xcc, 0xbe, 0x2e, 0xf2, 0x84, 0xbb, 0x54, 0x78, 0x0a, 0x4f,
-	0xfe, 0xe8, 0x9e, 0x17, 0x79, 0xf6, 0xad, 0x06, 0x50, 0x36, 0xe5, 0xa4, 0x09, 0x8a, 0xbb, 0xc2,
-	0x7b, 0xa4, 0x07, 0x40, 0x2d, 0xc3, 0xa6, 0xe6, 0x7c, 0xf9, 0x6a, 0x8c, 0xb5, 0x1b, 0x7a, 0x82,
-	0x0a, 0x01, 0x68, 0xba, 0x67, 0x4b, 0x8b, 0x8e, 0x71, 0x8f, 0x74, 0xa1, 0x75, 0x7a, 0xa2, 0x9f,
-	0xcf, 0x74, 0x63, 0x31, 0xc6, 0x3a, 0x41, 0xe8, 0xe8, 0x67, 0xe6, 0xdc, 0xfe, 0xe0, 0x9c, 0x3b,
-	0xae, 0xf5, 0x1a, 0x1b, 0x25, 0x3c, 0xc1, 0x66, 0x39, 0x4f, 0x71, 0xbf, 0xfa, 0xe1, 0x04, 0xef,
-	0x57, 0xe5, 0x14, 0x5b, 0x25, 0x79, 0x8c, 0x50, 0x5d, 0x1d, 0x63, 0x3b, 0x93, 0xd4, 0x72, 0x2c,
-	0xba, 0xb2, 0x4c, 0x03, 0x3b, 0x55, 0x69, 0x62, 0xb7, 0x2a, 0x2d, 0xec, 0x65, 0x72, 0x46, 0x6d,
-	0xdd, 0x34, 0x74, 0xc7, 0xc5, 0xfe, 0x45, 0x53, 0xfe, 0x4d, 0xa6, 0xdf, 0x03, 0x00, 0x00, 0xff,
-	0xff, 0x1b, 0x5d, 0x1c, 0x32, 0x5c, 0x04, 0x00, 0x00,
+	// 546 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x54, 0xed, 0x6e, 0xda, 0x40,
+	0x10, 0x2c, 0x0e, 0x1f, 0x65, 0xf9, 0xba, 0x5e, 0x1b, 0x6a, 0x94, 0x3f, 0x91, 0x7f, 0xb4, 0x49,
+	0x14, 0x21, 0x01, 0x79, 0x80, 0x1a, 0xdb, 0xa9, 0x10, 0x29, 0x44, 0x67, 0x27, 0x6d, 0xa4, 0x4a,
+	0x11, 0xc1, 0x97, 0xe2, 0xb6, 0x70, 0xae, 0x7d, 0x26, 0xca, 0x4b, 0xf7, 0x19, 0x2a, 0xdf, 0x19,
+	0x62, 0xd2, 0x48, 0x20, 0x92, 0x7f, 0x3b, 0xbb, 0xe3, 0x99, 0xd9, 0x3d, 0xc9, 0x50, 0xfa, 0x45,
+	0xbd, 0x9f, 0xac, 0xe9, 0x07, 0x8c, 0x33, 0x5c, 0xfb, 0xca, 0xa6, 0xfe, 0x88, 0x73, 0xcf, 0xa6,
+	0xc1, 0xdc, 0x1b, 0x53, 0x6d, 0x08, 0xb9, 0x7e, 0x3c, 0xc7, 0x55, 0x50, 0x3c, 0x57, 0xcd, 0xec,
+	0x67, 0x0e, 0x2a, 0x44, 0xf1, 0x5c, 0x8c, 0x21, 0x3b, 0x1b, 0x4d, 0xa9, 0xaa, 0xec, 0x67, 0x0e,
+	0x8a, 0x44, 0xd4, 0x82, 0xe3, 0xab, 0x3b, 0xa2, 0xa3, 0x78, 0x7e, 0xcc, 0xf1, 0x59, 0xc0, 0xd5,
+	0xac, 0xe4, 0xc4, 0xb5, 0xd6, 0x83, 0x9a, 0xee, 0xba, 0x42, 0x93, 0xd0, 0x3f, 0x11, 0x0d, 0xf9,
+	0xd6, 0x52, 0x9f, 0x00, 0x3d, 0x48, 0x85, 0x3e, 0x9b, 0x85, 0x14, 0x1f, 0x43, 0x4e, 0xec, 0x23,
+	0x92, 0x96, 0xda, 0xf5, 0xe6, 0xa3, 0x85, 0x9a, 0x92, 0x2e, 0x49, 0x9a, 0x0b, 0xc8, 0x72, 0x3d,
+	0xbe, 0x92, 0x46, 0x85, 0x82, 0x18, 0xf6, 0x16, 0xdb, 0x2e, 0xe0, 0xd6, 0x39, 0x75, 0x78, 0x93,
+	0x72, 0xd9, 0x2a, 0x68, 0x17, 0xf0, 0x29, 0xe5, 0xe3, 0x89, 0x68, 0x86, 0x8b, 0xa8, 0x75, 0xc8,
+	0xb3, 0xdb, 0xdb, 0x90, 0xf2, 0x24, 0x69, 0x82, 0xf0, 0x3b, 0xc8, 0xfd, 0xf6, 0xa6, 0x1e, 0x17,
+	0x49, 0x2b, 0x44, 0x02, 0xad, 0x05, 0xbb, 0x0f, 0x1a, 0xdd, 0xfb, 0x9e, 0xbb, 0x76, 0x63, 0xed,
+	0x14, 0xea, 0x8f, 0x3f, 0xd9, 0x2a, 0x7e, 0x13, 0x30, 0xa1, 0x53, 0x36, 0xa7, 0x9b, 0x5d, 0x5a,
+	0xdb, 0x85, 0xb7, 0x2b, 0x7c, 0x69, 0xaa, 0x9d, 0x41, 0xdd, 0x89, 0x82, 0xd9, 0x70, 0x66, 0xd0,
+	0xb1, 0x49, 0x63, 0x9b, 0xf5, 0x8f, 0xa6, 0x42, 0x61, 0xe4, 0xba, 0x01, 0x0d, 0xc3, 0xe4, 0x1a,
+	0x0b, 0xa8, 0x35, 0xe0, 0xfd, 0x7f, 0x6a, 0x89, 0xd1, 0x37, 0x50, 0x8d, 0xc9, 0x68, 0xf6, 0x43,
+	0xfa, 0xdb, 0x2c, 0x0a, 0x36, 0xb1, 0xd2, 0xa0, 0x1c, 0x0a, 0xea, 0x20, 0x9a, 0xde, 0xd0, 0x20,
+	0xf1, 0x5b, 0xe9, 0x69, 0x7b, 0xd0, 0x78, 0x42, 0x39, 0xb1, 0x1d, 0x80, 0x6a, 0x4f, 0x22, 0x6e,
+	0xb2, 0xbb, 0x97, 0xd9, 0x70, 0x0f, 0x1a, 0x4f, 0xe8, 0x25, 0x66, 0xd7, 0x70, 0x28, 0xde, 0x76,
+	0x39, 0x39, 0x67, 0x77, 0x34, 0xb0, 0xf9, 0x88, 0x47, 0x61, 0xf7, 0xbe, 0x2f, 0xc5, 0x9f, 0xe3,
+	0x7e, 0x0c, 0x47, 0x9b, 0x18, 0x24, 0x71, 0xbe, 0xc3, 0x87, 0x05, 0xdb, 0x99, 0x4b, 0xbe, 0xbc,
+	0xce, 0x8b, 0x64, 0x39, 0x84, 0x8f, 0x6b, 0xd5, 0x65, 0x90, 0xa3, 0xbf, 0x19, 0x80, 0x65, 0xe4,
+	0x10, 0xe7, 0x41, 0x71, 0x2e, 0xd1, 0x2b, 0x5c, 0x05, 0x20, 0x96, 0x31, 0x24, 0x66, 0x6f, 0xf0,
+	0xb9, 0x85, 0x32, 0x2b, 0xb8, 0x8d, 0x14, 0x0c, 0x90, 0x77, 0x2e, 0x06, 0x16, 0x69, 0xa1, 0x1d,
+	0x5c, 0x81, 0xe2, 0xf9, 0x99, 0x7e, 0xd5, 0xd5, 0x8d, 0x7e, 0x0b, 0x65, 0x31, 0x82, 0xb2, 0x7e,
+	0x61, 0xf6, 0x86, 0xd7, 0xf6, 0x95, 0xed, 0x58, 0x5f, 0x50, 0x6e, 0x49, 0x6e, 0xa3, 0xfc, 0xb2,
+	0xee, 0xa0, 0x42, 0xfa, 0xc3, 0x36, 0x7a, 0x9d, 0x86, 0x1d, 0x54, 0x5c, 0x32, 0x4f, 0x10, 0xa4,
+	0x47, 0x27, 0xa8, 0x14, 0x43, 0x62, 0xd9, 0x16, 0xb9, 0xb4, 0x4c, 0x03, 0x95, 0xd3, 0xd0, 0x44,
+	0x95, 0x34, 0xb4, 0x50, 0x35, 0x86, 0x5d, 0x32, 0xd4, 0x4d, 0x43, 0xb7, 0x1d, 0x54, 0xbb, 0xc9,
+	0x8b, 0x5f, 0x7f, 0xe7, 0x5f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xe1, 0xea, 0xf8, 0x37, 0x09, 0x06,
+	0x00, 0x00,
 }

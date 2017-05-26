@@ -46,6 +46,7 @@ func CreateContext(
 	}
 
 	db.AutoMigrate(&Computer{})
+	db.AutoMigrate(&Keijo{})
 
 	server := CreateService(db, serverPort)
 

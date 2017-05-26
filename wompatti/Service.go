@@ -96,6 +96,96 @@ func (s *server) RemoveComputer(ctx context.Context, in *WompattiService.RemoveC
 	return &WompattiService.RemoveComputerResponse{}, nil
 }
 
+func (s *server) AddKeijo(ctx context.Context, in *WompattiService.AddKeijoRequest) (*WompattiService.AddKeijoResponse, error) {
+	keijo := Keijo{Name: in.Name, Ip: in.Ip, Port: in.Port}
+	s.db.Create(&keijo)
+	return &WompattiService.AddKeijoResponse{
+		Keijo: &WompattiService.Keijo{
+			Id:   keijo.ID,
+			Name: keijo.Name,
+			Ip:   keijo.Ip,
+			Port: keijo.Port,
+		},
+	}, nil
+}
+
+func (s *server) EditKeijo(ctx context.Context, in *WompattiService.EditKeijoRequest) (*WompattiService.EditKeijoResponse, error) {
+	var keijo Keijo
+	s.db.Find(&keijo, in.KeijoId)
+	if in.Name != "" {
+		keijo.Name = in.Name
+	}
+	if in.Ip != "" {
+		keijo.Ip = in.Ip
+	}
+	if in.Port != "" {
+		keijo.Port = in.Port
+	}
+	s.db.Save(&keijo)
+	return &WompattiService.EditKeijoResponse{
+		Keijo: &WompattiService.Keijo{
+			Id:   keijo.ID,
+			Name: keijo.Name,
+			Ip:   keijo.Ip,
+			Port: keijo.Port,
+		},
+	}, nil
+}
+
+func (s *server) RemoveKeijo(ctx context.Context, in *WompattiService.RemoveKeijoRequest) (*WompattiService.RemoveKeijoResponse, error) {
+	keijo := &Keijo{ID: in.KeijoId}
+	s.db.Delete(keijo)
+	return &WompattiService.RemoveKeijoResponse{}, nil
+}
+
+func (s *server) FetchKeijos(in *WompattiService.FetchKeijosRequest, stream WompattiService.Wompatti_FetchKeijosServer) error {
+	keijos := []Keijo{}
+	s.db.Find(&keijos)
+	for _, keijo := range keijos {
+		stream.Send(&WompattiService.Keijo{
+			Id:   keijo.ID,
+			Name: keijo.Name,
+			Ip:   keijo.Ip,
+			Port: keijo.Port,
+		})
+	}
+
+	return nil
+}
+
+func (s *server) FetchKeijoById(ctx context.Context, in *WompattiService.FetchKeijoByIdRequest) (*WompattiService.FetchKeijoByIdResponse, error) {
+	var keijo Keijo
+	s.db.First(&keijo, in.KeijoId)
+	return &WompattiService.FetchKeijoByIdResponse{
+		Keijo: &WompattiService.Keijo{
+			Id:   keijo.ID,
+			Name: keijo.Name,
+			Ip:   keijo.Ip,
+			Port: keijo.Port,
+		},
+	}, nil
+}
+
+func (s *server) TurnOnCecDevice(ctx context.Context, in *WompattiService.TurnOnCecDeviceRequest) (*WompattiService.TurnOnCecDeviceResponse, error) {
+	return &WompattiService.TurnOnCecDeviceResponse{}, nil
+}
+
+func (s *server) ChangeKeijoSource(ctx context.Context, in *WompattiService.ChangeKeijoSourceRequest) (*WompattiService.ChangeKeijoSourceResponse, error) {
+	return &WompattiService.ChangeKeijoSourceResponse{}, nil
+}
+
+func (s *server) ShutDownCecDevice(ctx context.Context, in *WompattiService.ShutDownCecDeviceRequest) (*WompattiService.ShutDownCecDeviceResponse, error) {
+	return &WompattiService.ShutDownCecDeviceResponse{}, nil
+}
+
+func (s *server) FetchCecDevicePowerStatusByKeijoId(ctx context.Context, in *WompattiService.FetchCecDevicePowerStatusByKeijoIdRequest) (*WompattiService.FetchCecDevicePowerStatusByKeijoIdResponse, error) {
+	return &WompattiService.FetchCecDevicePowerStatusByKeijoIdResponse{}, nil
+}
+
+func (s *server) FetchCecTvDeviceSourceByKeijoId(ctx context.Context, in *WompattiService.FetchCecTvDeviceSourceByKeijoIdRequest) (*WompattiService.FetchCecTvDeviceSourceByKeijoIdResponse, error) {
+	return &WompattiService.FetchCecTvDeviceSourceByKeijoIdResponse{}, nil
+}
+
 func CreateService(db *gorm.DB, port string) *grpc.Server {
 	lis, err := net.Listen("tcp", ":"+port)
 	if err != nil {
