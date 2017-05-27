@@ -1,4 +1,4 @@
-package keijo
+package wompatti
 
 import (
 	"flag"
@@ -9,14 +9,17 @@ import (
 	KeijoService "github.com/koodinikkarit/wompatti/keijo_service"
 )
 
+var (
+	serverAddr = flag.String("server_addr", "", "Serverin ip ja portti")
+)
+
 type KeijoClient struct {
 }
 
 // CreateKeijoClient creates new client
 func CreateKeijoClient(ip string, port string) KeijoService.KeijoClient {
-	var (
-		serverAddr = flag.String("server_addr", ip+":"+port, "Serverin ip ja portti")
-	)
+
+	*serverAddr = ip + ":" + port
 
 	var opts []grpc.DialOption
 	opts = append(opts, grpc.WithInsecure())
