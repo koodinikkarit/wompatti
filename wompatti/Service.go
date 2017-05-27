@@ -12,6 +12,8 @@ import (
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/reflection"
 
+	"github.com/koodinikkarit/wompatti/keijo_service"
+
 	gorm "github.com/jinzhu/gorm"
 	WompattiService "github.com/koodinikkarit/wompatti/wompatti_service"
 )
@@ -167,10 +169,22 @@ func (s *server) FetchKeijoById(ctx context.Context, in *WompattiService.FetchKe
 }
 
 func (s *server) TurnOnCecDevice(ctx context.Context, in *WompattiService.TurnOnCecDeviceRequest) (*WompattiService.TurnOnCecDeviceResponse, error) {
+	var keijo Keijo
+	s.db.First(&keijo, in.KeijoId)
+
+	client := CreateKeijoClient(keijo.Ip, keijo.Port)
+	client.TurnOn(context.Background(), &KeijoService.TurnOnRequest{Address: in.Address})
+
 	return &WompattiService.TurnOnCecDeviceResponse{}, nil
 }
 
 func (s *server) ChangeKeijoSource(ctx context.Context, in *WompattiService.ChangeKeijoSourceRequest) (*WompattiService.ChangeKeijoSourceResponse, error) {
+	var keijo Keijo
+	s.db.First(&keijo, in.KeijoId)
+
+	client := CreateKeijoClient(keijo.Ip, keijo.Port)
+	client.ChangeSource(context.Background(), &KeijoService.ChangeSourceRequest{Source: KeijoService.Devices_RECORDING1, Destination: KeijoService.Devices_BROADCAST, SourceNumber: in.SourceNumber})
+
 	return &WompattiService.ChangeKeijoSourceResponse{}, nil
 }
 
