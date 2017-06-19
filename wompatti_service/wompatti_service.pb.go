@@ -29,22 +29,22 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for Wompatti service
 
 type WompattiClient interface {
-	AddComputer(ctx context.Context, in *AddComputerRequest, opts ...grpc.CallOption) (*AddComputerResponse, error)
-	FetchComputers(ctx context.Context, in *FetchComputersRequest, opts ...grpc.CallOption) (Wompatti_FetchComputersClient, error)
-	FetchComputerById(ctx context.Context, in *FetchComputerByIdRequest, opts ...grpc.CallOption) (*FetchComputerByIdResponse, error)
-	Wakeup(ctx context.Context, in *WakeupRequest, opts ...grpc.CallOption) (*WakeupResponse, error)
+	CreateComputer(ctx context.Context, in *CreateComputerRequest, opts ...grpc.CallOption) (*CreateComputerResponse, error)
 	EditComputer(ctx context.Context, in *EditComputerRequest, opts ...grpc.CallOption) (*EditComputerResponse, error)
 	RemoveComputer(ctx context.Context, in *RemoveComputerRequest, opts ...grpc.CallOption) (*RemoveComputerResponse, error)
-	AddKeijo(ctx context.Context, in *AddKeijoRequest, opts ...grpc.CallOption) (*AddKeijoResponse, error)
-	EditKeijo(ctx context.Context, in *EditKeijoRequest, opts ...grpc.CallOption) (*EditKeijoResponse, error)
-	RemoveKeijo(ctx context.Context, in *RemoveKeijoRequest, opts ...grpc.CallOption) (*RemoveKeijoResponse, error)
-	FetchKeijos(ctx context.Context, in *FetchKeijosRequest, opts ...grpc.CallOption) (Wompatti_FetchKeijosClient, error)
-	FetchKeijoById(ctx context.Context, in *FetchKeijoByIdRequest, opts ...grpc.CallOption) (*FetchKeijoByIdResponse, error)
-	TurnOnCecDevice(ctx context.Context, in *TurnOnCecDeviceRequest, opts ...grpc.CallOption) (*TurnOnCecDeviceResponse, error)
-	ChangeKeijoSource(ctx context.Context, in *ChangeKeijoSourceRequest, opts ...grpc.CallOption) (*ChangeKeijoSourceResponse, error)
-	ShutDownCecDevice(ctx context.Context, in *ShutDownCecDeviceRequest, opts ...grpc.CallOption) (*ShutDownCecDeviceResponse, error)
-	FetchCecDevicePowerStatusByKeijoId(ctx context.Context, in *FetchCecDevicePowerStatusByKeijoIdRequest, opts ...grpc.CallOption) (*FetchCecDevicePowerStatusByKeijoIdResponse, error)
-	FetchCecTvDeviceSourceByKeijoId(ctx context.Context, in *FetchCecTvDeviceSourceByKeijoIdRequest, opts ...grpc.CallOption) (*FetchCecTvDeviceSourceByKeijoIdResponse, error)
+	FetchComputers(ctx context.Context, in *FetchComputersRequest, opts ...grpc.CallOption) (Wompatti_FetchComputersClient, error)
+	FetchComputerById(ctx context.Context, in *FetchComputerByIdRequest, opts ...grpc.CallOption) (Wompatti_FetchComputerByIdClient, error)
+	FetchDeviceInfoById(ctx context.Context, in *FetchDeviceInfoByIdRequest, opts ...grpc.CallOption) (Wompatti_FetchDeviceInfoByIdClient, error)
+	FetchKeyValuesByDeviceInfoId(ctx context.Context, in *FetchKeyValuesByDeviceInfoIdRequest, opts ...grpc.CallOption) (Wompatti_FetchKeyValuesByDeviceInfoIdClient, error)
+	CreateKeyValue(ctx context.Context, in *CreateKeyValueRequest, opts ...grpc.CallOption) (*CreateKeyValueResponse, error)
+	EditKeyValue(ctx context.Context, in *EditKeyValueRequest, opts ...grpc.CallOption) (*EditKeyValueResponse, error)
+	RemoveKeyValue(ctx context.Context, in *RemoveKeyValueRequest, opts ...grpc.CallOption) (*RemoveKeyValueResponse, error)
+	CreateDevice(ctx context.Context, in *CreateDeviceRequest, opts ...grpc.CallOption) (*CreateDeviceResponse, error)
+	RemoveDevice(ctx context.Context, in *RemoveDeviceRequest, opts ...grpc.CallOption) (*RemoveDeviceResponse, error)
+	FetchDevices(ctx context.Context, in *FetchDevicesRequest, opts ...grpc.CallOption) (Wompatti_FetchDevicesClient, error)
+	FetchDeviceById(ctx context.Context, in *FetchDeviceByIdRequest, opts ...grpc.CallOption) (Wompatti_FetchDeviceByIdClient, error)
+	FetchEthernetInterfaces(ctx context.Context, in *FetchEthernetInterfacesRequest, opts ...grpc.CallOption) (Wompatti_FetchEthernetInterfacesClient, error)
+	CreateWolInterface(ctx context.Context, in *CreateWolInterfaceRequest, opts ...grpc.CallOption) (*CreateWolInterfaceResponse, error)
 }
 
 type wompattiClient struct {
@@ -55,9 +55,27 @@ func NewWompattiClient(cc *grpc.ClientConn) WompattiClient {
 	return &wompattiClient{cc}
 }
 
-func (c *wompattiClient) AddComputer(ctx context.Context, in *AddComputerRequest, opts ...grpc.CallOption) (*AddComputerResponse, error) {
-	out := new(AddComputerResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/addComputer", in, out, c.cc, opts...)
+func (c *wompattiClient) CreateComputer(ctx context.Context, in *CreateComputerRequest, opts ...grpc.CallOption) (*CreateComputerResponse, error) {
+	out := new(CreateComputerResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createComputer", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) EditComputer(ctx context.Context, in *EditComputerRequest, opts ...grpc.CallOption) (*EditComputerResponse, error) {
+	out := new(EditComputerResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editComputer", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) RemoveComputer(ctx context.Context, in *RemoveComputerRequest, opts ...grpc.CallOption) (*RemoveComputerResponse, error) {
+	out := new(RemoveComputerResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeComputer", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -96,75 +114,12 @@ func (x *wompattiFetchComputersClient) Recv() (*Computer, error) {
 	return m, nil
 }
 
-func (c *wompattiClient) FetchComputerById(ctx context.Context, in *FetchComputerByIdRequest, opts ...grpc.CallOption) (*FetchComputerByIdResponse, error) {
-	out := new(FetchComputerByIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchComputerById", in, out, c.cc, opts...)
+func (c *wompattiClient) FetchComputerById(ctx context.Context, in *FetchComputerByIdRequest, opts ...grpc.CallOption) (Wompatti_FetchComputerByIdClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Wompatti_serviceDesc.Streams[1], c.cc, "/WompattiService.Wompatti/fetchComputerById", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
-}
-
-func (c *wompattiClient) Wakeup(ctx context.Context, in *WakeupRequest, opts ...grpc.CallOption) (*WakeupResponse, error) {
-	out := new(WakeupResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/wakeup", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) EditComputer(ctx context.Context, in *EditComputerRequest, opts ...grpc.CallOption) (*EditComputerResponse, error) {
-	out := new(EditComputerResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editComputer", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) RemoveComputer(ctx context.Context, in *RemoveComputerRequest, opts ...grpc.CallOption) (*RemoveComputerResponse, error) {
-	out := new(RemoveComputerResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeComputer", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) AddKeijo(ctx context.Context, in *AddKeijoRequest, opts ...grpc.CallOption) (*AddKeijoResponse, error) {
-	out := new(AddKeijoResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/addKeijo", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) EditKeijo(ctx context.Context, in *EditKeijoRequest, opts ...grpc.CallOption) (*EditKeijoResponse, error) {
-	out := new(EditKeijoResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editKeijo", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) RemoveKeijo(ctx context.Context, in *RemoveKeijoRequest, opts ...grpc.CallOption) (*RemoveKeijoResponse, error) {
-	out := new(RemoveKeijoResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeKeijo", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchKeijos(ctx context.Context, in *FetchKeijosRequest, opts ...grpc.CallOption) (Wompatti_FetchKeijosClient, error) {
-	stream, err := grpc.NewClientStream(ctx, &_Wompatti_serviceDesc.Streams[1], c.cc, "/WompattiService.Wompatti/fetchKeijos", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &wompattiFetchKeijosClient{stream}
+	x := &wompattiFetchComputerByIdClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -174,71 +129,231 @@ func (c *wompattiClient) FetchKeijos(ctx context.Context, in *FetchKeijosRequest
 	return x, nil
 }
 
-type Wompatti_FetchKeijosClient interface {
-	Recv() (*Keijo, error)
+type Wompatti_FetchComputerByIdClient interface {
+	Recv() (*FetchComputerByIdResponse, error)
 	grpc.ClientStream
 }
 
-type wompattiFetchKeijosClient struct {
+type wompattiFetchComputerByIdClient struct {
 	grpc.ClientStream
 }
 
-func (x *wompattiFetchKeijosClient) Recv() (*Keijo, error) {
-	m := new(Keijo)
+func (x *wompattiFetchComputerByIdClient) Recv() (*FetchComputerByIdResponse, error) {
+	m := new(FetchComputerByIdResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *wompattiClient) FetchKeijoById(ctx context.Context, in *FetchKeijoByIdRequest, opts ...grpc.CallOption) (*FetchKeijoByIdResponse, error) {
-	out := new(FetchKeijoByIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchKeijoById", in, out, c.cc, opts...)
+func (c *wompattiClient) FetchDeviceInfoById(ctx context.Context, in *FetchDeviceInfoByIdRequest, opts ...grpc.CallOption) (Wompatti_FetchDeviceInfoByIdClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Wompatti_serviceDesc.Streams[2], c.cc, "/WompattiService.Wompatti/fetchDeviceInfoById", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &wompattiFetchDeviceInfoByIdClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Wompatti_FetchDeviceInfoByIdClient interface {
+	Recv() (*FetchDeviceInfoByIdResponse, error)
+	grpc.ClientStream
+}
+
+type wompattiFetchDeviceInfoByIdClient struct {
+	grpc.ClientStream
+}
+
+func (x *wompattiFetchDeviceInfoByIdClient) Recv() (*FetchDeviceInfoByIdResponse, error) {
+	m := new(FetchDeviceInfoByIdResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *wompattiClient) FetchKeyValuesByDeviceInfoId(ctx context.Context, in *FetchKeyValuesByDeviceInfoIdRequest, opts ...grpc.CallOption) (Wompatti_FetchKeyValuesByDeviceInfoIdClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Wompatti_serviceDesc.Streams[3], c.cc, "/WompattiService.Wompatti/fetchKeyValuesByDeviceInfoId", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &wompattiFetchKeyValuesByDeviceInfoIdClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Wompatti_FetchKeyValuesByDeviceInfoIdClient interface {
+	Recv() (*FetchKeyValuesByDeviceInfoIdResponse, error)
+	grpc.ClientStream
+}
+
+type wompattiFetchKeyValuesByDeviceInfoIdClient struct {
+	grpc.ClientStream
+}
+
+func (x *wompattiFetchKeyValuesByDeviceInfoIdClient) Recv() (*FetchKeyValuesByDeviceInfoIdResponse, error) {
+	m := new(FetchKeyValuesByDeviceInfoIdResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *wompattiClient) CreateKeyValue(ctx context.Context, in *CreateKeyValueRequest, opts ...grpc.CallOption) (*CreateKeyValueResponse, error) {
+	out := new(CreateKeyValueResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createKeyValue", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) TurnOnCecDevice(ctx context.Context, in *TurnOnCecDeviceRequest, opts ...grpc.CallOption) (*TurnOnCecDeviceResponse, error) {
-	out := new(TurnOnCecDeviceResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/turnOnCecDevice", in, out, c.cc, opts...)
+func (c *wompattiClient) EditKeyValue(ctx context.Context, in *EditKeyValueRequest, opts ...grpc.CallOption) (*EditKeyValueResponse, error) {
+	out := new(EditKeyValueResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editKeyValue", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) ChangeKeijoSource(ctx context.Context, in *ChangeKeijoSourceRequest, opts ...grpc.CallOption) (*ChangeKeijoSourceResponse, error) {
-	out := new(ChangeKeijoSourceResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/changeKeijoSource", in, out, c.cc, opts...)
+func (c *wompattiClient) RemoveKeyValue(ctx context.Context, in *RemoveKeyValueRequest, opts ...grpc.CallOption) (*RemoveKeyValueResponse, error) {
+	out := new(RemoveKeyValueResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeKeyValue", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) ShutDownCecDevice(ctx context.Context, in *ShutDownCecDeviceRequest, opts ...grpc.CallOption) (*ShutDownCecDeviceResponse, error) {
-	out := new(ShutDownCecDeviceResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/shutDownCecDevice", in, out, c.cc, opts...)
+func (c *wompattiClient) CreateDevice(ctx context.Context, in *CreateDeviceRequest, opts ...grpc.CallOption) (*CreateDeviceResponse, error) {
+	out := new(CreateDeviceResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createDevice", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) FetchCecDevicePowerStatusByKeijoId(ctx context.Context, in *FetchCecDevicePowerStatusByKeijoIdRequest, opts ...grpc.CallOption) (*FetchCecDevicePowerStatusByKeijoIdResponse, error) {
-	out := new(FetchCecDevicePowerStatusByKeijoIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchCecDevicePowerStatusByKeijoId", in, out, c.cc, opts...)
+func (c *wompattiClient) RemoveDevice(ctx context.Context, in *RemoveDeviceRequest, opts ...grpc.CallOption) (*RemoveDeviceResponse, error) {
+	out := new(RemoveDeviceResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeDevice", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) FetchCecTvDeviceSourceByKeijoId(ctx context.Context, in *FetchCecTvDeviceSourceByKeijoIdRequest, opts ...grpc.CallOption) (*FetchCecTvDeviceSourceByKeijoIdResponse, error) {
-	out := new(FetchCecTvDeviceSourceByKeijoIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchCecTvDeviceSourceByKeijoId", in, out, c.cc, opts...)
+func (c *wompattiClient) FetchDevices(ctx context.Context, in *FetchDevicesRequest, opts ...grpc.CallOption) (Wompatti_FetchDevicesClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Wompatti_serviceDesc.Streams[4], c.cc, "/WompattiService.Wompatti/fetchDevices", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &wompattiFetchDevicesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Wompatti_FetchDevicesClient interface {
+	Recv() (*Device, error)
+	grpc.ClientStream
+}
+
+type wompattiFetchDevicesClient struct {
+	grpc.ClientStream
+}
+
+func (x *wompattiFetchDevicesClient) Recv() (*Device, error) {
+	m := new(Device)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *wompattiClient) FetchDeviceById(ctx context.Context, in *FetchDeviceByIdRequest, opts ...grpc.CallOption) (Wompatti_FetchDeviceByIdClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Wompatti_serviceDesc.Streams[5], c.cc, "/WompattiService.Wompatti/fetchDeviceById", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &wompattiFetchDeviceByIdClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Wompatti_FetchDeviceByIdClient interface {
+	Recv() (*FetchDeviceByIdResponse, error)
+	grpc.ClientStream
+}
+
+type wompattiFetchDeviceByIdClient struct {
+	grpc.ClientStream
+}
+
+func (x *wompattiFetchDeviceByIdClient) Recv() (*FetchDeviceByIdResponse, error) {
+	m := new(FetchDeviceByIdResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *wompattiClient) FetchEthernetInterfaces(ctx context.Context, in *FetchEthernetInterfacesRequest, opts ...grpc.CallOption) (Wompatti_FetchEthernetInterfacesClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Wompatti_serviceDesc.Streams[6], c.cc, "/WompattiService.Wompatti/fetchEthernetInterfaces", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &wompattiFetchEthernetInterfacesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Wompatti_FetchEthernetInterfacesClient interface {
+	Recv() (*EthernetInterface, error)
+	grpc.ClientStream
+}
+
+type wompattiFetchEthernetInterfacesClient struct {
+	grpc.ClientStream
+}
+
+func (x *wompattiFetchEthernetInterfacesClient) Recv() (*EthernetInterface, error) {
+	m := new(EthernetInterface)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *wompattiClient) CreateWolInterface(ctx context.Context, in *CreateWolInterfaceRequest, opts ...grpc.CallOption) (*CreateWolInterfaceResponse, error) {
+	out := new(CreateWolInterfaceResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createWolInterface", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -248,99 +363,42 @@ func (c *wompattiClient) FetchCecTvDeviceSourceByKeijoId(ctx context.Context, in
 // Server API for Wompatti service
 
 type WompattiServer interface {
-	AddComputer(context.Context, *AddComputerRequest) (*AddComputerResponse, error)
-	FetchComputers(*FetchComputersRequest, Wompatti_FetchComputersServer) error
-	FetchComputerById(context.Context, *FetchComputerByIdRequest) (*FetchComputerByIdResponse, error)
-	Wakeup(context.Context, *WakeupRequest) (*WakeupResponse, error)
+	CreateComputer(context.Context, *CreateComputerRequest) (*CreateComputerResponse, error)
 	EditComputer(context.Context, *EditComputerRequest) (*EditComputerResponse, error)
 	RemoveComputer(context.Context, *RemoveComputerRequest) (*RemoveComputerResponse, error)
-	AddKeijo(context.Context, *AddKeijoRequest) (*AddKeijoResponse, error)
-	EditKeijo(context.Context, *EditKeijoRequest) (*EditKeijoResponse, error)
-	RemoveKeijo(context.Context, *RemoveKeijoRequest) (*RemoveKeijoResponse, error)
-	FetchKeijos(*FetchKeijosRequest, Wompatti_FetchKeijosServer) error
-	FetchKeijoById(context.Context, *FetchKeijoByIdRequest) (*FetchKeijoByIdResponse, error)
-	TurnOnCecDevice(context.Context, *TurnOnCecDeviceRequest) (*TurnOnCecDeviceResponse, error)
-	ChangeKeijoSource(context.Context, *ChangeKeijoSourceRequest) (*ChangeKeijoSourceResponse, error)
-	ShutDownCecDevice(context.Context, *ShutDownCecDeviceRequest) (*ShutDownCecDeviceResponse, error)
-	FetchCecDevicePowerStatusByKeijoId(context.Context, *FetchCecDevicePowerStatusByKeijoIdRequest) (*FetchCecDevicePowerStatusByKeijoIdResponse, error)
-	FetchCecTvDeviceSourceByKeijoId(context.Context, *FetchCecTvDeviceSourceByKeijoIdRequest) (*FetchCecTvDeviceSourceByKeijoIdResponse, error)
+	FetchComputers(*FetchComputersRequest, Wompatti_FetchComputersServer) error
+	FetchComputerById(*FetchComputerByIdRequest, Wompatti_FetchComputerByIdServer) error
+	FetchDeviceInfoById(*FetchDeviceInfoByIdRequest, Wompatti_FetchDeviceInfoByIdServer) error
+	FetchKeyValuesByDeviceInfoId(*FetchKeyValuesByDeviceInfoIdRequest, Wompatti_FetchKeyValuesByDeviceInfoIdServer) error
+	CreateKeyValue(context.Context, *CreateKeyValueRequest) (*CreateKeyValueResponse, error)
+	EditKeyValue(context.Context, *EditKeyValueRequest) (*EditKeyValueResponse, error)
+	RemoveKeyValue(context.Context, *RemoveKeyValueRequest) (*RemoveKeyValueResponse, error)
+	CreateDevice(context.Context, *CreateDeviceRequest) (*CreateDeviceResponse, error)
+	RemoveDevice(context.Context, *RemoveDeviceRequest) (*RemoveDeviceResponse, error)
+	FetchDevices(*FetchDevicesRequest, Wompatti_FetchDevicesServer) error
+	FetchDeviceById(*FetchDeviceByIdRequest, Wompatti_FetchDeviceByIdServer) error
+	FetchEthernetInterfaces(*FetchEthernetInterfacesRequest, Wompatti_FetchEthernetInterfacesServer) error
+	CreateWolInterface(context.Context, *CreateWolInterfaceRequest) (*CreateWolInterfaceResponse, error)
 }
 
 func RegisterWompattiServer(s *grpc.Server, srv WompattiServer) {
 	s.RegisterService(&_Wompatti_serviceDesc, srv)
 }
 
-func _Wompatti_AddComputer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddComputerRequest)
+func _Wompatti_CreateComputer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateComputerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).AddComputer(ctx, in)
+		return srv.(WompattiServer).CreateComputer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/AddComputer",
+		FullMethod: "/WompattiService.Wompatti/CreateComputer",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).AddComputer(ctx, req.(*AddComputerRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_FetchComputers_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(FetchComputersRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(WompattiServer).FetchComputers(m, &wompattiFetchComputersServer{stream})
-}
-
-type Wompatti_FetchComputersServer interface {
-	Send(*Computer) error
-	grpc.ServerStream
-}
-
-type wompattiFetchComputersServer struct {
-	grpc.ServerStream
-}
-
-func (x *wompattiFetchComputersServer) Send(m *Computer) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Wompatti_FetchComputerById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchComputerByIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).FetchComputerById(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchComputerById",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchComputerById(ctx, req.(*FetchComputerByIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_Wakeup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WakeupRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).Wakeup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/Wakeup",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).Wakeup(ctx, req.(*WakeupRequest))
+		return srv.(WompattiServer).CreateComputer(ctx, req.(*CreateComputerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -381,185 +439,257 @@ func _Wompatti_RemoveComputer_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_AddKeijo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddKeijoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).AddKeijo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/AddKeijo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).AddKeijo(ctx, req.(*AddKeijoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_EditKeijo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EditKeijoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).EditKeijo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/EditKeijo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).EditKeijo(ctx, req.(*EditKeijoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_RemoveKeijo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveKeijoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).RemoveKeijo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/RemoveKeijo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).RemoveKeijo(ctx, req.(*RemoveKeijoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_FetchKeijos_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(FetchKeijosRequest)
+func _Wompatti_FetchComputers_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FetchComputersRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(WompattiServer).FetchKeijos(m, &wompattiFetchKeijosServer{stream})
+	return srv.(WompattiServer).FetchComputers(m, &wompattiFetchComputersServer{stream})
 }
 
-type Wompatti_FetchKeijosServer interface {
-	Send(*Keijo) error
+type Wompatti_FetchComputersServer interface {
+	Send(*Computer) error
 	grpc.ServerStream
 }
 
-type wompattiFetchKeijosServer struct {
+type wompattiFetchComputersServer struct {
 	grpc.ServerStream
 }
 
-func (x *wompattiFetchKeijosServer) Send(m *Keijo) error {
+func (x *wompattiFetchComputersServer) Send(m *Computer) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Wompatti_FetchKeijoById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchKeijoByIdRequest)
+func _Wompatti_FetchComputerById_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FetchComputerByIdRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(WompattiServer).FetchComputerById(m, &wompattiFetchComputerByIdServer{stream})
+}
+
+type Wompatti_FetchComputerByIdServer interface {
+	Send(*FetchComputerByIdResponse) error
+	grpc.ServerStream
+}
+
+type wompattiFetchComputerByIdServer struct {
+	grpc.ServerStream
+}
+
+func (x *wompattiFetchComputerByIdServer) Send(m *FetchComputerByIdResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Wompatti_FetchDeviceInfoById_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FetchDeviceInfoByIdRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(WompattiServer).FetchDeviceInfoById(m, &wompattiFetchDeviceInfoByIdServer{stream})
+}
+
+type Wompatti_FetchDeviceInfoByIdServer interface {
+	Send(*FetchDeviceInfoByIdResponse) error
+	grpc.ServerStream
+}
+
+type wompattiFetchDeviceInfoByIdServer struct {
+	grpc.ServerStream
+}
+
+func (x *wompattiFetchDeviceInfoByIdServer) Send(m *FetchDeviceInfoByIdResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Wompatti_FetchKeyValuesByDeviceInfoId_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FetchKeyValuesByDeviceInfoIdRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(WompattiServer).FetchKeyValuesByDeviceInfoId(m, &wompattiFetchKeyValuesByDeviceInfoIdServer{stream})
+}
+
+type Wompatti_FetchKeyValuesByDeviceInfoIdServer interface {
+	Send(*FetchKeyValuesByDeviceInfoIdResponse) error
+	grpc.ServerStream
+}
+
+type wompattiFetchKeyValuesByDeviceInfoIdServer struct {
+	grpc.ServerStream
+}
+
+func (x *wompattiFetchKeyValuesByDeviceInfoIdServer) Send(m *FetchKeyValuesByDeviceInfoIdResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Wompatti_CreateKeyValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateKeyValueRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).FetchKeijoById(ctx, in)
+		return srv.(WompattiServer).CreateKeyValue(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchKeijoById",
+		FullMethod: "/WompattiService.Wompatti/CreateKeyValue",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchKeijoById(ctx, req.(*FetchKeijoByIdRequest))
+		return srv.(WompattiServer).CreateKeyValue(ctx, req.(*CreateKeyValueRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_TurnOnCecDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TurnOnCecDeviceRequest)
+func _Wompatti_EditKeyValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditKeyValueRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).TurnOnCecDevice(ctx, in)
+		return srv.(WompattiServer).EditKeyValue(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/TurnOnCecDevice",
+		FullMethod: "/WompattiService.Wompatti/EditKeyValue",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).TurnOnCecDevice(ctx, req.(*TurnOnCecDeviceRequest))
+		return srv.(WompattiServer).EditKeyValue(ctx, req.(*EditKeyValueRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_ChangeKeijoSource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ChangeKeijoSourceRequest)
+func _Wompatti_RemoveKeyValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveKeyValueRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).ChangeKeijoSource(ctx, in)
+		return srv.(WompattiServer).RemoveKeyValue(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/ChangeKeijoSource",
+		FullMethod: "/WompattiService.Wompatti/RemoveKeyValue",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).ChangeKeijoSource(ctx, req.(*ChangeKeijoSourceRequest))
+		return srv.(WompattiServer).RemoveKeyValue(ctx, req.(*RemoveKeyValueRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_ShutDownCecDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ShutDownCecDeviceRequest)
+func _Wompatti_CreateDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDeviceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).ShutDownCecDevice(ctx, in)
+		return srv.(WompattiServer).CreateDevice(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/ShutDownCecDevice",
+		FullMethod: "/WompattiService.Wompatti/CreateDevice",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).ShutDownCecDevice(ctx, req.(*ShutDownCecDeviceRequest))
+		return srv.(WompattiServer).CreateDevice(ctx, req.(*CreateDeviceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_FetchCecDevicePowerStatusByKeijoId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchCecDevicePowerStatusByKeijoIdRequest)
+func _Wompatti_RemoveDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveDeviceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).FetchCecDevicePowerStatusByKeijoId(ctx, in)
+		return srv.(WompattiServer).RemoveDevice(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchCecDevicePowerStatusByKeijoId",
+		FullMethod: "/WompattiService.Wompatti/RemoveDevice",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchCecDevicePowerStatusByKeijoId(ctx, req.(*FetchCecDevicePowerStatusByKeijoIdRequest))
+		return srv.(WompattiServer).RemoveDevice(ctx, req.(*RemoveDeviceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_FetchCecTvDeviceSourceByKeijoId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchCecTvDeviceSourceByKeijoIdRequest)
+func _Wompatti_FetchDevices_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FetchDevicesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(WompattiServer).FetchDevices(m, &wompattiFetchDevicesServer{stream})
+}
+
+type Wompatti_FetchDevicesServer interface {
+	Send(*Device) error
+	grpc.ServerStream
+}
+
+type wompattiFetchDevicesServer struct {
+	grpc.ServerStream
+}
+
+func (x *wompattiFetchDevicesServer) Send(m *Device) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Wompatti_FetchDeviceById_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FetchDeviceByIdRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(WompattiServer).FetchDeviceById(m, &wompattiFetchDeviceByIdServer{stream})
+}
+
+type Wompatti_FetchDeviceByIdServer interface {
+	Send(*FetchDeviceByIdResponse) error
+	grpc.ServerStream
+}
+
+type wompattiFetchDeviceByIdServer struct {
+	grpc.ServerStream
+}
+
+func (x *wompattiFetchDeviceByIdServer) Send(m *FetchDeviceByIdResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Wompatti_FetchEthernetInterfaces_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FetchEthernetInterfacesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(WompattiServer).FetchEthernetInterfaces(m, &wompattiFetchEthernetInterfacesServer{stream})
+}
+
+type Wompatti_FetchEthernetInterfacesServer interface {
+	Send(*EthernetInterface) error
+	grpc.ServerStream
+}
+
+type wompattiFetchEthernetInterfacesServer struct {
+	grpc.ServerStream
+}
+
+func (x *wompattiFetchEthernetInterfacesServer) Send(m *EthernetInterface) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Wompatti_CreateWolInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWolInterfaceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).FetchCecTvDeviceSourceByKeijoId(ctx, in)
+		return srv.(WompattiServer).CreateWolInterface(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchCecTvDeviceSourceByKeijoId",
+		FullMethod: "/WompattiService.Wompatti/CreateWolInterface",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchCecTvDeviceSourceByKeijoId(ctx, req.(*FetchCecTvDeviceSourceByKeijoIdRequest))
+		return srv.(WompattiServer).CreateWolInterface(ctx, req.(*CreateWolInterfaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -569,16 +699,8 @@ var _Wompatti_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*WompattiServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "addComputer",
-			Handler:    _Wompatti_AddComputer_Handler,
-		},
-		{
-			MethodName: "fetchComputerById",
-			Handler:    _Wompatti_FetchComputerById_Handler,
-		},
-		{
-			MethodName: "wakeup",
-			Handler:    _Wompatti_Wakeup_Handler,
+			MethodName: "createComputer",
+			Handler:    _Wompatti_CreateComputer_Handler,
 		},
 		{
 			MethodName: "editComputer",
@@ -589,40 +711,28 @@ var _Wompatti_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Wompatti_RemoveComputer_Handler,
 		},
 		{
-			MethodName: "addKeijo",
-			Handler:    _Wompatti_AddKeijo_Handler,
+			MethodName: "createKeyValue",
+			Handler:    _Wompatti_CreateKeyValue_Handler,
 		},
 		{
-			MethodName: "editKeijo",
-			Handler:    _Wompatti_EditKeijo_Handler,
+			MethodName: "editKeyValue",
+			Handler:    _Wompatti_EditKeyValue_Handler,
 		},
 		{
-			MethodName: "removeKeijo",
-			Handler:    _Wompatti_RemoveKeijo_Handler,
+			MethodName: "removeKeyValue",
+			Handler:    _Wompatti_RemoveKeyValue_Handler,
 		},
 		{
-			MethodName: "fetchKeijoById",
-			Handler:    _Wompatti_FetchKeijoById_Handler,
+			MethodName: "createDevice",
+			Handler:    _Wompatti_CreateDevice_Handler,
 		},
 		{
-			MethodName: "turnOnCecDevice",
-			Handler:    _Wompatti_TurnOnCecDevice_Handler,
+			MethodName: "removeDevice",
+			Handler:    _Wompatti_RemoveDevice_Handler,
 		},
 		{
-			MethodName: "changeKeijoSource",
-			Handler:    _Wompatti_ChangeKeijoSource_Handler,
-		},
-		{
-			MethodName: "shutDownCecDevice",
-			Handler:    _Wompatti_ShutDownCecDevice_Handler,
-		},
-		{
-			MethodName: "fetchCecDevicePowerStatusByKeijoId",
-			Handler:    _Wompatti_FetchCecDevicePowerStatusByKeijoId_Handler,
-		},
-		{
-			MethodName: "fetchCecTvDeviceSourceByKeijoId",
-			Handler:    _Wompatti_FetchCecTvDeviceSourceByKeijoId_Handler,
+			MethodName: "createWolInterface",
+			Handler:    _Wompatti_CreateWolInterface_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
@@ -632,51 +742,71 @@ var _Wompatti_serviceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "fetchKeijos",
-			Handler:       _Wompatti_FetchKeijos_Handler,
+			StreamName:    "fetchComputerById",
+			Handler:       _Wompatti_FetchComputerById_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "fetchDeviceInfoById",
+			Handler:       _Wompatti_FetchDeviceInfoById_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "fetchKeyValuesByDeviceInfoId",
+			Handler:       _Wompatti_FetchKeyValuesByDeviceInfoId_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "fetchDevices",
+			Handler:       _Wompatti_FetchDevices_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "fetchDeviceById",
+			Handler:       _Wompatti_FetchDeviceById_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "fetchEthernetInterfaces",
+			Handler:       _Wompatti_FetchEthernetInterfaces_Handler,
 			ServerStreams: true,
 		},
 	},
 	Metadata: "wompatti_service.proto",
 }
 
-func init() { proto.RegisterFile("wompatti_service.proto", fileDescriptor13) }
+func init() { proto.RegisterFile("wompatti_service.proto", fileDescriptor6) }
 
-var fileDescriptor13 = []byte{
-	// 547 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x95, 0x5f, 0x6f, 0xd3, 0x30,
-	0x14, 0xc5, 0xd7, 0x97, 0x69, 0xb8, 0x53, 0xa7, 0x59, 0x30, 0x89, 0x0c, 0x18, 0x6b, 0xc7, 0x06,
-	0x3c, 0x54, 0x08, 0x1e, 0x40, 0xf0, 0xc4, 0x3a, 0x26, 0x4d, 0x93, 0xf8, 0xb3, 0x56, 0xaa, 0x34,
-	0x09, 0x45, 0x59, 0xec, 0xd1, 0xb0, 0xb5, 0x0e, 0xb1, 0xd3, 0xaa, 0x5f, 0x84, 0x57, 0x3e, 0x26,
-	0xaf, 0x28, 0x76, 0xee, 0x6d, 0x9d, 0xc4, 0x29, 0xf0, 0x58, 0x9f, 0xdf, 0x3d, 0xe7, 0xfa, 0xe6,
-	0xa6, 0x21, 0x3b, 0x33, 0x31, 0x8e, 0x03, 0xa5, 0x22, 0x5f, 0xf2, 0x64, 0x1a, 0x85, 0xbc, 0x1b,
-	0x27, 0x42, 0x09, 0xba, 0x35, 0xcc, 0xcf, 0xfb, 0xe6, 0xd8, 0xf3, 0x02, 0xc6, 0xfc, 0x50, 0x8c,
-	0xe3, 0x54, 0xf1, 0xc4, 0x4f, 0xf8, 0x8f, 0x94, 0x4b, 0x65, 0x60, 0x6f, 0xb7, 0xa0, 0xc9, 0x58,
-	0x4c, 0x64, 0xee, 0xe4, 0x3d, 0xbc, 0xe6, 0x2a, 0x1c, 0xa1, 0x2c, 0x0b, 0xb5, 0x6d, 0x5b, 0xf6,
-	0xaf, 0xe6, 0x7e, 0xc4, 0x0a, 0x4c, 0xc7, 0xc1, 0x58, 0x39, 0x77, 0x67, 0xc1, 0x0d, 0x4f, 0xe3,
-	0x42, 0xe9, 0x3d, 0x3c, 0xb5, 0xe0, 0x5d, 0xce, 0x22, 0xe5, 0xba, 0xce, 0x83, 0xa2, 0x68, 0x95,
-	0xb6, 0x40, 0xc8, 0x7f, 0x37, 0x6f, 0x78, 0xf4, 0x5d, 0x98, 0x1f, 0x2f, 0x7f, 0x6f, 0x92, 0x0d,
-	0x98, 0x1c, 0xbd, 0x24, 0xcd, 0x80, 0xb1, 0x5e, 0x8e, 0xd3, 0x4e, 0xb7, 0x30, 0xd3, 0xee, 0xfb,
-	0x85, 0x7a, 0x61, 0x3a, 0xf0, 0x0e, 0xea, 0x21, 0xd3, 0x49, 0x7b, 0x8d, 0x0e, 0x49, 0x4b, 0x0f,
-	0x05, 0x24, 0x49, 0x0f, 0x4b, 0x95, 0xa7, 0x16, 0x00, 0x09, 0xf7, 0x4b, 0x1c, 0x20, 0xed, 0xb5,
-	0x17, 0x0d, 0x7a, 0x4b, 0xb6, 0x2d, 0xe3, 0xe3, 0xf9, 0x19, 0xa3, 0xcf, 0xea, 0xbd, 0x33, 0x06,
-	0xec, 0x9f, 0xff, 0x0d, 0x8a, 0xd7, 0x38, 0x27, 0xeb, 0xe6, 0x01, 0xd1, 0x47, 0xa5, 0xba, 0xa1,
-	0x16, 0xc0, 0x77, 0xcf, 0xa9, 0xa3, 0xd9, 0x57, 0xb2, 0x99, 0x3d, 0x39, 0x1c, 0x78, 0x79, 0x96,
-	0x1f, 0x96, 0x64, 0x30, 0x7e, 0xb2, 0x82, 0x42, 0xfb, 0x90, 0xb4, 0x12, 0x3e, 0x16, 0x53, 0x8e,
-	0x01, 0xe5, 0x91, 0x5f, 0x58, 0x00, 0x44, 0x1c, 0xad, 0xe4, 0x30, 0xe4, 0x0b, 0xd9, 0x08, 0x18,
-	0x3b, 0xcf, 0x56, 0x8a, 0x3e, 0xae, 0xda, 0x05, 0x2d, 0x81, 0xf1, 0x7e, 0x0d, 0x81, 0x96, 0x03,
-	0x72, 0x27, 0x1b, 0x8b, 0xf1, 0xdc, 0xaf, 0xbc, 0xad, 0x65, 0xda, 0xae, 0x43, 0xd0, 0xf5, 0x92,
-	0x34, 0xcd, 0x34, 0x8c, 0x6f, 0xc7, 0x71, 0x45, 0xcb, 0xf9, 0xa0, 0x1e, 0x42, 0xef, 0x8f, 0xa4,
-	0xa9, 0x77, 0x50, 0x9f, 0xcb, 0x0a, 0xef, 0xd3, 0x85, 0x0a, 0xde, 0x3b, 0x25, 0x48, 0xeb, 0x7a,
-	0xa7, 0xc3, 0xfc, 0x65, 0xd1, 0x27, 0x7a, 0xa1, 0x0f, 0x6b, 0x2c, 0x97, 0xb7, 0xf9, 0x68, 0x25,
-	0x87, 0x4d, 0x5f, 0x93, 0x2d, 0x95, 0x26, 0x93, 0x4f, 0x93, 0x1e, 0x0f, 0x4f, 0x78, 0xc6, 0xd2,
-	0x72, 0xf5, 0xc0, 0x26, 0x20, 0xe6, 0xe9, 0x6a, 0x10, 0x73, 0x6e, 0xc9, 0x76, 0x38, 0x0a, 0x26,
-	0xdf, 0xcc, 0xd4, 0xfa, 0x22, 0x4d, 0x42, 0x5e, 0xf1, 0x82, 0xf6, 0x8a, 0x8c, 0xfb, 0x05, 0xad,
-	0x40, 0x97, 0xd3, 0xe4, 0x28, 0x55, 0x27, 0x62, 0xb6, 0x74, 0xaf, 0x72, 0x5a, 0xbf, 0xc8, 0xb8,
-	0xd3, 0x2a, 0x50, 0x4c, 0xfb, 0xd5, 0x20, 0xe6, 0x7b, 0x80, 0xe2, 0x67, 0x31, 0xe3, 0x49, 0x5f,
-	0x05, 0x2a, 0x95, 0xc7, 0x73, 0xdd, 0xe2, 0x19, 0xa3, 0x6f, 0x1d, 0xff, 0x31, 0x75, 0x45, 0xd0,
-	0xd0, 0xbb, 0xff, 0xaa, 0xc5, 0x0e, 0x7f, 0x36, 0xc8, 0x1e, 0x74, 0x38, 0x98, 0x9a, 0x12, 0x33,
-	0xb4, 0x45, 0x7b, 0xaf, 0x9d, 0x11, 0x8e, 0x0a, 0xe8, 0xed, 0xcd, 0xbf, 0x17, 0x42, 0x63, 0x57,
-	0xeb, 0xfa, 0x03, 0xf4, 0xea, 0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x56, 0x8b, 0xc0, 0x73, 0xd1,
-	0x07, 0x00, 0x00,
+var fileDescriptor6 = []byte{
+	// 475 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x95, 0x5f, 0xaf, 0xd2, 0x30,
+	0x18, 0xc6, 0x0f, 0x37, 0xc6, 0x54, 0xdc, 0xc9, 0xe9, 0x49, 0x3c, 0x4a, 0xbc, 0x22, 0x1e, 0x51,
+	0x30, 0x48, 0xfc, 0xf3, 0x05, 0x40, 0x4c, 0x16, 0xaf, 0x9c, 0x89, 0x5c, 0x19, 0x32, 0xb7, 0x77,
+	0x61, 0x09, 0xac, 0xb3, 0xed, 0x20, 0x7c, 0x08, 0xe3, 0x57, 0x36, 0xb4, 0x6b, 0x69, 0xb7, 0x6e,
+	0xe3, 0x5c, 0xf2, 0xbe, 0xbf, 0x3d, 0xcf, 0xfb, 0x76, 0x4f, 0x07, 0x7a, 0x76, 0x20, 0xbb, 0x3c,
+	0xe4, 0x3c, 0x5d, 0x33, 0xa0, 0xfb, 0x34, 0x82, 0x69, 0x4e, 0x09, 0x27, 0xf8, 0x7a, 0x55, 0xd6,
+	0x7f, 0xc8, 0xf2, 0xc0, 0x8b, 0xc8, 0x2e, 0x2f, 0x38, 0x50, 0x09, 0x0c, 0x6e, 0x62, 0x38, 0xd5,
+	0xd7, 0x69, 0x96, 0x90, 0xb2, 0xf4, 0x24, 0xa4, 0x9c, 0x17, 0xe5, 0x8f, 0xbe, 0xec, 0x97, 0xbf,
+	0x9e, 0x03, 0xdf, 0x00, 0xcd, 0x80, 0xaf, 0xd3, 0x8c, 0x03, 0x4d, 0x42, 0xdd, 0xb9, 0x3d, 0x90,
+	0x6d, 0xb5, 0xf8, 0xe1, 0xef, 0x53, 0xf4, 0x58, 0x0d, 0x80, 0x23, 0xe4, 0x45, 0x14, 0x42, 0x0e,
+	0x8b, 0x72, 0x02, 0xfc, 0x7a, 0x5a, 0x99, 0x6e, 0xba, 0xb0, 0x80, 0x00, 0xfe, 0x14, 0xc0, 0xf8,
+	0x60, 0xd4, 0xc9, 0xb1, 0x9c, 0x64, 0x0c, 0x86, 0x57, 0xf8, 0x17, 0xea, 0x43, 0x9c, 0x72, 0x6d,
+	0xf1, 0xaa, 0xf6, 0xe8, 0xd2, 0x68, 0x2b, 0x83, 0xfb, 0x0e, 0x4a, 0xcb, 0x47, 0xc8, 0xa3, 0xb0,
+	0x23, 0xfb, 0xb6, 0x1d, 0x02, 0x0b, 0x68, 0xde, 0xa1, 0xca, 0x69, 0x93, 0x15, 0xf2, 0x12, 0xe0,
+	0xd1, 0x46, 0xb5, 0x98, 0xc3, 0xe4, 0xab, 0x05, 0x28, 0x93, 0x17, 0xf5, 0x83, 0x2a, 0x91, 0xe1,
+	0xd5, 0xac, 0x87, 0x33, 0x74, 0x63, 0x09, 0xcf, 0x8f, 0x7e, 0x8c, 0xdf, 0xb6, 0x6b, 0x9f, 0x18,
+	0x25, 0x3f, 0xbe, 0x04, 0x55, 0x6b, 0xcc, 0x7a, 0x98, 0xa3, 0x5b, 0xe1, 0xf7, 0x45, 0x44, 0xc8,
+	0xcf, 0x12, 0x22, 0x1c, 0x27, 0x6e, 0x19, 0x9b, 0x52, 0x9e, 0xef, 0x2e, 0x83, 0x0d, 0xd7, 0x7f,
+	0x3d, 0xf4, 0x52, 0xd8, 0x7e, 0x83, 0xe3, 0xcf, 0x70, 0x5b, 0x00, 0x9b, 0x1f, 0xcf, 0xb8, 0x1f,
+	0xe3, 0x4f, 0x6e, 0xc9, 0x06, 0x5c, 0x0d, 0xf2, 0xf9, 0x81, 0x4f, 0x19, 0x13, 0xe9, 0xe4, 0x2b,
+	0xb8, 0x31, 0xf9, 0x0a, 0xe8, 0x4a, 0xfe, 0x99, 0xab, 0x26, 0x5f, 0x5b, 0xb8, 0x93, 0x5f, 0x35,
+	0xb8, 0xef, 0xa0, 0xea, 0xc9, 0x6f, 0xd9, 0x21, 0xb0, 0x80, 0xae, 0xe4, 0xbb, 0x77, 0x90, 0x07,
+	0x25, 0x8f, 0xd2, 0xb1, 0xc3, 0xc2, 0x68, 0x37, 0xef, 0x60, 0x53, 0xa6, 0xbc, 0xdc, 0xa1, 0x51,
+	0x3e, 0x30, 0xda, 0xcd, 0xf2, 0x36, 0xa5, 0xe5, 0xbf, 0xa3, 0xbe, 0x11, 0x77, 0xe6, 0x90, 0x37,
+	0xa2, 0xab, 0xef, 0xec, 0x5d, 0x8d, 0x92, 0x80, 0x48, 0xce, 0x06, 0x5d, 0x1b, 0x92, 0xe2, 0xf6,
+	0x8c, 0xda, 0x54, 0xcd, 0x9b, 0xf3, 0xa6, 0x1b, 0x34, 0x32, 0x4a, 0xd1, 0x9d, 0x70, 0x5a, 0x96,
+	0x1f, 0x78, 0x5f, 0x7d, 0xca, 0x19, 0x7e, 0xef, 0x16, 0xaa, 0x93, 0xca, 0x79, 0x58, 0x0f, 0x55,
+	0x95, 0x15, 0x9e, 0x04, 0x61, 0xf9, 0xba, 0x57, 0x64, 0xab, 0x3b, 0x78, 0xdc, 0xf0, 0x3a, 0x4d,
+	0x48, 0x39, 0x4d, 0x2e, 0x62, 0xd5, 0x9a, 0xbf, 0x1f, 0x89, 0xbf, 0xa5, 0x8f, 0xff, 0x03, 0x00,
+	0x00, 0xff, 0xff, 0xce, 0xa0, 0x10, 0xbf, 0x2e, 0x07, 0x00, 0x00,
 }

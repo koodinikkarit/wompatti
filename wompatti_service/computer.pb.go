@@ -13,20 +13,127 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+type EditComputerResponse_State int32
+
+const (
+	EditComputerResponse_SUCCESS   EditComputerResponse_State = 0
+	EditComputerResponse_NOT_FOUND EditComputerResponse_State = 1
+)
+
+var EditComputerResponse_State_name = map[int32]string{
+	0: "SUCCESS",
+	1: "NOT_FOUND",
+}
+var EditComputerResponse_State_value = map[string]int32{
+	"SUCCESS":   0,
+	"NOT_FOUND": 1,
+}
+
+func (x EditComputerResponse_State) String() string {
+	return proto.EnumName(EditComputerResponse_State_name, int32(x))
+}
+func (EditComputerResponse_State) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor1, []int{4, 0}
+}
+
+type RemoveComputerResponse_State int32
+
+const (
+	RemoveComputerResponse_SUCCESS   RemoveComputerResponse_State = 0
+	RemoveComputerResponse_NOT_FOUND RemoveComputerResponse_State = 1
+)
+
+var RemoveComputerResponse_State_name = map[int32]string{
+	0: "SUCCESS",
+	1: "NOT_FOUND",
+}
+var RemoveComputerResponse_State_value = map[string]int32{
+	"SUCCESS":   0,
+	"NOT_FOUND": 1,
+}
+
+func (x RemoveComputerResponse_State) String() string {
+	return proto.EnumName(RemoveComputerResponse_State_name, int32(x))
+}
+func (RemoveComputerResponse_State) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor1, []int{6, 0}
+}
+
+type FetchComputerByIdResponse_State int32
+
+const (
+	FetchComputerByIdResponse_SUCCESS   FetchComputerByIdResponse_State = 0
+	FetchComputerByIdResponse_NOT_FOUND FetchComputerByIdResponse_State = 1
+)
+
+var FetchComputerByIdResponse_State_name = map[int32]string{
+	0: "SUCCESS",
+	1: "NOT_FOUND",
+}
+var FetchComputerByIdResponse_State_value = map[string]int32{
+	"SUCCESS":   0,
+	"NOT_FOUND": 1,
+}
+
+func (x FetchComputerByIdResponse_State) String() string {
+	return proto.EnumName(FetchComputerByIdResponse_State_name, int32(x))
+}
+func (FetchComputerByIdResponse_State) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor1, []int{8, 0}
+}
+
+type FetchManyComputerByIdResponse_State int32
+
+const (
+	FetchManyComputerByIdResponse_SUCCESS   FetchManyComputerByIdResponse_State = 0
+	FetchManyComputerByIdResponse_NOT_FOUND FetchManyComputerByIdResponse_State = 1
+)
+
+var FetchManyComputerByIdResponse_State_name = map[int32]string{
+	0: "SUCCESS",
+	1: "NOT_FOUND",
+}
+var FetchManyComputerByIdResponse_State_value = map[string]int32{
+	"SUCCESS":   0,
+	"NOT_FOUND": 1,
+}
+
+func (x FetchManyComputerByIdResponse_State) String() string {
+	return proto.EnumName(FetchManyComputerByIdResponse_State_name, int32(x))
+}
+func (FetchManyComputerByIdResponse_State) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor1, []int{10, 0}
+}
+
 type Computer struct {
-	Id   uint32 `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Mac  string `protobuf:"bytes,3,opt,name=mac" json:"mac,omitempty"`
+	Id           uint32 `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+	ArttuId      uint32 `protobuf:"varint,2,opt,name=arttuId" json:"arttuId,omitempty"`
+	DeviceInfoId uint32 `protobuf:"varint,3,opt,name=deviceInfoId" json:"deviceInfoId,omitempty"`
+	Name         string `protobuf:"bytes,4,opt,name=name" json:"name,omitempty"`
 }
 
 func (m *Computer) Reset()                    { *m = Computer{} }
 func (m *Computer) String() string            { return proto.CompactTextString(m) }
 func (*Computer) ProtoMessage()               {}
-func (*Computer) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{0} }
+func (*Computer) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
 
 func (m *Computer) GetId() uint32 {
 	if m != nil {
 		return m.Id
+	}
+	return 0
+}
+
+func (m *Computer) GetArttuId() uint32 {
+	if m != nil {
+		return m.ArttuId
+	}
+	return 0
+}
+
+func (m *Computer) GetDeviceInfoId() uint32 {
+	if m != nil {
+		return m.DeviceInfoId
 	}
 	return 0
 }
@@ -38,11 +145,116 @@ func (m *Computer) GetName() string {
 	return ""
 }
 
-func (m *Computer) GetMac() string {
+type CreateComputerRequest struct {
+	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+}
+
+func (m *CreateComputerRequest) Reset()                    { *m = CreateComputerRequest{} }
+func (m *CreateComputerRequest) String() string            { return proto.CompactTextString(m) }
+func (*CreateComputerRequest) ProtoMessage()               {}
+func (*CreateComputerRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{1} }
+
+func (m *CreateComputerRequest) GetName() string {
 	if m != nil {
-		return m.Mac
+		return m.Name
 	}
 	return ""
+}
+
+type CreateComputerResponse struct {
+	Computer   *Computer   `protobuf:"bytes,1,opt,name=computer" json:"computer,omitempty"`
+	DeviceInfo *DeviceInfo `protobuf:"bytes,2,opt,name=deviceInfo" json:"deviceInfo,omitempty"`
+}
+
+func (m *CreateComputerResponse) Reset()                    { *m = CreateComputerResponse{} }
+func (m *CreateComputerResponse) String() string            { return proto.CompactTextString(m) }
+func (*CreateComputerResponse) ProtoMessage()               {}
+func (*CreateComputerResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{2} }
+
+func (m *CreateComputerResponse) GetComputer() *Computer {
+	if m != nil {
+		return m.Computer
+	}
+	return nil
+}
+
+func (m *CreateComputerResponse) GetDeviceInfo() *DeviceInfo {
+	if m != nil {
+		return m.DeviceInfo
+	}
+	return nil
+}
+
+type EditComputerRequest struct {
+	ComputerId   uint32 `protobuf:"varint,1,opt,name=computerId" json:"computerId,omitempty"`
+	Name         string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	ArttuId      uint32 `protobuf:"varint,3,opt,name=arttuId" json:"arttuId,omitempty"`
+	DeviceInfoId uint32 `protobuf:"varint,4,opt,name=deviceInfoId" json:"deviceInfoId,omitempty"`
+}
+
+func (m *EditComputerRequest) Reset()                    { *m = EditComputerRequest{} }
+func (m *EditComputerRequest) String() string            { return proto.CompactTextString(m) }
+func (*EditComputerRequest) ProtoMessage()               {}
+func (*EditComputerRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{3} }
+
+func (m *EditComputerRequest) GetComputerId() uint32 {
+	if m != nil {
+		return m.ComputerId
+	}
+	return 0
+}
+
+func (m *EditComputerRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *EditComputerRequest) GetArttuId() uint32 {
+	if m != nil {
+		return m.ArttuId
+	}
+	return 0
+}
+
+func (m *EditComputerRequest) GetDeviceInfoId() uint32 {
+	if m != nil {
+		return m.DeviceInfoId
+	}
+	return 0
+}
+
+type EditComputerResponse struct {
+	Computer   *Computer                  `protobuf:"bytes,1,opt,name=computer" json:"computer,omitempty"`
+	State      EditComputerResponse_State `protobuf:"varint,2,opt,name=state,enum=WompattiService.EditComputerResponse_State" json:"state,omitempty"`
+	ComputerId uint32                     `protobuf:"varint,3,opt,name=computerId" json:"computerId,omitempty"`
+}
+
+func (m *EditComputerResponse) Reset()                    { *m = EditComputerResponse{} }
+func (m *EditComputerResponse) String() string            { return proto.CompactTextString(m) }
+func (*EditComputerResponse) ProtoMessage()               {}
+func (*EditComputerResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{4} }
+
+func (m *EditComputerResponse) GetComputer() *Computer {
+	if m != nil {
+		return m.Computer
+	}
+	return nil
+}
+
+func (m *EditComputerResponse) GetState() EditComputerResponse_State {
+	if m != nil {
+		return m.State
+	}
+	return EditComputerResponse_SUCCESS
+}
+
+func (m *EditComputerResponse) GetComputerId() uint32 {
+	if m != nil {
+		return m.ComputerId
+	}
+	return 0
 }
 
 type RemoveComputerRequest struct {
@@ -52,7 +264,7 @@ type RemoveComputerRequest struct {
 func (m *RemoveComputerRequest) Reset()                    { *m = RemoveComputerRequest{} }
 func (m *RemoveComputerRequest) String() string            { return proto.CompactTextString(m) }
 func (*RemoveComputerRequest) ProtoMessage()               {}
-func (*RemoveComputerRequest) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{1} }
+func (*RemoveComputerRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{5} }
 
 func (m *RemoveComputerRequest) GetComputerId() uint32 {
 	if m != nil {
@@ -62,31 +274,193 @@ func (m *RemoveComputerRequest) GetComputerId() uint32 {
 }
 
 type RemoveComputerResponse struct {
+	State RemoveComputerResponse_State `protobuf:"varint,1,opt,name=state,enum=WompattiService.RemoveComputerResponse_State" json:"state,omitempty"`
 }
 
 func (m *RemoveComputerResponse) Reset()                    { *m = RemoveComputerResponse{} }
 func (m *RemoveComputerResponse) String() string            { return proto.CompactTextString(m) }
 func (*RemoveComputerResponse) ProtoMessage()               {}
-func (*RemoveComputerResponse) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{2} }
+func (*RemoveComputerResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{6} }
+
+func (m *RemoveComputerResponse) GetState() RemoveComputerResponse_State {
+	if m != nil {
+		return m.State
+	}
+	return RemoveComputerResponse_SUCCESS
+}
+
+type FetchComputerByIdRequest struct {
+	ComputerIdt []uint32 `protobuf:"varint,1,rep,packed,name=computerIdt" json:"computerIdt,omitempty"`
+}
+
+func (m *FetchComputerByIdRequest) Reset()                    { *m = FetchComputerByIdRequest{} }
+func (m *FetchComputerByIdRequest) String() string            { return proto.CompactTextString(m) }
+func (*FetchComputerByIdRequest) ProtoMessage()               {}
+func (*FetchComputerByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{7} }
+
+func (m *FetchComputerByIdRequest) GetComputerIdt() []uint32 {
+	if m != nil {
+		return m.ComputerIdt
+	}
+	return nil
+}
+
+type FetchComputerByIdResponse struct {
+	Computer   *Computer                       `protobuf:"bytes,1,opt,name=computer" json:"computer,omitempty"`
+	State      FetchComputerByIdResponse_State `protobuf:"varint,2,opt,name=state,enum=WompattiService.FetchComputerByIdResponse_State" json:"state,omitempty"`
+	ComputerId uint32                          `protobuf:"varint,3,opt,name=computerId" json:"computerId,omitempty"`
+}
+
+func (m *FetchComputerByIdResponse) Reset()                    { *m = FetchComputerByIdResponse{} }
+func (m *FetchComputerByIdResponse) String() string            { return proto.CompactTextString(m) }
+func (*FetchComputerByIdResponse) ProtoMessage()               {}
+func (*FetchComputerByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{8} }
+
+func (m *FetchComputerByIdResponse) GetComputer() *Computer {
+	if m != nil {
+		return m.Computer
+	}
+	return nil
+}
+
+func (m *FetchComputerByIdResponse) GetState() FetchComputerByIdResponse_State {
+	if m != nil {
+		return m.State
+	}
+	return FetchComputerByIdResponse_SUCCESS
+}
+
+func (m *FetchComputerByIdResponse) GetComputerId() uint32 {
+	if m != nil {
+		return m.ComputerId
+	}
+	return 0
+}
+
+type FetchManyComputerByIdRequest struct {
+	Id []uint32 `protobuf:"varint,1,rep,packed,name=id" json:"id,omitempty"`
+}
+
+func (m *FetchManyComputerByIdRequest) Reset()                    { *m = FetchManyComputerByIdRequest{} }
+func (m *FetchManyComputerByIdRequest) String() string            { return proto.CompactTextString(m) }
+func (*FetchManyComputerByIdRequest) ProtoMessage()               {}
+func (*FetchManyComputerByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{9} }
+
+func (m *FetchManyComputerByIdRequest) GetId() []uint32 {
+	if m != nil {
+		return m.Id
+	}
+	return nil
+}
+
+type FetchManyComputerByIdResponse struct {
+	Computer   *Computer                           `protobuf:"bytes,1,opt,name=computer" json:"computer,omitempty"`
+	State      FetchManyComputerByIdResponse_State `protobuf:"varint,2,opt,name=state,enum=WompattiService.FetchManyComputerByIdResponse_State" json:"state,omitempty"`
+	ComputerId uint32                              `protobuf:"varint,3,opt,name=computerId" json:"computerId,omitempty"`
+}
+
+func (m *FetchManyComputerByIdResponse) Reset()                    { *m = FetchManyComputerByIdResponse{} }
+func (m *FetchManyComputerByIdResponse) String() string            { return proto.CompactTextString(m) }
+func (*FetchManyComputerByIdResponse) ProtoMessage()               {}
+func (*FetchManyComputerByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{10} }
+
+func (m *FetchManyComputerByIdResponse) GetComputer() *Computer {
+	if m != nil {
+		return m.Computer
+	}
+	return nil
+}
+
+func (m *FetchManyComputerByIdResponse) GetState() FetchManyComputerByIdResponse_State {
+	if m != nil {
+		return m.State
+	}
+	return FetchManyComputerByIdResponse_SUCCESS
+}
+
+func (m *FetchManyComputerByIdResponse) GetComputerId() uint32 {
+	if m != nil {
+		return m.ComputerId
+	}
+	return 0
+}
+
+type FetchComputersRequest struct {
+	Offset uint32 `protobuf:"varint,1,opt,name=offset" json:"offset,omitempty"`
+	Limit  uint32 `protobuf:"varint,2,opt,name=limit" json:"limit,omitempty"`
+}
+
+func (m *FetchComputersRequest) Reset()                    { *m = FetchComputersRequest{} }
+func (m *FetchComputersRequest) String() string            { return proto.CompactTextString(m) }
+func (*FetchComputersRequest) ProtoMessage()               {}
+func (*FetchComputersRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{11} }
+
+func (m *FetchComputersRequest) GetOffset() uint32 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+func (m *FetchComputersRequest) GetLimit() uint32 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
+}
 
 func init() {
 	proto.RegisterType((*Computer)(nil), "WompattiService.Computer")
+	proto.RegisterType((*CreateComputerRequest)(nil), "WompattiService.CreateComputerRequest")
+	proto.RegisterType((*CreateComputerResponse)(nil), "WompattiService.CreateComputerResponse")
+	proto.RegisterType((*EditComputerRequest)(nil), "WompattiService.EditComputerRequest")
+	proto.RegisterType((*EditComputerResponse)(nil), "WompattiService.EditComputerResponse")
 	proto.RegisterType((*RemoveComputerRequest)(nil), "WompattiService.RemoveComputerRequest")
 	proto.RegisterType((*RemoveComputerResponse)(nil), "WompattiService.RemoveComputerResponse")
+	proto.RegisterType((*FetchComputerByIdRequest)(nil), "WompattiService.FetchComputerByIdRequest")
+	proto.RegisterType((*FetchComputerByIdResponse)(nil), "WompattiService.FetchComputerByIdResponse")
+	proto.RegisterType((*FetchManyComputerByIdRequest)(nil), "WompattiService.FetchManyComputerByIdRequest")
+	proto.RegisterType((*FetchManyComputerByIdResponse)(nil), "WompattiService.FetchManyComputerByIdResponse")
+	proto.RegisterType((*FetchComputersRequest)(nil), "WompattiService.FetchComputersRequest")
+	proto.RegisterEnum("WompattiService.EditComputerResponse_State", EditComputerResponse_State_name, EditComputerResponse_State_value)
+	proto.RegisterEnum("WompattiService.RemoveComputerResponse_State", RemoveComputerResponse_State_name, RemoveComputerResponse_State_value)
+	proto.RegisterEnum("WompattiService.FetchComputerByIdResponse_State", FetchComputerByIdResponse_State_name, FetchComputerByIdResponse_State_value)
+	proto.RegisterEnum("WompattiService.FetchManyComputerByIdResponse_State", FetchManyComputerByIdResponse_State_name, FetchManyComputerByIdResponse_State_value)
 }
 
-func init() { proto.RegisterFile("computer.proto", fileDescriptor2) }
+func init() { proto.RegisterFile("computer.proto", fileDescriptor1) }
 
-var fileDescriptor2 = []byte{
-	// 157 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4b, 0xce, 0xcf, 0x2d,
-	0x28, 0x2d, 0x49, 0x2d, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x0f, 0xcf, 0xcf, 0x2d,
-	0x48, 0x2c, 0x29, 0xc9, 0x0c, 0x4e, 0x2d, 0x2a, 0xcb, 0x4c, 0x4e, 0x55, 0x72, 0xe0, 0xe2, 0x70,
-	0x86, 0x2a, 0x11, 0xe2, 0xe3, 0x62, 0xca, 0x4c, 0x91, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0d, 0x62,
-	0xca, 0x4c, 0x11, 0x12, 0xe2, 0x62, 0xc9, 0x4b, 0xcc, 0x4d, 0x95, 0x60, 0x52, 0x60, 0xd4, 0xe0,
-	0x0c, 0x02, 0xb3, 0x85, 0x04, 0xb8, 0x98, 0x73, 0x13, 0x93, 0x25, 0x98, 0xc1, 0x42, 0x20, 0xa6,
-	0x92, 0x39, 0x97, 0x68, 0x50, 0x6a, 0x6e, 0x7e, 0x59, 0x2a, 0xcc, 0x9c, 0xa0, 0xd4, 0xc2, 0xd2,
-	0xd4, 0xe2, 0x12, 0x21, 0x39, 0x2e, 0x2e, 0x98, 0xed, 0x9e, 0x30, 0x63, 0x91, 0x44, 0x94, 0x24,
-	0xb8, 0xc4, 0xd0, 0x35, 0x16, 0x17, 0xe4, 0xe7, 0x15, 0xa7, 0x26, 0xb1, 0x81, 0x1d, 0x6b, 0x0c,
-	0x08, 0x00, 0x00, 0xff, 0xff, 0x2e, 0xbf, 0x9c, 0xf6, 0xbe, 0x00, 0x00, 0x00,
+var fileDescriptor1 = []byte{
+	// 488 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x94, 0x4b, 0x6f, 0xd3, 0x40,
+	0x14, 0x85, 0x99, 0x38, 0xe9, 0xe3, 0x86, 0x84, 0x32, 0x34, 0x91, 0xcb, 0x4b, 0xd6, 0xb0, 0x89,
+	0x54, 0x61, 0xa1, 0x00, 0x62, 0x01, 0x1b, 0x70, 0x13, 0xc9, 0x48, 0xb4, 0x92, 0x4d, 0xc5, 0xb2,
+	0x32, 0xf1, 0x58, 0x8c, 0x54, 0x7b, 0x8c, 0x3d, 0xa9, 0xd4, 0x2d, 0x1b, 0x36, 0xfc, 0x3d, 0xd6,
+	0x2c, 0xf9, 0x1b, 0xa8, 0x63, 0x8f, 0xe3, 0x57, 0x10, 0x28, 0xca, 0x2a, 0x99, 0xc9, 0x39, 0x73,
+	0xef, 0xf9, 0x6e, 0x74, 0x61, 0xb8, 0xe0, 0x61, 0xbc, 0x14, 0x34, 0x31, 0xe3, 0x84, 0x0b, 0x8e,
+	0xef, 0x7c, 0xe2, 0x61, 0xec, 0x09, 0xc1, 0x5c, 0x9a, 0x5c, 0xb1, 0x05, 0xbd, 0x7f, 0xd7, 0xa7,
+	0x37, 0x9f, 0x17, 0x2c, 0x0a, 0x78, 0xa6, 0x21, 0x97, 0xb0, 0x67, 0xe5, 0x2e, 0x3c, 0x84, 0x0e,
+	0xf3, 0x75, 0x64, 0xa0, 0xc9, 0xc0, 0xe9, 0x30, 0x1f, 0xeb, 0xb0, 0xeb, 0x25, 0x42, 0x2c, 0x6d,
+	0x5f, 0xef, 0xc8, 0x4b, 0x75, 0xc4, 0x04, 0x6e, 0x67, 0x4f, 0xd9, 0x51, 0xc0, 0x6d, 0x5f, 0xd7,
+	0xe4, 0xcf, 0x95, 0x3b, 0x8c, 0xa1, 0x1b, 0x79, 0x21, 0xd5, 0xbb, 0x06, 0x9a, 0xec, 0x3b, 0xf2,
+	0x3b, 0x39, 0x86, 0x91, 0x95, 0x50, 0x4f, 0x50, 0x55, 0xd3, 0xa1, 0x5f, 0x97, 0x34, 0x15, 0x85,
+	0x18, 0x95, 0xc4, 0x3f, 0x10, 0x8c, 0xeb, 0xea, 0x34, 0xe6, 0x51, 0x4a, 0xf1, 0x4b, 0xd8, 0x53,
+	0x59, 0xa5, 0xa5, 0x3f, 0x3d, 0x32, 0x6b, 0x61, 0xcd, 0xc2, 0x54, 0x48, 0xf1, 0x6b, 0x80, 0x55,
+	0x8b, 0x32, 0x53, 0x7f, 0xfa, 0xa0, 0x61, 0x3c, 0x29, 0x24, 0x4e, 0x49, 0x4e, 0xbe, 0x23, 0xb8,
+	0x37, 0xf3, 0x99, 0xa8, 0xb7, 0xfe, 0x18, 0x40, 0x15, 0xb0, 0x15, 0xbd, 0xd2, 0x4d, 0x11, 0xad,
+	0xb3, 0x8a, 0x56, 0x26, 0xab, 0xfd, 0x9d, 0x6c, 0xb7, 0x49, 0x96, 0xfc, 0x44, 0x70, 0x58, 0xed,
+	0x64, 0x33, 0x2c, 0x6f, 0xa1, 0x97, 0x0a, 0x4f, 0x64, 0x2d, 0x0e, 0xa7, 0xc7, 0x0d, 0x4f, 0x5b,
+	0x31, 0xd3, 0xbd, 0xb1, 0x38, 0x99, 0xb3, 0x06, 0x41, 0xab, 0x43, 0x20, 0x4f, 0xa0, 0x27, 0xf5,
+	0xb8, 0x0f, 0xbb, 0xee, 0xb9, 0x65, 0xcd, 0x5c, 0xf7, 0xe0, 0x16, 0x1e, 0xc0, 0xfe, 0xe9, 0xd9,
+	0xc7, 0x8b, 0xf9, 0xd9, 0xf9, 0xe9, 0xc9, 0x01, 0x22, 0xaf, 0x60, 0xe4, 0xd0, 0x90, 0x5f, 0xd1,
+	0xff, 0x44, 0x4c, 0xbe, 0x21, 0x18, 0xd7, 0x9d, 0x39, 0x12, 0x4b, 0x65, 0x43, 0x32, 0xdb, 0xd3,
+	0x46, 0xb6, 0x76, 0x5f, 0x25, 0xdd, 0xbf, 0x75, 0xff, 0x06, 0xf4, 0x39, 0x15, 0x8b, 0x2f, 0xea,
+	0xa9, 0x77, 0xd7, 0xb6, 0xaf, 0x02, 0x18, 0xd0, 0x5f, 0xb5, 0x2b, 0x74, 0x64, 0x68, 0x93, 0x81,
+	0x53, 0xbe, 0x22, 0xbf, 0x10, 0x1c, 0xb5, 0xd8, 0x37, 0x1b, 0xec, 0xbc, 0x3a, 0xd8, 0x67, 0x0d,
+	0xcf, 0xda, 0x8a, 0x5b, 0x98, 0xae, 0x09, 0x0f, 0x65, 0xb9, 0x0f, 0x5e, 0x74, 0xdd, 0xc6, 0x48,
+	0x6d, 0x1f, 0x2d, 0xdb, 0x3e, 0xe4, 0x37, 0x82, 0x47, 0x6b, 0x0c, 0x9b, 0x51, 0x79, 0x5f, 0xa5,
+	0xf2, 0xa2, 0x9d, 0xca, 0xba, 0xaa, 0x5b, 0x20, 0x33, 0x83, 0x51, 0x65, 0x10, 0xa9, 0x42, 0x32,
+	0x86, 0x1d, 0x1e, 0x04, 0x29, 0x15, 0xf9, 0x7f, 0x3e, 0x3f, 0xe1, 0x43, 0xe8, 0x5d, 0xb2, 0x90,
+	0x89, 0x7c, 0x2d, 0x67, 0x87, 0xcf, 0x3b, 0x72, 0xa3, 0x3f, 0xff, 0x13, 0x00, 0x00, 0xff, 0xff,
+	0x00, 0x3c, 0x7e, 0xf3, 0x07, 0x06, 0x00, 0x00,
 }
