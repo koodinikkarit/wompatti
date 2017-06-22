@@ -26,7 +26,7 @@ type EthernetInterface struct {
 func (m *EthernetInterface) Reset()                    { *m = EthernetInterface{} }
 func (m *EthernetInterface) String() string            { return proto.CompactTextString(m) }
 func (*EthernetInterface) ProtoMessage()               {}
-func (*EthernetInterface) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{0} }
+func (*EthernetInterface) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{0} }
 
 func (m *EthernetInterface) GetId() uint32 {
 	if m != nil {
@@ -85,7 +85,7 @@ type FetchEthernetInterfacesRequest struct {
 func (m *FetchEthernetInterfacesRequest) Reset()                    { *m = FetchEthernetInterfacesRequest{} }
 func (m *FetchEthernetInterfacesRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchEthernetInterfacesRequest) ProtoMessage()               {}
-func (*FetchEthernetInterfacesRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1} }
+func (*FetchEthernetInterfacesRequest) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{1} }
 
 func (m *FetchEthernetInterfacesRequest) GetOffset() uint32 {
 	if m != nil {
@@ -106,9 +106,9 @@ func init() {
 	proto.RegisterType((*FetchEthernetInterfacesRequest)(nil), "WompattiService.FetchEthernetInterfacesRequest")
 }
 
-func init() { proto.RegisterFile("ethernet_interface.proto", fileDescriptor4) }
+func init() { proto.RegisterFile("ethernet_interface.proto", fileDescriptor5) }
 
-var fileDescriptor4 = []byte{
+var fileDescriptor5 = []byte{
 	// 218 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x90, 0xbf, 0x4a, 0xc4, 0x40,
 	0x10, 0xc6, 0xd9, 0xdc, 0x5d, 0xc4, 0xc1, 0xf3, 0xcf, 0x22, 0x32, 0x95, 0x84, 0xab, 0x52, 0xd9,

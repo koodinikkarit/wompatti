@@ -10,7 +10,10 @@ It is generated from these files:
 	computer.proto
 	device.proto
 	device_info.proto
+	device_type.proto
 	ethernet_interface.proto
+	serial_interface.proto
+	telnet_interface.proto
 	wol_interface.proto
 	wompatti_service.proto
 
@@ -52,11 +55,35 @@ It has these top-level messages:
 	EditKeyValueResponse
 	RemoveKeyValueRequest
 	RemoveKeyValueResponse
+	DeviceType
+	Command
+	CreateDeviceTypeRequest
+	CreateDeviceTypeResponse
+	EditDeviceTypeRequest
+	EditDeviceTypeResponse
+	RemoveDeviceTypeRequest
+	RemoveDeviceTypeResponse
+	CreateCommandRequest
+	CreateCommandResponse
+	EditCommandRequest
+	EditCommandReponse
+	RemoveCommandRequest
+	RemoveCommandResponse
 	EthernetInterface
 	FetchEthernetInterfacesRequest
+	SerialInterface
+	TelnetInterface
 	WolInterface
 	CreateWolInterfaceRequest
 	CreateWolInterfaceResponse
+	EditWolInterfaceRequest
+	EditWolInterfaceResponse
+	RemoveWolInterfaceRequest
+	RemoveWolInterfaceResponse
+	ExecuteWolInterfaceRequest
+	ExecuteWolInterfaceResponse
+	FetchWolInterfaceByIdRequest
+	FetchWolInterfaceByIdResponse
 */
 package WompattiService
 

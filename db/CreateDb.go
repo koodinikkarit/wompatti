@@ -26,6 +26,7 @@ func CreateDb(
 	db.AutoMigrate(&DeviceInfo{})
 	db.AutoMigrate(&KeyValue{})
 	db.AutoMigrate(&Device{})
+	db.AutoMigrate(&WolInterface{})
 
 	return db
 }

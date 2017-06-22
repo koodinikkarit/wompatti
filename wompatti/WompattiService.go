@@ -309,11 +309,49 @@ func (s *WompattiServiceServer) RemoveDevice(ctx context.Context, in *WompattiSe
 	return response, nil
 }
 
-func (s *WompattiServiceServer) FetchDevices(in *WompattiService.FetchDevicesRequest, stream WompattiService.Device) error {
+func (s *WompattiServiceServer) FetchDevices(in *WompattiService.FetchDevicesRequest, stream WompattiService.Wompatti_FetchDevicesServer) error {
+	var devices = []wompatti.Device{}
+	s.db.Find(&devices)
+
+	for _, device := range devices {
+		stream.Send(&WompattiService.Device{
+			Id:           device.ID,
+			Name:         device.Name,
+			DeviceInfoId: uint32(device.DeviceInfoID),
+		})
+	}
+
 	return nil
 }
 
 func (s *WompattiServiceServer) FetchDeviceById(in *WompattiService.FetchDeviceByIdRequest, stream WompattiService.Wompatti_FetchDeviceByIdServer) error {
+	devices := []wompatti.Device{}
+	s.db.Where("id in (?)", in.DeviceIdt).Find(&devices)
+	for _, deviceId := range in.DeviceIdt {
+		var found bool
+		for _, device := range devices {
+			if device.ID == deviceId {
+				stream.Send(&WompattiService.FetchDeviceByIdResponse{
+					State: WompattiService.FetchDeviceByIdResponse_SUCCESS,
+					Device: &WompattiService.Device{
+						Id:           device.ID,
+						Name:         device.Name,
+						DeviceInfoId: uint32(device.DeviceInfoID),
+					},
+				})
+
+				found = true
+				break
+			}
+		}
+		if found == false {
+			stream.Send(&WompattiService.FetchDeviceByIdResponse{
+				State:    WompattiService.FetchDeviceByIdResponse_NOT_FOUND,
+				DeviceId: deviceId,
+			})
+		}
+	}
+
 	return nil
 }
 
@@ -321,6 +359,7 @@ func (s *WompattiServiceServer) FetchEthernetInterfaces(in *WompattiService.Fetc
 	ifaces, _ := net.Interfaces()
 	for _, iface := range ifaces {
 		stream.Send(&WompattiService.EthernetInterface{
+			Id:    uint32(iface.Index),
 			Name:  iface.Name,
 			Mac:   iface.HardwareAddr,
 			Index: uint32(iface.Index),
@@ -332,7 +371,20 @@ func (s *WompattiServiceServer) FetchEthernetInterfaces(in *WompattiService.Fetc
 }
 
 func (s *WompattiServiceServer) CreateWolInterface(ctx context.Context, in *WompattiService.CreateWolInterfaceRequest) (*WompattiService.CreateWolInterfaceResponse, error) {
-	return &WompattiService.CreateWolInterfaceResponse{}, nil
+	wolInterface := &wompatti.WolInterface{
+		EthernetInterfaceId: in.EthernetInterfaceId,
+		Mac:                 in.Mac,
+	}
+
+	s.db.Create(wolInterface)
+
+	return &WompattiService.CreateWolInterfaceResponse{
+		WolInterface: &WompattiService.WolInterface{
+			Id:                  wolInterface.ID,
+			EthernetInterfaceId: wolInterface.EthernetInterfaceId,
+			Mac:                 wolInterface.Mac,
+		},
+	}, nil
 }
 
 func CreateWompattiService(db *gorm.DB, port string) *grpc.Server {
