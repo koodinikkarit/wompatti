@@ -33,7 +33,7 @@ func (x CreateWolInterfaceResponse_State) String() string {
 	return proto.EnumName(CreateWolInterfaceResponse_State_name, int32(x))
 }
 func (CreateWolInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor8, []int{2, 0}
+	return fileDescriptor9, []int{2, 0}
 }
 
 type EditWolInterfaceResponse_State int32
@@ -56,7 +56,7 @@ func (x EditWolInterfaceResponse_State) String() string {
 	return proto.EnumName(EditWolInterfaceResponse_State_name, int32(x))
 }
 func (EditWolInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor8, []int{4, 0}
+	return fileDescriptor9, []int{4, 0}
 }
 
 type RemoveWolInterfaceResponse_State int32
@@ -79,7 +79,7 @@ func (x RemoveWolInterfaceResponse_State) String() string {
 	return proto.EnumName(RemoveWolInterfaceResponse_State_name, int32(x))
 }
 func (RemoveWolInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor8, []int{6, 0}
+	return fileDescriptor9, []int{6, 0}
 }
 
 type ExecuteWolInterfaceResponse_State int32
@@ -102,7 +102,7 @@ func (x ExecuteWolInterfaceResponse_State) String() string {
 	return proto.EnumName(ExecuteWolInterfaceResponse_State_name, int32(x))
 }
 func (ExecuteWolInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor8, []int{8, 0}
+	return fileDescriptor9, []int{8, 0}
 }
 
 type FetchWolInterfaceByIdResponse_State int32
@@ -125,7 +125,7 @@ func (x FetchWolInterfaceByIdResponse_State) String() string {
 	return proto.EnumName(FetchWolInterfaceByIdResponse_State_name, int32(x))
 }
 func (FetchWolInterfaceByIdResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor8, []int{10, 0}
+	return fileDescriptor9, []int{10, 0}
 }
 
 type WolInterface struct {
@@ -137,7 +137,7 @@ type WolInterface struct {
 func (m *WolInterface) Reset()                    { *m = WolInterface{} }
 func (m *WolInterface) String() string            { return proto.CompactTextString(m) }
 func (*WolInterface) ProtoMessage()               {}
-func (*WolInterface) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{0} }
+func (*WolInterface) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{0} }
 
 func (m *WolInterface) GetId() uint32 {
 	if m != nil {
@@ -169,7 +169,7 @@ type CreateWolInterfaceRequest struct {
 func (m *CreateWolInterfaceRequest) Reset()                    { *m = CreateWolInterfaceRequest{} }
 func (m *CreateWolInterfaceRequest) String() string            { return proto.CompactTextString(m) }
 func (*CreateWolInterfaceRequest) ProtoMessage()               {}
-func (*CreateWolInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{1} }
+func (*CreateWolInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{1} }
 
 func (m *CreateWolInterfaceRequest) GetComputerId() uint32 {
 	if m != nil {
@@ -200,7 +200,7 @@ type CreateWolInterfaceResponse struct {
 func (m *CreateWolInterfaceResponse) Reset()                    { *m = CreateWolInterfaceResponse{} }
 func (m *CreateWolInterfaceResponse) String() string            { return proto.CompactTextString(m) }
 func (*CreateWolInterfaceResponse) ProtoMessage()               {}
-func (*CreateWolInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{2} }
+func (*CreateWolInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{2} }
 
 func (m *CreateWolInterfaceResponse) GetState() CreateWolInterfaceResponse_State {
 	if m != nil {
@@ -225,7 +225,7 @@ type EditWolInterfaceRequest struct {
 func (m *EditWolInterfaceRequest) Reset()                    { *m = EditWolInterfaceRequest{} }
 func (m *EditWolInterfaceRequest) String() string            { return proto.CompactTextString(m) }
 func (*EditWolInterfaceRequest) ProtoMessage()               {}
-func (*EditWolInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{3} }
+func (*EditWolInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{3} }
 
 func (m *EditWolInterfaceRequest) GetWolInterfaceId() uint32 {
 	if m != nil {
@@ -256,7 +256,7 @@ type EditWolInterfaceResponse struct {
 func (m *EditWolInterfaceResponse) Reset()                    { *m = EditWolInterfaceResponse{} }
 func (m *EditWolInterfaceResponse) String() string            { return proto.CompactTextString(m) }
 func (*EditWolInterfaceResponse) ProtoMessage()               {}
-func (*EditWolInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{4} }
+func (*EditWolInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{4} }
 
 func (m *EditWolInterfaceResponse) GetState() EditWolInterfaceResponse_State {
 	if m != nil {
@@ -279,7 +279,7 @@ type RemoveWolInterfaceRequest struct {
 func (m *RemoveWolInterfaceRequest) Reset()                    { *m = RemoveWolInterfaceRequest{} }
 func (m *RemoveWolInterfaceRequest) String() string            { return proto.CompactTextString(m) }
 func (*RemoveWolInterfaceRequest) ProtoMessage()               {}
-func (*RemoveWolInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{5} }
+func (*RemoveWolInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{5} }
 
 func (m *RemoveWolInterfaceRequest) GetWolInterfaceId() uint32 {
 	if m != nil {
@@ -295,7 +295,7 @@ type RemoveWolInterfaceResponse struct {
 func (m *RemoveWolInterfaceResponse) Reset()                    { *m = RemoveWolInterfaceResponse{} }
 func (m *RemoveWolInterfaceResponse) String() string            { return proto.CompactTextString(m) }
 func (*RemoveWolInterfaceResponse) ProtoMessage()               {}
-func (*RemoveWolInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{6} }
+func (*RemoveWolInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{6} }
 
 func (m *RemoveWolInterfaceResponse) GetState() RemoveWolInterfaceResponse_State {
 	if m != nil {
@@ -311,7 +311,7 @@ type ExecuteWolInterfaceRequest struct {
 func (m *ExecuteWolInterfaceRequest) Reset()                    { *m = ExecuteWolInterfaceRequest{} }
 func (m *ExecuteWolInterfaceRequest) String() string            { return proto.CompactTextString(m) }
 func (*ExecuteWolInterfaceRequest) ProtoMessage()               {}
-func (*ExecuteWolInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{7} }
+func (*ExecuteWolInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{7} }
 
 func (m *ExecuteWolInterfaceRequest) GetWolInterfaceId() uint32 {
 	if m != nil {
@@ -327,7 +327,7 @@ type ExecuteWolInterfaceResponse struct {
 func (m *ExecuteWolInterfaceResponse) Reset()                    { *m = ExecuteWolInterfaceResponse{} }
 func (m *ExecuteWolInterfaceResponse) String() string            { return proto.CompactTextString(m) }
 func (*ExecuteWolInterfaceResponse) ProtoMessage()               {}
-func (*ExecuteWolInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{8} }
+func (*ExecuteWolInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{8} }
 
 func (m *ExecuteWolInterfaceResponse) GetState() ExecuteWolInterfaceResponse_State {
 	if m != nil {
@@ -343,7 +343,7 @@ type FetchWolInterfaceByIdRequest struct {
 func (m *FetchWolInterfaceByIdRequest) Reset()                    { *m = FetchWolInterfaceByIdRequest{} }
 func (m *FetchWolInterfaceByIdRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchWolInterfaceByIdRequest) ProtoMessage()               {}
-func (*FetchWolInterfaceByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{9} }
+func (*FetchWolInterfaceByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{9} }
 
 func (m *FetchWolInterfaceByIdRequest) GetWolInterfaceIdt() []uint32 {
 	if m != nil {
@@ -360,7 +360,7 @@ type FetchWolInterfaceByIdResponse struct {
 func (m *FetchWolInterfaceByIdResponse) Reset()                    { *m = FetchWolInterfaceByIdResponse{} }
 func (m *FetchWolInterfaceByIdResponse) String() string            { return proto.CompactTextString(m) }
 func (*FetchWolInterfaceByIdResponse) ProtoMessage()               {}
-func (*FetchWolInterfaceByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor8, []int{10} }
+func (*FetchWolInterfaceByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{10} }
 
 func (m *FetchWolInterfaceByIdResponse) GetState() FetchWolInterfaceByIdResponse_State {
 	if m != nil {
@@ -395,9 +395,9 @@ func init() {
 	proto.RegisterEnum("WompattiService.FetchWolInterfaceByIdResponse_State", FetchWolInterfaceByIdResponse_State_name, FetchWolInterfaceByIdResponse_State_value)
 }
 
-func init() { proto.RegisterFile("wol_interface.proto", fileDescriptor8) }
+func init() { proto.RegisterFile("wol_interface.proto", fileDescriptor9) }
 
-var fileDescriptor8 = []byte{
+var fileDescriptor9 = []byte{
 	// 416 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x94, 0x4f, 0x8f, 0x9a, 0x60,
 	0x10, 0xc6, 0xfb, 0x6a, 0x6c, 0xd3, 0xf1, 0x6f, 0x5e, 0x0f, 0x45, 0x5b, 0x1b, 0x43, 0x93, 0x86,

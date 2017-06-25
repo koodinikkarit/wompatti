@@ -13,25 +13,221 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+type CreateSerialInterfaceResponse_State int32
+
+const (
+	CreateSerialInterfaceResponse_SUCCESS   CreateSerialInterfaceResponse_State = 0
+	CreateSerialInterfaceResponse_NOT_FOUND CreateSerialInterfaceResponse_State = 1
+)
+
+var CreateSerialInterfaceResponse_State_name = map[int32]string{
+	0: "SUCCESS",
+	1: "NOT_FOUND",
+}
+var CreateSerialInterfaceResponse_State_value = map[string]int32{
+	"SUCCESS":   0,
+	"NOT_FOUND": 1,
+}
+
+func (x CreateSerialInterfaceResponse_State) String() string {
+	return proto.EnumName(CreateSerialInterfaceResponse_State_name, int32(x))
+}
+func (CreateSerialInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor7, []int{2, 0}
+}
+
+type EditSerialInterfaceResponse_State int32
+
+const (
+	EditSerialInterfaceResponse_SUCCESS   EditSerialInterfaceResponse_State = 0
+	EditSerialInterfaceResponse_NOT_FOUND EditSerialInterfaceResponse_State = 1
+)
+
+var EditSerialInterfaceResponse_State_name = map[int32]string{
+	0: "SUCCESS",
+	1: "NOT_FOUND",
+}
+var EditSerialInterfaceResponse_State_value = map[string]int32{
+	"SUCCESS":   0,
+	"NOT_FOUND": 1,
+}
+
+func (x EditSerialInterfaceResponse_State) String() string {
+	return proto.EnumName(EditSerialInterfaceResponse_State_name, int32(x))
+}
+func (EditSerialInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor7, []int{4, 0}
+}
+
 type SerialInterface struct {
+	Id           uint32 `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+	SerialPortId uint32 `protobuf:"varint,2,opt,name=serialPortId" json:"serialPortId,omitempty"`
 }
 
 func (m *SerialInterface) Reset()                    { *m = SerialInterface{} }
 func (m *SerialInterface) String() string            { return proto.CompactTextString(m) }
 func (*SerialInterface) ProtoMessage()               {}
-func (*SerialInterface) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
+func (*SerialInterface) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{0} }
+
+func (m *SerialInterface) GetId() uint32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *SerialInterface) GetSerialPortId() uint32 {
+	if m != nil {
+		return m.SerialPortId
+	}
+	return 0
+}
+
+type CreateSerialInterfaceRequest struct {
+	SerialPortId uint32 `protobuf:"varint,1,opt,name=serialPortId" json:"serialPortId,omitempty"`
+}
+
+func (m *CreateSerialInterfaceRequest) Reset()                    { *m = CreateSerialInterfaceRequest{} }
+func (m *CreateSerialInterfaceRequest) String() string            { return proto.CompactTextString(m) }
+func (*CreateSerialInterfaceRequest) ProtoMessage()               {}
+func (*CreateSerialInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{1} }
+
+func (m *CreateSerialInterfaceRequest) GetSerialPortId() uint32 {
+	if m != nil {
+		return m.SerialPortId
+	}
+	return 0
+}
+
+type CreateSerialInterfaceResponse struct {
+	State           CreateSerialInterfaceResponse_State `protobuf:"varint,1,opt,name=state,enum=WompattiService.CreateSerialInterfaceResponse_State" json:"state,omitempty"`
+	SerialInterface *SerialInterface                    `protobuf:"bytes,2,opt,name=serialInterface" json:"serialInterface,omitempty"`
+}
+
+func (m *CreateSerialInterfaceResponse) Reset()                    { *m = CreateSerialInterfaceResponse{} }
+func (m *CreateSerialInterfaceResponse) String() string            { return proto.CompactTextString(m) }
+func (*CreateSerialInterfaceResponse) ProtoMessage()               {}
+func (*CreateSerialInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{2} }
+
+func (m *CreateSerialInterfaceResponse) GetState() CreateSerialInterfaceResponse_State {
+	if m != nil {
+		return m.State
+	}
+	return CreateSerialInterfaceResponse_SUCCESS
+}
+
+func (m *CreateSerialInterfaceResponse) GetSerialInterface() *SerialInterface {
+	if m != nil {
+		return m.SerialInterface
+	}
+	return nil
+}
+
+type EditSerialInterfaceRequest struct {
+	SerialInterfaceId uint32 `protobuf:"varint,1,opt,name=serialInterfaceId" json:"serialInterfaceId,omitempty"`
+	SerialPortId      uint32 `protobuf:"varint,2,opt,name=serialPortId" json:"serialPortId,omitempty"`
+}
+
+func (m *EditSerialInterfaceRequest) Reset()                    { *m = EditSerialInterfaceRequest{} }
+func (m *EditSerialInterfaceRequest) String() string            { return proto.CompactTextString(m) }
+func (*EditSerialInterfaceRequest) ProtoMessage()               {}
+func (*EditSerialInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{3} }
+
+func (m *EditSerialInterfaceRequest) GetSerialInterfaceId() uint32 {
+	if m != nil {
+		return m.SerialInterfaceId
+	}
+	return 0
+}
+
+func (m *EditSerialInterfaceRequest) GetSerialPortId() uint32 {
+	if m != nil {
+		return m.SerialPortId
+	}
+	return 0
+}
+
+type EditSerialInterfaceResponse struct {
+	State           EditSerialInterfaceResponse_State `protobuf:"varint,1,opt,name=state,enum=WompattiService.EditSerialInterfaceResponse_State" json:"state,omitempty"`
+	SerialInterface *SerialInterface                  `protobuf:"bytes,2,opt,name=serialInterface" json:"serialInterface,omitempty"`
+}
+
+func (m *EditSerialInterfaceResponse) Reset()                    { *m = EditSerialInterfaceResponse{} }
+func (m *EditSerialInterfaceResponse) String() string            { return proto.CompactTextString(m) }
+func (*EditSerialInterfaceResponse) ProtoMessage()               {}
+func (*EditSerialInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{4} }
+
+func (m *EditSerialInterfaceResponse) GetState() EditSerialInterfaceResponse_State {
+	if m != nil {
+		return m.State
+	}
+	return EditSerialInterfaceResponse_SUCCESS
+}
+
+func (m *EditSerialInterfaceResponse) GetSerialInterface() *SerialInterface {
+	if m != nil {
+		return m.SerialInterface
+	}
+	return nil
+}
+
+type RemoveSerialInterfaceRequest struct {
+	SerialInterfaceId uint32 `protobuf:"varint,1,opt,name=serialInterfaceId" json:"serialInterfaceId,omitempty"`
+}
+
+func (m *RemoveSerialInterfaceRequest) Reset()                    { *m = RemoveSerialInterfaceRequest{} }
+func (m *RemoveSerialInterfaceRequest) String() string            { return proto.CompactTextString(m) }
+func (*RemoveSerialInterfaceRequest) ProtoMessage()               {}
+func (*RemoveSerialInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{5} }
+
+func (m *RemoveSerialInterfaceRequest) GetSerialInterfaceId() uint32 {
+	if m != nil {
+		return m.SerialInterfaceId
+	}
+	return 0
+}
+
+type RemoveSerialInterfaceResponse struct {
+}
+
+func (m *RemoveSerialInterfaceResponse) Reset()                    { *m = RemoveSerialInterfaceResponse{} }
+func (m *RemoveSerialInterfaceResponse) String() string            { return proto.CompactTextString(m) }
+func (*RemoveSerialInterfaceResponse) ProtoMessage()               {}
+func (*RemoveSerialInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{6} }
 
 func init() {
 	proto.RegisterType((*SerialInterface)(nil), "WompattiService.SerialInterface")
+	proto.RegisterType((*CreateSerialInterfaceRequest)(nil), "WompattiService.CreateSerialInterfaceRequest")
+	proto.RegisterType((*CreateSerialInterfaceResponse)(nil), "WompattiService.CreateSerialInterfaceResponse")
+	proto.RegisterType((*EditSerialInterfaceRequest)(nil), "WompattiService.EditSerialInterfaceRequest")
+	proto.RegisterType((*EditSerialInterfaceResponse)(nil), "WompattiService.EditSerialInterfaceResponse")
+	proto.RegisterType((*RemoveSerialInterfaceRequest)(nil), "WompattiService.RemoveSerialInterfaceRequest")
+	proto.RegisterType((*RemoveSerialInterfaceResponse)(nil), "WompattiService.RemoveSerialInterfaceResponse")
+	proto.RegisterEnum("WompattiService.CreateSerialInterfaceResponse_State", CreateSerialInterfaceResponse_State_name, CreateSerialInterfaceResponse_State_value)
+	proto.RegisterEnum("WompattiService.EditSerialInterfaceResponse_State", EditSerialInterfaceResponse_State_name, EditSerialInterfaceResponse_State_value)
 }
 
-func init() { proto.RegisterFile("serial_interface.proto", fileDescriptor6) }
+func init() { proto.RegisterFile("serial_interface.proto", fileDescriptor7) }
 
-var fileDescriptor6 = []byte{
-	// 80 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2b, 0x4e, 0x2d, 0xca,
-	0x4c, 0xcc, 0x89, 0xcf, 0xcc, 0x2b, 0x49, 0x2d, 0x4a, 0x4b, 0x4c, 0x4e, 0xd5, 0x2b, 0x28, 0xca,
-	0x2f, 0xc9, 0x17, 0xe2, 0x0f, 0xcf, 0xcf, 0x2d, 0x48, 0x2c, 0x29, 0xc9, 0x0c, 0x4e, 0x2d, 0x2a,
-	0xcb, 0x4c, 0x4e, 0x55, 0x12, 0xe4, 0xe2, 0x0f, 0x06, 0x2b, 0xf5, 0x84, 0xa9, 0x4c, 0x62, 0x03,
-	0x2b, 0x35, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0x3f, 0x5e, 0x2c, 0x8c, 0x44, 0x00, 0x00, 0x00,
+var fileDescriptor7 = []byte{
+	// 294 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x93, 0x41, 0x4b, 0xc3, 0x30,
+	0x14, 0xc7, 0xcd, 0x60, 0x8a, 0x6f, 0x6e, 0x9d, 0x39, 0xc8, 0xd0, 0x0d, 0x47, 0xbc, 0x78, 0x90,
+	0x1e, 0xaa, 0x9f, 0xc0, 0x5a, 0x71, 0x43, 0x36, 0x69, 0x1c, 0x1e, 0x47, 0x5d, 0x9f, 0x10, 0x70,
+	0x4d, 0x4d, 0xe2, 0x3e, 0xab, 0x07, 0x3f, 0x8c, 0x98, 0xaa, 0xd0, 0x74, 0x1d, 0x1e, 0x04, 0xaf,
+	0x79, 0xef, 0xff, 0x0b, 0xff, 0x5f, 0x08, 0x1c, 0x68, 0x54, 0x22, 0x79, 0x9e, 0x8b, 0xcc, 0xa0,
+	0x7a, 0x4a, 0x16, 0xe8, 0xe7, 0x4a, 0x1a, 0x49, 0xbd, 0x07, 0xb9, 0xcc, 0x13, 0x63, 0x04, 0x47,
+	0xb5, 0x12, 0x0b, 0x64, 0x11, 0x78, 0xdc, 0xae, 0x8e, 0xbe, 0x37, 0x69, 0x07, 0x1a, 0x22, 0xed,
+	0x91, 0x21, 0x39, 0x6d, 0xc7, 0x0d, 0x91, 0x52, 0x06, 0x7b, 0x05, 0xed, 0x4e, 0x2a, 0x33, 0x4a,
+	0x7b, 0x0d, 0x3b, 0x29, 0x9d, 0xb1, 0x4b, 0xe8, 0x87, 0x0a, 0x13, 0x83, 0x0e, 0x2c, 0xc6, 0x97,
+	0x57, 0xd4, 0xa6, 0xc2, 0x20, 0x6b, 0x18, 0xef, 0x04, 0x06, 0x35, 0x10, 0x9d, 0xcb, 0x4c, 0x23,
+	0x1d, 0x43, 0x53, 0x9b, 0xc4, 0xa0, 0x8d, 0x77, 0x82, 0x0b, 0xdf, 0x69, 0xe3, 0x6f, 0x8c, 0xfb,
+	0xfc, 0x33, 0x1b, 0x17, 0x08, 0x3a, 0x06, 0x4f, 0x97, 0xf7, 0x6c, 0xb1, 0x56, 0x30, 0xac, 0x50,
+	0x5d, 0x9e, 0x1b, 0x64, 0x27, 0xd0, 0xb4, 0x6c, 0xda, 0x82, 0x1d, 0x3e, 0x0b, 0xc3, 0x88, 0xf3,
+	0xee, 0x16, 0x6d, 0xc3, 0xee, 0x64, 0x7a, 0x3f, 0xbf, 0x9e, 0xce, 0x26, 0x57, 0x5d, 0xc2, 0x32,
+	0x38, 0x8c, 0x52, 0x61, 0x6a, 0x04, 0x9d, 0xc1, 0xbe, 0x43, 0xfd, 0xb1, 0x54, 0x1d, 0xfc, 0xea,
+	0x49, 0xde, 0x08, 0x1c, 0xad, 0xbd, 0xf0, 0x4b, 0xe6, 0x4d, 0x59, 0x66, 0x50, 0xa9, 0xbd, 0x21,
+	0xfc, 0xcf, 0x2a, 0x6f, 0xa1, 0x1f, 0xe3, 0x52, 0xae, 0xf0, 0x2f, 0x64, 0xb2, 0x63, 0x18, 0xd4,
+	0xd0, 0x8a, 0xb2, 0x8f, 0xdb, 0xf6, 0xef, 0x9c, 0x7f, 0x04, 0x00, 0x00, 0xff, 0xff, 0x74, 0x1b,
+	0x45, 0xd9, 0x55, 0x03, 0x00, 0x00,
 }

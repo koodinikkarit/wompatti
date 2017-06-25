@@ -12,6 +12,7 @@ It is generated from these files:
 	device_info.proto
 	device_type.proto
 	ethernet_interface.proto
+	page_info.proto
 	serial_interface.proto
 	telnet_interface.proto
 	wol_interface.proto
@@ -24,6 +25,8 @@ It has these top-level messages:
 	FetchArttuByIdRequest
 	FetchArttuByIdResponse
 	Computer
+	ComputersEdge
+	ComputersConnection
 	CreateComputerRequest
 	CreateComputerResponse
 	EditComputerRequest
@@ -63,16 +66,37 @@ It has these top-level messages:
 	EditDeviceTypeResponse
 	RemoveDeviceTypeRequest
 	RemoveDeviceTypeResponse
+	FetchDeviceTypesRequest
+	FetchDeviceTypeByIdRequest
+	FetchDeviceTypeByIdResponse
 	CreateCommandRequest
 	CreateCommandResponse
 	EditCommandRequest
 	EditCommandReponse
 	RemoveCommandRequest
 	RemoveCommandResponse
+	FetchCommandsByDeviceTypeIdRequest
+	FetchCommandsByDeviceTypeIdResponse
 	EthernetInterface
 	FetchEthernetInterfacesRequest
+	PageInfo
 	SerialInterface
+	CreateSerialInterfaceRequest
+	CreateSerialInterfaceResponse
+	EditSerialInterfaceRequest
+	EditSerialInterfaceResponse
+	RemoveSerialInterfaceRequest
+	RemoveSerialInterfaceResponse
 	TelnetInterface
+	CreateTelnetInterfaceRequest
+	CreateTelnetInterfaceResponse
+	EditTelnetInterfaceRequest
+	EditTelnetInterfaceResponse
+	RemoveTelnetInterfaceRequest
+	RemoveTelnetInterfaceResponse
+	FetchTelnetInterfacesRequest
+	FetchTelnetInterfaceByIdRequest
+	FetchTelnetInterfaceByIdResponse
 	WolInterface
 	CreateWolInterfaceRequest
 	CreateWolInterfaceResponse
