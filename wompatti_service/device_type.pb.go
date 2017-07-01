@@ -33,7 +33,7 @@ func (x CreateDeviceTypeResponse_State) String() string {
 	return proto.EnumName(CreateDeviceTypeResponse_State_name, int32(x))
 }
 func (CreateDeviceTypeResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor4, []int{3, 0}
+	return fileDescriptor4, []int{5, 0}
 }
 
 type EditDeviceTypeResponse_State int32
@@ -56,7 +56,7 @@ func (x EditDeviceTypeResponse_State) String() string {
 	return proto.EnumName(EditDeviceTypeResponse_State_name, int32(x))
 }
 func (EditDeviceTypeResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor4, []int{5, 0}
+	return fileDescriptor4, []int{7, 0}
 }
 
 type RemoveDeviceTypeResponse_State int32
@@ -79,7 +79,7 @@ func (x RemoveDeviceTypeResponse_State) String() string {
 	return proto.EnumName(RemoveDeviceTypeResponse_State_name, int32(x))
 }
 func (RemoveDeviceTypeResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor4, []int{7, 0}
+	return fileDescriptor4, []int{9, 0}
 }
 
 type CreateCommandResponse_State int32
@@ -102,7 +102,7 @@ func (x CreateCommandResponse_State) String() string {
 	return proto.EnumName(CreateCommandResponse_State_name, int32(x))
 }
 func (CreateCommandResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor4, []int{12, 0}
+	return fileDescriptor4, []int{14, 0}
 }
 
 type EditCommandReponse_State int32
@@ -124,7 +124,7 @@ var EditCommandReponse_State_value = map[string]int32{
 func (x EditCommandReponse_State) String() string {
 	return proto.EnumName(EditCommandReponse_State_name, int32(x))
 }
-func (EditCommandReponse_State) EnumDescriptor() ([]byte, []int) { return fileDescriptor4, []int{14, 0} }
+func (EditCommandReponse_State) EnumDescriptor() ([]byte, []int) { return fileDescriptor4, []int{16, 0} }
 
 type RemoveCommandResponse_State int32
 
@@ -146,15 +146,12 @@ func (x RemoveCommandResponse_State) String() string {
 	return proto.EnumName(RemoveCommandResponse_State_name, int32(x))
 }
 func (RemoveCommandResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor4, []int{16, 0}
+	return fileDescriptor4, []int{18, 0}
 }
 
 type DeviceType struct {
-	Id                uint32 `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
-	Name              string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	SerialInterfaceId uint32 `protobuf:"varint,3,opt,name=serialInterfaceId" json:"serialInterfaceId,omitempty"`
-	TelnetInterfaceId uint32 `protobuf:"varint,4,opt,name=telnetInterfaceId" json:"telnetInterfaceId,omitempty"`
-	CecInterfaceId    uint32 `protobuf:"varint,5,opt,name=cecInterfaceId" json:"cecInterfaceId,omitempty"`
+	Id   uint32 `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
 }
 
 func (m *DeviceType) Reset()                    { *m = DeviceType{} }
@@ -174,27 +171,6 @@ func (m *DeviceType) GetName() string {
 		return m.Name
 	}
 	return ""
-}
-
-func (m *DeviceType) GetSerialInterfaceId() uint32 {
-	if m != nil {
-		return m.SerialInterfaceId
-	}
-	return 0
-}
-
-func (m *DeviceType) GetTelnetInterfaceId() uint32 {
-	if m != nil {
-		return m.TelnetInterfaceId
-	}
-	return 0
-}
-
-func (m *DeviceType) GetCecInterfaceId() uint32 {
-	if m != nil {
-		return m.CecInterfaceId
-	}
-	return 0
 }
 
 type Command struct {
@@ -237,6 +213,62 @@ func (m *Command) GetValue() string {
 	return ""
 }
 
+type DeviceTypesConnection struct {
+	PageInfo   *PageInfo          `protobuf:"bytes,1,opt,name=pageInfo" json:"pageInfo,omitempty"`
+	Edges      []*DeviceTypesEdge `protobuf:"bytes,2,rep,name=edges" json:"edges,omitempty"`
+	TotalCount uint32             `protobuf:"varint,3,opt,name=totalCount" json:"totalCount,omitempty"`
+}
+
+func (m *DeviceTypesConnection) Reset()                    { *m = DeviceTypesConnection{} }
+func (m *DeviceTypesConnection) String() string            { return proto.CompactTextString(m) }
+func (*DeviceTypesConnection) ProtoMessage()               {}
+func (*DeviceTypesConnection) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{2} }
+
+func (m *DeviceTypesConnection) GetPageInfo() *PageInfo {
+	if m != nil {
+		return m.PageInfo
+	}
+	return nil
+}
+
+func (m *DeviceTypesConnection) GetEdges() []*DeviceTypesEdge {
+	if m != nil {
+		return m.Edges
+	}
+	return nil
+}
+
+func (m *DeviceTypesConnection) GetTotalCount() uint32 {
+	if m != nil {
+		return m.TotalCount
+	}
+	return 0
+}
+
+type DeviceTypesEdge struct {
+	Node   *DeviceType `protobuf:"bytes,1,opt,name=node" json:"node,omitempty"`
+	Cursor uint32      `protobuf:"varint,2,opt,name=cursor" json:"cursor,omitempty"`
+}
+
+func (m *DeviceTypesEdge) Reset()                    { *m = DeviceTypesEdge{} }
+func (m *DeviceTypesEdge) String() string            { return proto.CompactTextString(m) }
+func (*DeviceTypesEdge) ProtoMessage()               {}
+func (*DeviceTypesEdge) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{3} }
+
+func (m *DeviceTypesEdge) GetNode() *DeviceType {
+	if m != nil {
+		return m.Node
+	}
+	return nil
+}
+
+func (m *DeviceTypesEdge) GetCursor() uint32 {
+	if m != nil {
+		return m.Cursor
+	}
+	return 0
+}
+
 type CreateDeviceTypeRequest struct {
 	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
 }
@@ -244,7 +276,7 @@ type CreateDeviceTypeRequest struct {
 func (m *CreateDeviceTypeRequest) Reset()                    { *m = CreateDeviceTypeRequest{} }
 func (m *CreateDeviceTypeRequest) String() string            { return proto.CompactTextString(m) }
 func (*CreateDeviceTypeRequest) ProtoMessage()               {}
-func (*CreateDeviceTypeRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{2} }
+func (*CreateDeviceTypeRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{4} }
 
 func (m *CreateDeviceTypeRequest) GetName() string {
 	if m != nil {
@@ -261,7 +293,7 @@ type CreateDeviceTypeResponse struct {
 func (m *CreateDeviceTypeResponse) Reset()                    { *m = CreateDeviceTypeResponse{} }
 func (m *CreateDeviceTypeResponse) String() string            { return proto.CompactTextString(m) }
 func (*CreateDeviceTypeResponse) ProtoMessage()               {}
-func (*CreateDeviceTypeResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{3} }
+func (*CreateDeviceTypeResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{5} }
 
 func (m *CreateDeviceTypeResponse) GetState() CreateDeviceTypeResponse_State {
 	if m != nil {
@@ -288,7 +320,7 @@ type EditDeviceTypeRequest struct {
 func (m *EditDeviceTypeRequest) Reset()                    { *m = EditDeviceTypeRequest{} }
 func (m *EditDeviceTypeRequest) String() string            { return proto.CompactTextString(m) }
 func (*EditDeviceTypeRequest) ProtoMessage()               {}
-func (*EditDeviceTypeRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{4} }
+func (*EditDeviceTypeRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{6} }
 
 func (m *EditDeviceTypeRequest) GetDeviceTypeId() uint32 {
 	if m != nil {
@@ -333,7 +365,7 @@ type EditDeviceTypeResponse struct {
 func (m *EditDeviceTypeResponse) Reset()                    { *m = EditDeviceTypeResponse{} }
 func (m *EditDeviceTypeResponse) String() string            { return proto.CompactTextString(m) }
 func (*EditDeviceTypeResponse) ProtoMessage()               {}
-func (*EditDeviceTypeResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{5} }
+func (*EditDeviceTypeResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{7} }
 
 func (m *EditDeviceTypeResponse) GetState() EditDeviceTypeResponse_State {
 	if m != nil {
@@ -356,7 +388,7 @@ type RemoveDeviceTypeRequest struct {
 func (m *RemoveDeviceTypeRequest) Reset()                    { *m = RemoveDeviceTypeRequest{} }
 func (m *RemoveDeviceTypeRequest) String() string            { return proto.CompactTextString(m) }
 func (*RemoveDeviceTypeRequest) ProtoMessage()               {}
-func (*RemoveDeviceTypeRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{6} }
+func (*RemoveDeviceTypeRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{8} }
 
 func (m *RemoveDeviceTypeRequest) GetDeviceTypeId() uint32 {
 	if m != nil {
@@ -371,28 +403,44 @@ type RemoveDeviceTypeResponse struct {
 func (m *RemoveDeviceTypeResponse) Reset()                    { *m = RemoveDeviceTypeResponse{} }
 func (m *RemoveDeviceTypeResponse) String() string            { return proto.CompactTextString(m) }
 func (*RemoveDeviceTypeResponse) ProtoMessage()               {}
-func (*RemoveDeviceTypeResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{7} }
+func (*RemoveDeviceTypeResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{9} }
 
 type FetchDeviceTypesRequest struct {
-	Offset uint32 `protobuf:"varint,1,opt,name=offset" json:"offset,omitempty"`
-	Limit  uint32 `protobuf:"varint,2,opt,name=limit" json:"limit,omitempty"`
+	After  uint32 `protobuf:"varint,1,opt,name=after" json:"after,omitempty"`
+	Before uint32 `protobuf:"varint,2,opt,name=before" json:"before,omitempty"`
+	First  uint32 `protobuf:"varint,3,opt,name=first" json:"first,omitempty"`
+	Last   uint32 `protobuf:"varint,4,opt,name=last" json:"last,omitempty"`
 }
 
 func (m *FetchDeviceTypesRequest) Reset()                    { *m = FetchDeviceTypesRequest{} }
 func (m *FetchDeviceTypesRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchDeviceTypesRequest) ProtoMessage()               {}
-func (*FetchDeviceTypesRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{8} }
+func (*FetchDeviceTypesRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{10} }
 
-func (m *FetchDeviceTypesRequest) GetOffset() uint32 {
+func (m *FetchDeviceTypesRequest) GetAfter() uint32 {
 	if m != nil {
-		return m.Offset
+		return m.After
 	}
 	return 0
 }
 
-func (m *FetchDeviceTypesRequest) GetLimit() uint32 {
+func (m *FetchDeviceTypesRequest) GetBefore() uint32 {
 	if m != nil {
-		return m.Limit
+		return m.Before
+	}
+	return 0
+}
+
+func (m *FetchDeviceTypesRequest) GetFirst() uint32 {
+	if m != nil {
+		return m.First
+	}
+	return 0
+}
+
+func (m *FetchDeviceTypesRequest) GetLast() uint32 {
+	if m != nil {
+		return m.Last
 	}
 	return 0
 }
@@ -404,7 +452,7 @@ type FetchDeviceTypeByIdRequest struct {
 func (m *FetchDeviceTypeByIdRequest) Reset()                    { *m = FetchDeviceTypeByIdRequest{} }
 func (m *FetchDeviceTypeByIdRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchDeviceTypeByIdRequest) ProtoMessage()               {}
-func (*FetchDeviceTypeByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{9} }
+func (*FetchDeviceTypeByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{11} }
 
 func (m *FetchDeviceTypeByIdRequest) GetDeviceTypesIdt() []uint32 {
 	if m != nil {
@@ -414,12 +462,20 @@ func (m *FetchDeviceTypeByIdRequest) GetDeviceTypesIdt() []uint32 {
 }
 
 type FetchDeviceTypeByIdResponse struct {
+	DeviceTypes []*DeviceType `protobuf:"bytes,1,rep,name=deviceTypes" json:"deviceTypes,omitempty"`
 }
 
 func (m *FetchDeviceTypeByIdResponse) Reset()                    { *m = FetchDeviceTypeByIdResponse{} }
 func (m *FetchDeviceTypeByIdResponse) String() string            { return proto.CompactTextString(m) }
 func (*FetchDeviceTypeByIdResponse) ProtoMessage()               {}
-func (*FetchDeviceTypeByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{10} }
+func (*FetchDeviceTypeByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{12} }
+
+func (m *FetchDeviceTypeByIdResponse) GetDeviceTypes() []*DeviceType {
+	if m != nil {
+		return m.DeviceTypes
+	}
+	return nil
+}
 
 type CreateCommandRequest struct {
 	DeviceTypeId uint32 `protobuf:"varint,1,opt,name=deviceTypeId" json:"deviceTypeId,omitempty"`
@@ -430,7 +486,7 @@ type CreateCommandRequest struct {
 func (m *CreateCommandRequest) Reset()                    { *m = CreateCommandRequest{} }
 func (m *CreateCommandRequest) String() string            { return proto.CompactTextString(m) }
 func (*CreateCommandRequest) ProtoMessage()               {}
-func (*CreateCommandRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{11} }
+func (*CreateCommandRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{13} }
 
 func (m *CreateCommandRequest) GetDeviceTypeId() uint32 {
 	if m != nil {
@@ -461,7 +517,7 @@ type CreateCommandResponse struct {
 func (m *CreateCommandResponse) Reset()                    { *m = CreateCommandResponse{} }
 func (m *CreateCommandResponse) String() string            { return proto.CompactTextString(m) }
 func (*CreateCommandResponse) ProtoMessage()               {}
-func (*CreateCommandResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{12} }
+func (*CreateCommandResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{14} }
 
 func (m *CreateCommandResponse) GetState() CreateCommandResponse_State {
 	if m != nil {
@@ -486,7 +542,7 @@ type EditCommandRequest struct {
 func (m *EditCommandRequest) Reset()                    { *m = EditCommandRequest{} }
 func (m *EditCommandRequest) String() string            { return proto.CompactTextString(m) }
 func (*EditCommandRequest) ProtoMessage()               {}
-func (*EditCommandRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{13} }
+func (*EditCommandRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{15} }
 
 func (m *EditCommandRequest) GetCommandId() uint32 {
 	if m != nil {
@@ -517,7 +573,7 @@ type EditCommandReponse struct {
 func (m *EditCommandReponse) Reset()                    { *m = EditCommandReponse{} }
 func (m *EditCommandReponse) String() string            { return proto.CompactTextString(m) }
 func (*EditCommandReponse) ProtoMessage()               {}
-func (*EditCommandReponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{14} }
+func (*EditCommandReponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{16} }
 
 func (m *EditCommandReponse) GetState() EditCommandReponse_State {
 	if m != nil {
@@ -540,7 +596,7 @@ type RemoveCommandRequest struct {
 func (m *RemoveCommandRequest) Reset()                    { *m = RemoveCommandRequest{} }
 func (m *RemoveCommandRequest) String() string            { return proto.CompactTextString(m) }
 func (*RemoveCommandRequest) ProtoMessage()               {}
-func (*RemoveCommandRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{15} }
+func (*RemoveCommandRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{17} }
 
 func (m *RemoveCommandRequest) GetCommandId() uint32 {
 	if m != nil {
@@ -556,7 +612,7 @@ type RemoveCommandResponse struct {
 func (m *RemoveCommandResponse) Reset()                    { *m = RemoveCommandResponse{} }
 func (m *RemoveCommandResponse) String() string            { return proto.CompactTextString(m) }
 func (*RemoveCommandResponse) ProtoMessage()               {}
-func (*RemoveCommandResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{16} }
+func (*RemoveCommandResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{18} }
 
 func (m *RemoveCommandResponse) GetState() RemoveCommandResponse_State {
 	if m != nil {
@@ -566,17 +622,41 @@ func (m *RemoveCommandResponse) GetState() RemoveCommandResponse_State {
 }
 
 type FetchCommandsByDeviceTypeIdRequest struct {
-	DeviceTypeId uint32 `protobuf:"varint,1,opt,name=deviceTypeId" json:"deviceTypeId,omitempty"`
+	DeviceTypeIdt []uint32 `protobuf:"varint,1,rep,packed,name=deviceTypeIdt" json:"deviceTypeIdt,omitempty"`
 }
 
 func (m *FetchCommandsByDeviceTypeIdRequest) Reset()         { *m = FetchCommandsByDeviceTypeIdRequest{} }
 func (m *FetchCommandsByDeviceTypeIdRequest) String() string { return proto.CompactTextString(m) }
 func (*FetchCommandsByDeviceTypeIdRequest) ProtoMessage()    {}
 func (*FetchCommandsByDeviceTypeIdRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor4, []int{17}
+	return fileDescriptor4, []int{19}
 }
 
-func (m *FetchCommandsByDeviceTypeIdRequest) GetDeviceTypeId() uint32 {
+func (m *FetchCommandsByDeviceTypeIdRequest) GetDeviceTypeIdt() []uint32 {
+	if m != nil {
+		return m.DeviceTypeIdt
+	}
+	return nil
+}
+
+type DeviceTypeCommands struct {
+	Commands     []*Command `protobuf:"bytes,1,rep,name=commands" json:"commands,omitempty"`
+	DeviceTypeId uint32     `protobuf:"varint,2,opt,name=deviceTypeId" json:"deviceTypeId,omitempty"`
+}
+
+func (m *DeviceTypeCommands) Reset()                    { *m = DeviceTypeCommands{} }
+func (m *DeviceTypeCommands) String() string            { return proto.CompactTextString(m) }
+func (*DeviceTypeCommands) ProtoMessage()               {}
+func (*DeviceTypeCommands) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{20} }
+
+func (m *DeviceTypeCommands) GetCommands() []*Command {
+	if m != nil {
+		return m.Commands
+	}
+	return nil
+}
+
+func (m *DeviceTypeCommands) GetDeviceTypeId() uint32 {
 	if m != nil {
 		return m.DeviceTypeId
 	}
@@ -584,18 +664,28 @@ func (m *FetchCommandsByDeviceTypeIdRequest) GetDeviceTypeId() uint32 {
 }
 
 type FetchCommandsByDeviceTypeIdResponse struct {
+	DeviceTypeCommands []*DeviceTypeCommands `protobuf:"bytes,1,rep,name=deviceTypeCommands" json:"deviceTypeCommands,omitempty"`
 }
 
 func (m *FetchCommandsByDeviceTypeIdResponse) Reset()         { *m = FetchCommandsByDeviceTypeIdResponse{} }
 func (m *FetchCommandsByDeviceTypeIdResponse) String() string { return proto.CompactTextString(m) }
 func (*FetchCommandsByDeviceTypeIdResponse) ProtoMessage()    {}
 func (*FetchCommandsByDeviceTypeIdResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor4, []int{18}
+	return fileDescriptor4, []int{21}
+}
+
+func (m *FetchCommandsByDeviceTypeIdResponse) GetDeviceTypeCommands() []*DeviceTypeCommands {
+	if m != nil {
+		return m.DeviceTypeCommands
+	}
+	return nil
 }
 
 func init() {
 	proto.RegisterType((*DeviceType)(nil), "WompattiService.DeviceType")
 	proto.RegisterType((*Command)(nil), "WompattiService.Command")
+	proto.RegisterType((*DeviceTypesConnection)(nil), "WompattiService.DeviceTypesConnection")
+	proto.RegisterType((*DeviceTypesEdge)(nil), "WompattiService.DeviceTypesEdge")
 	proto.RegisterType((*CreateDeviceTypeRequest)(nil), "WompattiService.CreateDeviceTypeRequest")
 	proto.RegisterType((*CreateDeviceTypeResponse)(nil), "WompattiService.CreateDeviceTypeResponse")
 	proto.RegisterType((*EditDeviceTypeRequest)(nil), "WompattiService.EditDeviceTypeRequest")
@@ -612,6 +702,7 @@ func init() {
 	proto.RegisterType((*RemoveCommandRequest)(nil), "WompattiService.RemoveCommandRequest")
 	proto.RegisterType((*RemoveCommandResponse)(nil), "WompattiService.RemoveCommandResponse")
 	proto.RegisterType((*FetchCommandsByDeviceTypeIdRequest)(nil), "WompattiService.FetchCommandsByDeviceTypeIdRequest")
+	proto.RegisterType((*DeviceTypeCommands)(nil), "WompattiService.DeviceTypeCommands")
 	proto.RegisterType((*FetchCommandsByDeviceTypeIdResponse)(nil), "WompattiService.FetchCommandsByDeviceTypeIdResponse")
 	proto.RegisterEnum("WompattiService.CreateDeviceTypeResponse_State", CreateDeviceTypeResponse_State_name, CreateDeviceTypeResponse_State_value)
 	proto.RegisterEnum("WompattiService.EditDeviceTypeResponse_State", EditDeviceTypeResponse_State_name, EditDeviceTypeResponse_State_value)
@@ -624,42 +715,53 @@ func init() {
 func init() { proto.RegisterFile("device_type.proto", fileDescriptor4) }
 
 var fileDescriptor4 = []byte{
-	// 584 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x56, 0x4f, 0x6b, 0xdb, 0x4e,
-	0x10, 0xfd, 0xad, 0x1d, 0xc7, 0x78, 0xf2, 0xb3, 0x9b, 0x2c, 0x76, 0x2c, 0x9a, 0x16, 0xc2, 0x86,
-	0x86, 0x14, 0x12, 0x17, 0xdc, 0xde, 0x4a, 0x09, 0xf8, 0x4f, 0x5a, 0x5f, 0x12, 0x90, 0x13, 0x7a,
-	0x29, 0x04, 0x55, 0x3b, 0x6e, 0x05, 0x96, 0xe5, 0x5a, 0x1b, 0x83, 0x6f, 0xfd, 0x44, 0x3d, 0xe5,
-	0xde, 0x43, 0x3f, 0x42, 0xbf, 0x50, 0xd1, 0xee, 0xda, 0x92, 0x56, 0x4e, 0x6a, 0xe7, 0x10, 0x7a,
-	0xd3, 0xee, 0xce, 0x7b, 0x3b, 0xef, 0xcd, 0xcc, 0x22, 0xd8, 0xe1, 0x38, 0xf5, 0x5c, 0xbc, 0x16,
-	0xb3, 0x31, 0x36, 0xc6, 0x93, 0x40, 0x04, 0xf4, 0xc9, 0xc7, 0xc0, 0x1f, 0x3b, 0x42, 0x78, 0x7d,
-	0x9c, 0x44, 0x67, 0xec, 0x96, 0x00, 0x74, 0x64, 0xd8, 0xe5, 0x6c, 0x8c, 0xb4, 0x02, 0x39, 0x8f,
-	0x5b, 0x64, 0x9f, 0x1c, 0x95, 0xed, 0x9c, 0xc7, 0x29, 0x85, 0x8d, 0x91, 0xe3, 0xa3, 0x95, 0xdb,
-	0x27, 0x47, 0x25, 0x5b, 0x7e, 0xd3, 0x63, 0xd8, 0x09, 0x71, 0xe2, 0x39, 0xc3, 0xde, 0x48, 0xe0,
-	0x64, 0xe0, 0xb8, 0xd8, 0xe3, 0x56, 0x5e, 0x42, 0xb2, 0x07, 0x51, 0xb4, 0xc0, 0xe1, 0x08, 0x45,
-	0x32, 0x7a, 0x43, 0x45, 0x67, 0x0e, 0xe8, 0x21, 0x54, 0x5c, 0x74, 0x93, 0xa1, 0x05, 0x19, 0x6a,
-	0xec, 0xb2, 0x2f, 0x50, 0x6c, 0x07, 0xbe, 0xef, 0x8c, 0x78, 0x26, 0x65, 0x06, 0xff, 0xf3, 0x85,
-	0xa0, 0x1e, 0x97, 0xa9, 0x97, 0xed, 0xd4, 0xde, 0x42, 0x56, 0x3e, 0x21, 0xab, 0x0a, 0x85, 0xa9,
-	0x33, 0xbc, 0x41, 0x99, 0x5c, 0xc9, 0x56, 0x0b, 0x76, 0x02, 0xf5, 0xf6, 0x04, 0x1d, 0x81, 0xb1,
-	0x49, 0x36, 0x7e, 0xbb, 0xc1, 0x50, 0x2c, 0x48, 0x48, 0x4c, 0xc2, 0x7e, 0x11, 0xb0, 0xb2, 0xf1,
-	0xe1, 0x38, 0x18, 0x85, 0x48, 0xbb, 0x50, 0x08, 0x85, 0x23, 0x14, 0xa2, 0xd2, 0x7c, 0xd5, 0x30,
-	0x8a, 0xd1, 0xb8, 0x0b, 0xd9, 0xe8, 0x47, 0x30, 0x5b, 0xa1, 0xe9, 0x5b, 0x80, 0x58, 0x8c, 0x94,
-	0xb7, 0xd5, 0xdc, 0xcb, 0x70, 0x25, 0x58, 0x12, 0xe1, 0xec, 0x00, 0x0a, 0x92, 0x8c, 0x6e, 0x41,
-	0xb1, 0x7f, 0xd5, 0x6e, 0x77, 0xfb, 0xfd, 0xed, 0xff, 0x68, 0x19, 0x4a, 0xe7, 0x17, 0x97, 0xd7,
-	0x67, 0x17, 0x57, 0xe7, 0x9d, 0x6d, 0xc2, 0x7e, 0x13, 0xa8, 0x75, 0xb9, 0x27, 0xb2, 0x9a, 0x4d,
-	0x73, 0xc9, 0x3d, 0xe6, 0xfe, 0x6b, 0x3d, 0xf3, 0x93, 0xc0, 0xae, 0xa9, 0x4a, 0x57, 0xa6, 0x9d,
-	0xae, 0xcc, 0x49, 0xc6, 0xcd, 0xe5, 0xb8, 0xc7, 0xae, 0xcb, 0x3b, 0xa8, 0xdb, 0xe8, 0x07, 0x53,
-	0x7c, 0x50, 0x61, 0xd8, 0x29, 0x58, 0x59, 0xb8, 0x52, 0xb2, 0xda, 0xfd, 0xef, 0xa1, 0x7e, 0x86,
-	0xc2, 0xfd, 0x1a, 0xe3, 0xc3, 0xf9, 0xfd, 0xbb, 0xb0, 0x19, 0x0c, 0x06, 0x21, 0x0a, 0x7d, 0xb3,
-	0x5e, 0x45, 0x53, 0x35, 0xf4, 0x7c, 0x4f, 0xe8, 0x31, 0x54, 0x0b, 0xd6, 0x81, 0xa7, 0x06, 0x51,
-	0x6b, 0xd6, 0xe3, 0x73, 0xae, 0x43, 0xa8, 0xc4, 0x79, 0x87, 0x3d, 0x1e, 0x71, 0xe6, 0xa3, 0x82,
-	0xa6, 0x77, 0xd9, 0x73, 0xd8, 0x5b, 0xca, 0xa2, 0x25, 0x71, 0xa8, 0xaa, 0x81, 0xd2, 0x2f, 0xc5,
-	0x43, 0x7a, 0xf8, 0xef, 0x0f, 0xc4, 0x2d, 0x81, 0x9a, 0x71, 0x8d, 0x6e, 0xaa, 0x56, 0xba, 0xa9,
-	0x8e, 0xef, 0x18, 0x77, 0x03, 0x96, 0xee, 0xa9, 0x26, 0x14, 0x5d, 0x75, 0xae, 0x1b, 0xca, 0xca,
-	0xb2, 0x68, 0xfc, 0x3c, 0x70, 0xb5, 0x52, 0x7e, 0x02, 0x1a, 0xf5, 0xb4, 0x61, 0xcd, 0x33, 0x28,
-	0x69, 0x96, 0x85, 0x2f, 0xf1, 0xc6, 0x1a, 0xa6, 0xfc, 0x20, 0x06, 0xbd, 0x72, 0xe4, 0x34, 0xed,
-	0xc8, 0xcb, 0xa5, 0x63, 0x96, 0xc6, 0x3c, 0x92, 0x1d, 0x6f, 0xa0, 0xaa, 0x46, 0x63, 0x1d, 0x43,
-	0xd8, 0x77, 0x02, 0x35, 0x03, 0xb6, 0x6a, 0xed, 0x97, 0xc2, 0x52, 0x62, 0x57, 0x4b, 0xfc, 0x03,
-	0x30, 0x39, 0x03, 0x9a, 0x29, 0x6c, 0xcd, 0x3a, 0x89, 0x3e, 0x5e, 0xe7, 0x75, 0x78, 0x01, 0x07,
-	0xf7, 0x32, 0xa9, 0x14, 0x3f, 0x6f, 0xca, 0x1f, 0x89, 0xd7, 0x7f, 0x02, 0x00, 0x00, 0xff, 0xff,
-	0x11, 0xaf, 0xbb, 0x6a, 0x5d, 0x08, 0x00, 0x00,
+	// 763 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x56, 0xcb, 0x4e, 0xdb, 0x40,
+	0x14, 0xad, 0x43, 0xc2, 0xe3, 0xa6, 0x09, 0x30, 0x4a, 0xc0, 0x85, 0xaa, 0x8a, 0x86, 0x0a, 0x51,
+	0x09, 0x42, 0x95, 0xd2, 0x6e, 0x2a, 0x84, 0x84, 0x13, 0xa4, 0x74, 0x01, 0x95, 0x03, 0xaa, 0x54,
+	0x21, 0x21, 0x63, 0xdf, 0xa4, 0x96, 0x12, 0x4f, 0xb0, 0x27, 0x48, 0xe9, 0xaa, 0x5f, 0xd3, 0x65,
+	0x57, 0xdd, 0x77, 0xd1, 0x4f, 0xe8, 0x0f, 0x55, 0xf6, 0x8c, 0x13, 0x3f, 0x42, 0x08, 0x2c, 0xd8,
+	0x79, 0xee, 0x9c, 0x73, 0xdf, 0x67, 0x64, 0x58, 0xb5, 0xf0, 0xd6, 0x36, 0xf1, 0x8a, 0x0f, 0xfb,
+	0x58, 0xed, 0xbb, 0x8c, 0x33, 0xb2, 0xfc, 0x85, 0xf5, 0xfa, 0x06, 0xe7, 0x76, 0x0b, 0x5d, 0xff,
+	0x6e, 0x63, 0xb9, 0x6f, 0x74, 0xf0, 0xca, 0x76, 0xda, 0x4c, 0x20, 0xe8, 0x5b, 0x80, 0x7a, 0x40,
+	0x3b, 0x1f, 0xf6, 0x91, 0x14, 0x21, 0x63, 0x5b, 0xaa, 0x52, 0x51, 0x76, 0x0a, 0x7a, 0xc6, 0xb6,
+	0x08, 0x81, 0xac, 0x63, 0xf4, 0x50, 0xcd, 0x54, 0x94, 0x9d, 0x25, 0x3d, 0xf8, 0xa6, 0x1d, 0x58,
+	0xd0, 0x58, 0xaf, 0x67, 0x38, 0x56, 0x0a, 0x4e, 0xe1, 0xb9, 0x35, 0x72, 0xd6, 0xb4, 0x02, 0x5a,
+	0x41, 0x8f, 0xd9, 0x46, 0x2e, 0xe7, 0xc6, 0x2e, 0x49, 0x09, 0x72, 0xb7, 0x46, 0x77, 0x80, 0x6a,
+	0x36, 0x30, 0x8a, 0x03, 0xfd, 0xa9, 0x40, 0x79, 0x9c, 0x9b, 0xa7, 0x31, 0xc7, 0x41, 0x93, 0xdb,
+	0xcc, 0x21, 0xef, 0x61, 0xd1, 0xaf, 0xa3, 0xe9, 0xb4, 0x59, 0x10, 0x3d, 0x5f, 0x7b, 0x51, 0x4d,
+	0x54, 0x5a, 0xfd, 0x2c, 0x01, 0xfa, 0x08, 0x4a, 0x3e, 0x40, 0x0e, 0xad, 0x0e, 0x7a, 0x6a, 0xa6,
+	0x32, 0xb7, 0x93, 0xaf, 0x55, 0x52, 0x9c, 0x48, 0xb4, 0x86, 0xd5, 0x41, 0x5d, 0xc0, 0xc9, 0x2b,
+	0x00, 0xce, 0xb8, 0xd1, 0xd5, 0xd8, 0xc0, 0xe1, 0x41, 0xe2, 0x05, 0x3d, 0x62, 0xa1, 0x5f, 0x61,
+	0x39, 0xc1, 0x24, 0xfb, 0x90, 0x75, 0x98, 0x85, 0x32, 0xbb, 0xcd, 0x29, 0x91, 0xf4, 0x00, 0x48,
+	0xd6, 0x60, 0xde, 0x1c, 0xb8, 0x1e, 0x73, 0x65, 0xd3, 0xe4, 0x89, 0xee, 0xc1, 0xba, 0xe6, 0xa2,
+	0xc1, 0x31, 0xc2, 0xc0, 0x9b, 0x01, 0x7a, 0x7c, 0xd4, 0x49, 0x25, 0x32, 0x9c, 0xbf, 0x0a, 0xa8,
+	0x69, 0xbc, 0xd7, 0x67, 0x8e, 0x87, 0xa4, 0x01, 0x39, 0x8f, 0x1b, 0x5c, 0x30, 0x8a, 0xb5, 0xfd,
+	0x54, 0x56, 0x77, 0x31, 0xab, 0x2d, 0x9f, 0xa6, 0x0b, 0x36, 0xf9, 0x08, 0x30, 0x9e, 0x68, 0x90,
+	0xee, 0x3d, 0x15, 0x46, 0xe0, 0x74, 0x0b, 0x72, 0x81, 0x33, 0x92, 0x87, 0x85, 0xd6, 0x85, 0xa6,
+	0x35, 0x5a, 0xad, 0x95, 0x67, 0xa4, 0x00, 0x4b, 0xa7, 0x67, 0xe7, 0x57, 0x27, 0x67, 0x17, 0xa7,
+	0xf5, 0x15, 0x85, 0xfe, 0x53, 0xa0, 0xdc, 0xb0, 0x6c, 0x9e, 0xae, 0x39, 0xb9, 0x61, 0xca, 0x94,
+	0x0d, 0x8b, 0x2c, 0x2d, 0xd9, 0x85, 0x55, 0x0f, 0x5d, 0xdb, 0xe8, 0x36, 0x1d, 0x8e, 0x6e, 0xdb,
+	0x30, 0x7d, 0xb2, 0x98, 0x64, 0xfa, 0xc2, 0x47, 0x73, 0xec, 0x3a, 0xc8, 0xa3, 0xe8, 0xac, 0x40,
+	0xa7, 0x2e, 0xc8, 0x36, 0x14, 0x4d, 0x34, 0xa3, 0xd0, 0x5c, 0x00, 0x4d, 0x58, 0xe9, 0x1f, 0x05,
+	0xd6, 0x92, 0x55, 0xc9, 0xc9, 0x68, 0xf1, 0xc9, 0xec, 0xa5, 0xba, 0x39, 0x99, 0xf7, 0xd4, 0x73,
+	0x39, 0x84, 0x75, 0x1d, 0x7b, 0xec, 0x16, 0x1f, 0x35, 0x18, 0x7a, 0x04, 0x6a, 0x9a, 0x2e, 0x2a,
+	0x99, 0x2d, 0xfe, 0x0d, 0xac, 0x9f, 0x20, 0x37, 0xbf, 0x45, 0xd4, 0x16, 0xc6, 0x2f, 0x41, 0xce,
+	0x68, 0x73, 0x74, 0x65, 0x60, 0x71, 0xf0, 0x55, 0x75, 0x8d, 0x6d, 0xe6, 0x62, 0xa8, 0x2a, 0x71,
+	0xf2, 0xd1, 0x6d, 0xdb, 0xf5, 0x42, 0x31, 0x8b, 0x83, 0xbf, 0x38, 0x5d, 0xc3, 0xe3, 0x72, 0xd2,
+	0xc1, 0x37, 0xad, 0xc3, 0x46, 0x22, 0xe4, 0xf1, 0xb0, 0x69, 0x85, 0x51, 0xb7, 0xa1, 0x38, 0xae,
+	0xd0, 0x6b, 0x5a, 0x5c, 0x55, 0x2a, 0x73, 0xfe, 0xe8, 0xe3, 0x56, 0x7a, 0x09, 0x9b, 0x13, 0xbd,
+	0xc8, 0xf1, 0x1f, 0x42, 0x3e, 0x42, 0x08, 0x7c, 0xdc, 0x33, 0xba, 0x28, 0x9e, 0x5a, 0x50, 0x12,
+	0xca, 0x95, 0xef, 0xf2, 0x63, 0xc4, 0x72, 0xff, 0x73, 0xfc, 0x5b, 0x81, 0x72, 0x22, 0x8c, 0x4c,
+	0xff, 0x38, 0xbe, 0xbd, 0xbb, 0x77, 0xbc, 0x2b, 0x09, 0x5a, 0x7c, 0x79, 0x6b, 0xb0, 0x60, 0x8a,
+	0x7b, 0xb9, 0xb9, 0x6a, 0xda, 0x8b, 0xe4, 0x87, 0xc0, 0xd9, 0x76, 0xe6, 0x12, 0x88, 0x2f, 0x9e,
+	0x44, 0x6b, 0x5e, 0xc2, 0x92, 0xf4, 0x32, 0xea, 0xcb, 0xd8, 0xf0, 0x80, 0xa6, 0xfc, 0x52, 0x12,
+	0xee, 0x45, 0x47, 0x8e, 0xe2, 0x1d, 0x79, 0x33, 0x51, 0xcf, 0x71, 0xce, 0x13, 0xb5, 0xe3, 0x00,
+	0x4a, 0x42, 0x83, 0x0f, 0x69, 0x08, 0xfd, 0xa1, 0x40, 0x39, 0x41, 0x9b, 0x75, 0xf6, 0x13, 0x69,
+	0xb1, 0x62, 0x67, 0x4b, 0xfc, 0x13, 0xd0, 0x40, 0x42, 0xd2, 0x93, 0x77, 0x3c, 0xac, 0x47, 0xf6,
+	0x38, 0x2c, 0xe3, 0x35, 0x14, 0xa2, 0xeb, 0x1d, 0xea, 0x31, 0x6e, 0xa4, 0x0e, 0x90, 0x31, 0x39,
+	0x74, 0x48, 0x0e, 0x60, 0x51, 0x56, 0x1c, 0x4a, 0xf0, 0xee, 0xa6, 0x8f, 0x90, 0xb3, 0xfc, 0xf3,
+	0xd0, 0xef, 0xb0, 0x35, 0x35, 0x77, 0xd9, 0xcb, 0x16, 0x10, 0x2b, 0x95, 0x96, 0x4c, 0x65, 0x6b,
+	0xca, 0x6b, 0x10, 0x42, 0xf5, 0x09, 0xf4, 0xeb, 0xf9, 0xe0, 0x3f, 0xef, 0xdd, 0xff, 0x00, 0x00,
+	0x00, 0xff, 0xff, 0xcf, 0xde, 0xf0, 0x28, 0x1e, 0x0a, 0x00, 0x00,
 }

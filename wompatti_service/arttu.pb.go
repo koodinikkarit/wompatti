@@ -39,8 +39,12 @@ It has these top-level messages:
 	FetchManyComputerByIdResponse
 	FetchComputersRequest
 	Device
+	DevicesConnection
+	DevicesEdge
 	CreateDeviceRequest
 	CreateDeviceResponse
+	EditDeviceRequest
+	EditDeviceResponse
 	RemoveDeviceRequest
 	RemoveDeviceResponse
 	FetchDevicesRequest
@@ -51,6 +55,7 @@ It has these top-level messages:
 	FetchDeviceInfoByIdRequest
 	FetchDeviceInfoByIdResponse
 	FetchKeyValuesByDeviceInfoIdRequest
+	DeviceInfoKeyValues
 	FetchKeyValuesByDeviceInfoIdResponse
 	CreateKeyValueRequest
 	CreateKeyValueResponse
@@ -60,6 +65,8 @@ It has these top-level messages:
 	RemoveKeyValueResponse
 	DeviceType
 	Command
+	DeviceTypesConnection
+	DeviceTypesEdge
 	CreateDeviceTypeRequest
 	CreateDeviceTypeResponse
 	EditDeviceTypeRequest
@@ -76,11 +83,19 @@ It has these top-level messages:
 	RemoveCommandRequest
 	RemoveCommandResponse
 	FetchCommandsByDeviceTypeIdRequest
+	DeviceTypeCommands
 	FetchCommandsByDeviceTypeIdResponse
 	EthernetInterface
 	FetchEthernetInterfacesRequest
+	EthernetInterfacesConnection
+	EthernetInterfaceEdge
 	PageInfo
 	SerialInterface
+	SerialInterfacesEdge
+	SerialInterfacesConnection
+	FetchSerialInterfacesRequest
+	FetchSerialInterfaceByIdRequest
+	FetchSerialInterfaceByIdResponse
 	CreateSerialInterfaceRequest
 	CreateSerialInterfaceResponse
 	EditSerialInterfaceRequest
@@ -88,15 +103,17 @@ It has these top-level messages:
 	RemoveSerialInterfaceRequest
 	RemoveSerialInterfaceResponse
 	TelnetInterface
+	TelnetInterfacesConnection
+	TelnetInterfacesEdge
+	FetchTelnetInterfacesRequest
+	FetchTelnetInterfaceByIdRequest
+	FetchTelnetInterfaceByIdResponse
 	CreateTelnetInterfaceRequest
 	CreateTelnetInterfaceResponse
 	EditTelnetInterfaceRequest
 	EditTelnetInterfaceResponse
 	RemoveTelnetInterfaceRequest
 	RemoveTelnetInterfaceResponse
-	FetchTelnetInterfacesRequest
-	FetchTelnetInterfaceByIdRequest
-	FetchTelnetInterfaceByIdResponse
 	WolInterface
 	CreateWolInterfaceRequest
 	CreateWolInterfaceResponse
