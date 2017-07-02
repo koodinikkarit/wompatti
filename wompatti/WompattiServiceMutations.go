@@ -247,9 +247,9 @@ func (s *WompattiServiceServer) EditWolInterface(ctx context.Context, in *Wompat
 			wolInterface.EthernetInterfaceId = in.EthernetInterfaceId
 		}
 
-		// if in.Mac {
-		// 	wolInterface.Mac = in.Mac
-		// }
+		if in.Mac != nil {
+			wolInterface.Mac = in.Mac
+		}
 
 		s.db.Save(&wolInterface)
 
