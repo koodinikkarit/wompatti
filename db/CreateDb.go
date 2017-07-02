@@ -46,6 +46,7 @@ func CreateDb(
 	db.AutoMigrate(&DeviceType{})
 	db.AutoMigrate(&Command{})
 	db.AutoMigrate(&TelnetInterface{})
+	db.AutoMigrate(&SerialInterface{})
 
 	return db
 }
