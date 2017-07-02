@@ -152,6 +152,121 @@ func (s *WompattiServiceServer) RemoveDevice(ctx context.Context, in *WompattiSe
 	return response, nil
 }
 
+func (s *WompattiServiceServer) CreateDeviceType(ctx context.Context, in *WompattiService.CreateDeviceTypeRequest) (*WompattiService.CreateDeviceTypeResponse, error) {
+	res := &WompattiService.CreateDeviceTypeResponse{}
+
+	deviceType := wompatti.DeviceType{
+		Name: in.Name,
+	}
+
+	s.db.Create(&deviceType)
+
+	res.DeviceType = GenerateServiceDeviceType(&deviceType)
+
+	return res, nil
+}
+
+func (s *WompattiServiceServer) EditDeviceType(ctx context.Context, in *WompattiService.EditDeviceTypeRequest) (*WompattiService.EditDeviceTypeResponse, error) {
+	res := &WompattiService.EditDeviceTypeResponse{}
+
+	deviceType := &wompatti.DeviceType{}
+
+	s.db.First(&deviceType, in.DeviceTypeId)
+
+	if deviceType.ID > 0 {
+
+		if in.Name != "" {
+			deviceType.Name = in.Name
+		}
+
+		s.db.Save(&deviceType)
+
+		res.State = WompattiService.EditDeviceTypeResponse_SUCCESS
+		res.DeviceType = GenerateServiceDeviceType(deviceType)
+	} else {
+		res.State = WompattiService.EditDeviceTypeResponse_NOT_FOUND
+	}
+
+	return res, nil
+}
+
+func (s *WompattiServiceServer) RemoveDeviceType(ctx context.Context, in *WompattiService.RemoveDeviceTypeRequest) (*WompattiService.RemoveDeviceTypeResponse, error) {
+	res := &WompattiService.RemoveDeviceTypeResponse{}
+
+	deviceType := &wompatti.DeviceType{}
+
+	s.db.First(&deviceType, in.DeviceTypeId)
+
+	if deviceType.ID > 0 {
+		res.State = WompattiService.RemoveDeviceTypeResponse_SUCCESS
+		s.db.Delete(&deviceType)
+	} else {
+		res.State = WompattiService.RemoveDeviceTypeResponse_NOT_FOUND
+	}
+
+	return nil, nil
+}
+
+func (s *WompattiServiceServer) CreateCommand(ctx context.Context, in *WompattiService.CreateCommandRequest) (*WompattiService.CreateCommandResponse, error) {
+	res := &WompattiService.CreateCommandResponse{}
+
+	command := &wompatti.Command{
+		DeviceTypeID: in.DeviceTypeId,
+		Name:         in.Name,
+		Value:        in.Value,
+	}
+
+	s.db.Create(&command)
+
+	res.Command = GenerateServiceCommand(command)
+
+	return res, nil
+}
+
+func (s *WompattiServiceServer) EditCommand(ctx context.Context, in *WompattiService.EditCommandRequest) (*WompattiService.EditCommandReponse, error) {
+	res := &WompattiService.EditCommandReponse{}
+
+	command := &wompatti.Command{}
+
+	s.db.First(&command, in.CommandId)
+
+	if command.ID > 0 {
+		if in.Name != "" {
+			command.Name = in.Name
+		}
+
+		if in.Value != "" {
+			command.Value = in.Value
+		}
+
+		s.db.Save(&command)
+
+		res.State = WompattiService.EditCommandReponse_SUCCESS
+		res.Command = GenerateServiceCommand(command)
+	} else {
+		res.State = WompattiService.EditCommandReponse_NOT_FOUND
+	}
+
+	return res, nil
+}
+
+func (s *WompattiServiceServer) RemoveCommand(ctx context.Context, in *WompattiService.RemoveCommandRequest) (*WompattiService.RemoveCommandResponse, error) {
+	res := &WompattiService.RemoveCommandResponse{}
+
+	command := &wompatti.Command{}
+
+	s.db.First(&command, in.CommandId)
+
+	if command.ID > 0 {
+		res.State = WompattiService.RemoveCommandResponse_SUCCESS
+		s.db.Delete(&command)
+	} else {
+		res.State = WompattiService.RemoveCommandResponse_NOT_FOUND
+	}
+
+	return res, nil
+}
+
 func (s *WompattiServiceServer) CreateKeyValue(ctx context.Context, in *WompattiService.CreateKeyValueRequest) (*WompattiService.CreateKeyValueResponse, error) {
 	keyValue := &wompatti.KeyValue{
 		DeviceInfoID: in.DeviceInfoId,
@@ -266,57 +381,131 @@ func (s *WompattiServiceServer) EditWolInterface(ctx context.Context, in *Wompat
 }
 
 func (s *WompattiServiceServer) RemoveWolInterface(ctx context.Context, in *WompattiService.RemoveWolInterfaceRequest) (*WompattiService.RemoveWolInterfaceResponse, error) {
-	return nil, nil
+	res := &WompattiService.RemoveWolInterfaceResponse{}
+	wolInterface := &wompatti.WolInterface{}
+
+	s.db.First(&wolInterface, in.WolInterfaceId)
+
+	if wolInterface.ID > 0 {
+		res.State = WompattiService.RemoveWolInterfaceResponse_SUCCESS
+		s.db.Delete(&wolInterface)
+	} else {
+		res.State = WompattiService.RemoveWolInterfaceResponse_NOT_FOUND
+	}
+
+	return res, nil
 }
 
 func (s *WompattiServiceServer) ExecuteWolInterface(ctx context.Context, in *WompattiService.ExecuteWolInterfaceRequest) (*WompattiService.ExecuteWolInterfaceResponse, error) {
 	return nil, nil
 }
 
-func (s *WompattiServiceServer) CreateDeviceType(ctx context.Context, in *WompattiService.CreateDeviceTypeRequest) (*WompattiService.CreateDeviceTypeResponse, error) {
-	return nil, nil
-}
-
-func (s *WompattiServiceServer) EditDeviceType(ctx context.Context, in *WompattiService.EditDeviceTypeRequest) (*WompattiService.EditDeviceTypeResponse, error) {
-	return nil, nil
-}
-
-func (s *WompattiServiceServer) RemoveDeviceType(ctx context.Context, in *WompattiService.RemoveDeviceTypeRequest) (*WompattiService.RemoveDeviceTypeResponse, error) {
-	return nil, nil
-}
-
-func (s *WompattiServiceServer) CreateCommand(ctx context.Context, in *WompattiService.CreateCommandRequest) (*WompattiService.CreateCommandResponse, error) {
-	return nil, nil
-}
-
-func (s *WompattiServiceServer) EditCommand(ctx context.Context, in *WompattiService.EditCommandRequest) (*WompattiService.EditCommandReponse, error) {
-	return nil, nil
-}
-
-func (s *WompattiServiceServer) RemoveCommand(ctx context.Context, in *WompattiService.RemoveCommandRequest) (*WompattiService.RemoveCommandResponse, error) {
-	return nil, nil
-}
-
 func (s *WompattiServiceServer) CreateTelnetInterface(ctx context.Context, in *WompattiService.CreateTelnetInterfaceRequest) (*WompattiService.CreateTelnetInterfaceResponse, error) {
-	return nil, nil
+	res := &WompattiService.CreateTelnetInterfaceResponse{}
+
+	telnetInterface := &wompatti.TelnetInterface{
+		Ip:   in.Ip,
+		Port: in.Port,
+	}
+
+	s.db.Save(&telnetInterface)
+
+	res.TelnetInterface = GenerateServiceTelnetInterface(telnetInterface)
+
+	return res, nil
 }
 
 func (s *WompattiServiceServer) EditTelnetInterface(ctx context.Context, in *WompattiService.EditTelnetInterfaceRequest) (*WompattiService.EditTelnetInterfaceResponse, error) {
-	return nil, nil
+	res := &WompattiService.EditTelnetInterfaceResponse{}
+
+	telnetInterface := &wompatti.TelnetInterface{}
+
+	s.db.First(&telnetInterface, in.Id)
+
+	if telnetInterface.ID > 0 {
+		if in.Ip != "" {
+			telnetInterface.Ip = in.Ip
+		}
+		if in.Port != "" {
+			telnetInterface.Port = in.Port
+		}
+
+		res.State = WompattiService.EditTelnetInterfaceResponse_SUCCESS
+		res.TelnetInterface = GenerateServiceTelnetInterface(telnetInterface)
+	} else {
+		res.State = WompattiService.EditTelnetInterfaceResponse_NOT_FOUND
+	}
+
+	return res, nil
 }
 
 func (s *WompattiServiceServer) RemoveTelnetInterface(ctx context.Context, in *WompattiService.RemoveTelnetInterfaceRequest) (*WompattiService.RemoveTelnetInterfaceResponse, error) {
-	return nil, nil
+	res := &WompattiService.RemoveTelnetInterfaceResponse{}
+
+	telnetInterface := &wompatti.TelnetInterface{}
+
+	s.db.First(&telnetInterface, in.TelnetInterfaceId)
+
+	if telnetInterface.ID > 0 {
+		res.State = WompattiService.RemoveTelnetInterfaceResponse_SUCCESS
+		s.db.Delete(&telnetInterface)
+	} else {
+		res.State = WompattiService.RemoveTelnetInterfaceResponse_NOT_FOUND
+	}
+
+	return res, nil
 }
 
 func (s *WompattiServiceServer) CreateSerialInterface(ctx context.Context, in *WompattiService.CreateSerialInterfaceRequest) (*WompattiService.CreateSerialInterfaceResponse, error) {
-	return nil, nil
+	res := &WompattiService.CreateSerialInterfaceResponse{}
+
+	serialInterface := &wompatti.SerialInterface{
+		SerialPortID: in.SerialPortId,
+	}
+
+	s.db.Create(&serialInterface)
+
+	res.SerialInterface = GenerateServiceSerialInterface(serialInterface)
+
+	return res, nil
 }
 
 func (s *WompattiServiceServer) EditSerialInterface(ctx context.Context, in *WompattiService.EditSerialInterfaceRequest) (*WompattiService.EditSerialInterfaceResponse, error) {
-	return nil, nil
+	res := &WompattiService.EditSerialInterfaceResponse{}
+
+	serialInterface := &wompatti.SerialInterface{}
+
+	s.db.First(&serialInterface, in.SerialInterfaceId)
+
+	if serialInterface.ID > 0 {
+		if in.SerialPortId != 0 {
+			serialInterface.SerialPortID = in.SerialInterfaceId
+		}
+
+		s.db.Save(&serialInterface)
+
+		res.State = WompattiService.EditSerialInterfaceResponse_SUCCESS
+		res.SerialInterface = GenerateServiceSerialInterface(serialInterface)
+	} else {
+		res.State = WompattiService.EditSerialInterfaceResponse_NOT_FOUND
+	}
+
+	return res, nil
 }
 
 func (s *WompattiServiceServer) RemoveSerialInterface(ctx context.Context, in *WompattiService.RemoveSerialInterfaceRequest) (*WompattiService.RemoveSerialInterfaceResponse, error) {
-	return nil, nil
+	res := &WompattiService.RemoveSerialInterfaceResponse{}
+
+	serialInterface := &wompatti.SerialInterface{}
+
+	s.db.First(&serialInterface, in.SerialInterfaceId)
+
+	if serialInterface.ID > 0 {
+		res.State = WompattiService.RemoveSerialInterfaceResponse_SUCCESS
+		s.db.Delete(&serialInterface)
+	} else {
+		res.State = WompattiService.RemoveSerialInterfaceResponse_NOT_FOUND
+	}
+
+	return res, nil
 }

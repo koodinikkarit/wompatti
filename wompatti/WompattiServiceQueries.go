@@ -68,56 +68,6 @@ func (s *WompattiServiceServer) FetchComputerById(ctx context.Context, in *Wompa
 	return res, nil
 }
 
-func (s *WompattiServiceServer) FetchDeviceInfoById(ctx context.Context, in *WompattiService.FetchDeviceInfoByIdRequest) (*WompattiService.FetchDeviceInfoByIdResponse, error) {
-	res := &WompattiService.FetchDeviceInfoByIdResponse{}
-	deviceInfos := []wompatti.DeviceInfo{}
-	s.db.Where("id in (?)", in.DeviceInfoIdt).Find(&deviceInfos)
-	for _, deviceInfoId := range in.DeviceInfoIdt {
-		var found bool
-		for _, deviceInfo := range deviceInfos {
-			if deviceInfoId == uint32(deviceInfo.ID) {
-				res.DeviceInfos = append(res.DeviceInfos, &WompattiService.DeviceInfo{
-					Id: uint32(deviceInfo.ID),
-				})
-				found = true
-				break
-			}
-		}
-		if found == false {
-			res.DeviceInfos = append(res.DeviceInfos, &WompattiService.DeviceInfo{
-				Id: 0,
-			})
-		}
-	}
-
-	return res, nil
-}
-
-func (s *WompattiServiceServer) FetchKeyValuesByDeviceInfoId(ctx context.Context, in *WompattiService.FetchKeyValuesByDeviceInfoIdRequest) (*WompattiService.FetchKeyValuesByDeviceInfoIdResponse, error) {
-	res := &WompattiService.FetchKeyValuesByDeviceInfoIdResponse{}
-
-	keyValues := []wompatti.KeyValue{}
-	s.db.Where("device_info_id IN (?)", in.DeviceInfoIdt).Find(&keyValues)
-	for _, deviceInfoId := range in.DeviceInfoIdt {
-		deviceInfoKeyValues := &WompattiService.DeviceInfoKeyValues{
-			DeviceInfoId: deviceInfoId,
-		}
-
-		for _, keyValue := range keyValues {
-			if deviceInfoId == keyValue.DeviceInfoID {
-				deviceInfoKeyValues.KeyValues = append(deviceInfoKeyValues.KeyValues, &WompattiService.KeyValue{
-					Id:           keyValue.ID,
-					DeviceInfoId: keyValue.DeviceInfoID,
-					Key:          keyValue.Key,
-					Value:        keyValue.Value,
-				})
-			}
-		}
-	}
-
-	return res, nil
-}
-
 func (s *WompattiServiceServer) FetchDevices(ctx context.Context, in *WompattiService.FetchDevicesRequest) (*WompattiService.DevicesConnection, error) {
 	res := &WompattiService.DevicesConnection{}
 
@@ -173,6 +123,56 @@ func (s *WompattiServiceServer) FetchDeviceById(ctx context.Context, in *Wompatt
 	}
 
 	return nil, nil
+}
+
+func (s *WompattiServiceServer) FetchDeviceInfoById(ctx context.Context, in *WompattiService.FetchDeviceInfoByIdRequest) (*WompattiService.FetchDeviceInfoByIdResponse, error) {
+	res := &WompattiService.FetchDeviceInfoByIdResponse{}
+	deviceInfos := []wompatti.DeviceInfo{}
+	s.db.Where("id in (?)", in.DeviceInfoIdt).Find(&deviceInfos)
+	for _, deviceInfoId := range in.DeviceInfoIdt {
+		var found bool
+		for _, deviceInfo := range deviceInfos {
+			if deviceInfoId == uint32(deviceInfo.ID) {
+				res.DeviceInfos = append(res.DeviceInfos, &WompattiService.DeviceInfo{
+					Id: uint32(deviceInfo.ID),
+				})
+				found = true
+				break
+			}
+		}
+		if found == false {
+			res.DeviceInfos = append(res.DeviceInfos, &WompattiService.DeviceInfo{
+				Id: 0,
+			})
+		}
+	}
+
+	return res, nil
+}
+
+func (s *WompattiServiceServer) FetchKeyValuesByDeviceInfoId(ctx context.Context, in *WompattiService.FetchKeyValuesByDeviceInfoIdRequest) (*WompattiService.FetchKeyValuesByDeviceInfoIdResponse, error) {
+	res := &WompattiService.FetchKeyValuesByDeviceInfoIdResponse{}
+
+	keyValues := []wompatti.KeyValue{}
+	s.db.Where("device_info_id IN (?)", in.DeviceInfoIdt).Find(&keyValues)
+	for _, deviceInfoId := range in.DeviceInfoIdt {
+		deviceInfoKeyValues := &WompattiService.DeviceInfoKeyValues{
+			DeviceInfoId: deviceInfoId,
+		}
+
+		for _, keyValue := range keyValues {
+			if deviceInfoId == keyValue.DeviceInfoID {
+				deviceInfoKeyValues.KeyValues = append(deviceInfoKeyValues.KeyValues, &WompattiService.KeyValue{
+					Id:           keyValue.ID,
+					DeviceInfoId: keyValue.DeviceInfoID,
+					Key:          keyValue.Key,
+					Value:        keyValue.Value,
+				})
+			}
+		}
+	}
+
+	return res, nil
 }
 
 func (s *WompattiServiceServer) FetchEthernetInterfaces(ctx context.Context, in *WompattiService.FetchEthernetInterfacesRequest) (*WompattiService.EthernetInterfacesConnection, error) {
@@ -261,6 +261,34 @@ func (s *WompattiServiceServer) FetchDeviceTypeById(ctx context.Context, in *Wom
 	return res, nil
 }
 
+func (s *WompattiServiceServer) FetchCommandsByDeviceTypeId(ctx context.Context, in *WompattiService.FetchCommandsByDeviceTypeIdRequest) (*WompattiService.FetchCommandsByDeviceTypeIdResponse, error) {
+	res := &WompattiService.FetchCommandsByDeviceTypeIdResponse{}
+
+	commands := []wompatti.Command{}
+
+	s.db.Where("device_type_id in (?)", in.DeviceTypeIdt).Find(&commands)
+
+	for _, deviceTypeId := range in.DeviceTypeIdt {
+		deviceTypeCommands := &WompattiService.DeviceTypeCommands{
+			DeviceTypeId: deviceTypeId,
+		}
+
+		for _, command := range commands {
+			if command.DeviceTypeID == deviceTypeId {
+				deviceTypeCommands.Commands = append(deviceTypeCommands.Commands, &WompattiService.Command{
+					Id:           command.ID,
+					DeviceTypeId: command.DeviceTypeID,
+					Name:         command.Name,
+					Value:        command.Value,
+				})
+			}
+		}
+		res.DeviceTypeCommands = append(res.DeviceTypeCommands, deviceTypeCommands)
+	}
+
+	return nil, nil
+}
+
 func (s *WompattiServiceServer) FetchWolInterfaceById(ctx context.Context, in *WompattiService.FetchWolInterfaceByIdRequest) (*WompattiService.FetchWolInterfaceByIdResponse, error) {
 	res := &WompattiService.FetchWolInterfaceByIdResponse{}
 
@@ -289,34 +317,6 @@ func (s *WompattiServiceServer) FetchWolInterfaceById(ctx context.Context, in *W
 	}
 
 	return res, nil
-}
-
-func (s *WompattiServiceServer) FetchCommandsByDeviceTypeId(ctx context.Context, in *WompattiService.FetchCommandsByDeviceTypeIdRequest) (*WompattiService.FetchCommandsByDeviceTypeIdResponse, error) {
-	res := &WompattiService.FetchCommandsByDeviceTypeIdResponse{}
-
-	commands := []wompatti.Command{}
-
-	s.db.Where("device_type_id in (?)", in.DeviceTypeIdt).Find(&commands)
-
-	for _, deviceTypeId := range in.DeviceTypeIdt {
-		deviceTypeCommands := &WompattiService.DeviceTypeCommands{
-			DeviceTypeId: deviceTypeId,
-		}
-
-		for _, command := range commands {
-			if command.DeviceTypeID == deviceTypeId {
-				deviceTypeCommands.Commands = append(deviceTypeCommands.Commands, &WompattiService.Command{
-					Id:           command.ID,
-					DeviceTypeId: command.DeviceTypeID,
-					Name:         command.Name,
-					Value:        command.Value,
-				})
-			}
-		}
-		res.DeviceTypeCommands = append(res.DeviceTypeCommands, deviceTypeCommands)
-	}
-
-	return nil, nil
 }
 
 func (s *WompattiServiceServer) FetchTelnetInterfaces(ctx context.Context, in *WompattiService.FetchTelnetInterfacesRequest) (*WompattiService.TelnetInterfacesConnection, error) {
@@ -368,6 +368,61 @@ func (s *WompattiServiceServer) FetchTelnetInterfaceById(ctx context.Context, in
 		}
 		if found == false {
 			res.TelnetInterfaces = append(res.TelnetInterfaces, &WompattiService.TelnetInterface{
+				Id: 0,
+			})
+		}
+	}
+
+	return res, nil
+}
+
+func (s *WompattiServiceServer) FetchSerialInterfaces(ctx context.Context, in *WompattiService.FetchSerialInterfacesRequest) (*WompattiService.SerialInterfacesConnection, error) {
+	res := &WompattiService.SerialInterfacesConnection{}
+
+	serialInterfaces := []wompatti.SerialInterface{}
+
+	s.db.Find(&serialInterfaces).Count(&res.TotalCount)
+
+	q, startCursor := wompatti.ConnectionsQuery(s.db, in.After, in.Before, in.First, in.Last)
+
+	q.Find(&serialInterfaces)
+
+	currentCursor := startCursor + 1
+
+	for _, serialInterface := range serialInterfaces {
+		res.Edges = append(res.Edges, &WompattiService.SerialInterfacesEdge{
+			Node: &WompattiService.SerialInterface{
+				Id:           serialInterface.ID,
+				SerialPortId: serialInterface.SerialPortID,
+			},
+			Cursor: currentCursor,
+		})
+		currentCursor++
+	}
+
+	return res, nil
+}
+
+func (s *WompattiServiceServer) FetchSerialInterfaceById(ctx context.Context, in *WompattiService.FetchSerialInterfaceByIdRequest) (*WompattiService.FetchSerialInterfaceByIdResponse, error) {
+	res := &WompattiService.FetchSerialInterfaceByIdResponse{}
+
+	serialInterfaces := []wompatti.SerialInterface{}
+
+	s.db.Where("id in (?)", in.SerialInterfaceIdt).Find(&serialInterfaces)
+
+	for _, serialInterfaceId := range in.SerialInterfaceIdt {
+		var found bool
+		for _, serialInterface := range serialInterfaces {
+			if serialInterface.ID == serialInterfaceId {
+				res.SerialInterfaces = append(res.SerialInterfaces, &WompattiService.SerialInterface{
+					Id:           serialInterface.ID,
+					SerialPortId: serialInterfaceId,
+				})
+				found = true
+			}
+		}
+		if found == false {
+			res.SerialInterfaces = append(res.SerialInterfaces, &WompattiService.SerialInterface{
 				Id: 0,
 			})
 		}
