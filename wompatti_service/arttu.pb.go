@@ -7,13 +7,17 @@ Package WompattiService is a generated protocol buffer package.
 
 It is generated from these files:
 	arttu.proto
+	command.proto
 	computer.proto
 	device.proto
 	device_info.proto
 	device_type.proto
 	ethernet_interface.proto
+	keijo.proto
+	key_value.proto
 	page_info.proto
 	serial_interface.proto
+	severi.proto
 	telnet_interface.proto
 	wol_interface.proto
 	wompatti_service.proto
@@ -24,21 +28,38 @@ It has these top-level messages:
 	FetchArttuByComputerIdResponse
 	FetchArttuByIdRequest
 	FetchArttuByIdResponse
+	Command
+	FetchCommandsRequest
+	FetchCommandsResponse
+	FetchCommandsByDeviceTypeIdRequest
+	FetchCommandsByDeviceTypeIdResponse
+	FetchCommandByIdRequest
+	FetchCommandByIdResponse
+	CreateCommandRequest
+	CreateCommandResponse
+	EditCommandRequest
+	EditCommandReponse
+	RemoveCommandRequest
+	RemoveCommandResponse
 	Computer
 	ComputersEdge
 	ComputersConnection
+	FetchComputerByIdRequest
+	FetchComputerByIdResponse
+	FetchManyComputerByIdRequest
+	FetchManyComputerByIdResponse
+	FetchComputersRequest
 	CreateComputerRequest
 	CreateComputerResponse
 	EditComputerRequest
 	EditComputerResponse
 	RemoveComputerRequest
 	RemoveComputerResponse
-	FetchComputerByIdRequest
-	FetchComputerByIdResponse
-	FetchManyComputerByIdRequest
-	FetchManyComputerByIdResponse
-	FetchComputersRequest
 	Device
+	FetchDevicesRequest
+	FetchDevicesResponse
+	FetchDeviceByIdRequest
+	FetchDeviceByIdResponse
 	DevicesConnection
 	DevicesEdge
 	CreateDeviceRequest
@@ -47,15 +68,38 @@ It has these top-level messages:
 	EditDeviceResponse
 	RemoveDeviceRequest
 	RemoveDeviceResponse
-	FetchDevicesRequest
-	FetchDeviceByIdRequest
-	FetchDeviceByIdResponse
 	DeviceInfo
-	KeyValue
 	FetchDeviceInfoByIdRequest
 	FetchDeviceInfoByIdResponse
-	FetchKeyValuesByDeviceInfoIdRequest
+	DeviceType
+	FetchDeviceTypesRequest
+	FetchDeviceTypesResponse
+	FetchDeviceTypeByIdRequest
+	FetchDeviceTypeByIdResponse
+	CreateDeviceTypeRequest
+	CreateDeviceTypeResponse
+	EditDeviceTypeRequest
+	EditDeviceTypeResponse
+	RemoveDeviceTypeRequest
+	RemoveDeviceTypeResponse
+	EthernetInterface
+	FetchEthernetInterfacesRequest
+	EthernetInterfacesConnection
+	EthernetInterfaceEdge
+	Keijo
+	FetchKeijosRequest
+	FetchKeijosResponse
+	FetchKeijoByIdRequest
+	FetchKeijoByIdResponse
+	CreateKeijoRequest
+	CreateKeijoResponse
+	EditKeijoRequest
+	EditKeijoResponse
+	RemoveKeijoRequest
+	RemoveKeijoResponse
+	KeyValue
 	DeviceInfoKeyValues
+	FetchKeyValuesByDeviceInfoIdRequest
 	FetchKeyValuesByDeviceInfoIdResponse
 	CreateKeyValueRequest
 	CreateKeyValueResponse
@@ -63,32 +107,6 @@ It has these top-level messages:
 	EditKeyValueResponse
 	RemoveKeyValueRequest
 	RemoveKeyValueResponse
-	DeviceType
-	Command
-	DeviceTypesConnection
-	DeviceTypesEdge
-	CreateDeviceTypeRequest
-	CreateDeviceTypeResponse
-	EditDeviceTypeRequest
-	EditDeviceTypeResponse
-	RemoveDeviceTypeRequest
-	RemoveDeviceTypeResponse
-	FetchDeviceTypesRequest
-	FetchDeviceTypeByIdRequest
-	FetchDeviceTypeByIdResponse
-	CreateCommandRequest
-	CreateCommandResponse
-	EditCommandRequest
-	EditCommandReponse
-	RemoveCommandRequest
-	RemoveCommandResponse
-	FetchCommandsByDeviceTypeIdRequest
-	DeviceTypeCommands
-	FetchCommandsByDeviceTypeIdResponse
-	EthernetInterface
-	FetchEthernetInterfacesRequest
-	EthernetInterfacesConnection
-	EthernetInterfaceEdge
 	PageInfo
 	SerialInterface
 	SerialInterfacesEdge
@@ -102,10 +120,22 @@ It has these top-level messages:
 	EditSerialInterfaceResponse
 	RemoveSerialInterfaceRequest
 	RemoveSerialInterfaceResponse
+	Severi
+	FetchSeverisRequest
+	FetchSeverisResponse
+	FetchSeveriByIdRequest
+	FetchSeveriByIdResponse
+	CreateSeveriRequest
+	CreateSeveriResponse
+	EditSeveriRequest
+	EditSeveriResponse
+	RemoveSeveriRequest
+	RemoveSeveriResponse
 	TelnetInterface
 	TelnetInterfacesConnection
 	TelnetInterfacesEdge
 	FetchTelnetInterfacesRequest
+	FetchTelnetInterfacesResponse
 	FetchTelnetInterfaceByIdRequest
 	FetchTelnetInterfaceByIdResponse
 	CreateTelnetInterfaceRequest
@@ -115,16 +145,18 @@ It has these top-level messages:
 	RemoveTelnetInterfaceRequest
 	RemoveTelnetInterfaceResponse
 	WolInterface
+	FetchWolInterfacesRequest
+	FetchWolInterfacesResponse
+	FetchWolInterfaceByIdRequest
+	FetchWolInterfaceByIdResponse
 	CreateWolInterfaceRequest
 	CreateWolInterfaceResponse
 	EditWolInterfaceRequest
 	EditWolInterfaceResponse
 	RemoveWolInterfaceRequest
 	RemoveWolInterfaceResponse
-	ExecuteWolInterfaceRequest
-	ExecuteWolInterfaceResponse
-	FetchWolInterfaceByIdRequest
-	FetchWolInterfaceByIdResponse
+	WakeupWolInterfaceRequest
+	WakeupWolInterfaceResponse
 */
 package WompattiService
 

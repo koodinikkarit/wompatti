@@ -13,72 +13,6 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-type CreateKeyValueResponse_State int32
-
-const (
-	CreateKeyValueResponse_SUCCESS CreateKeyValueResponse_State = 0
-)
-
-var CreateKeyValueResponse_State_name = map[int32]string{
-	0: "SUCCESS",
-}
-var CreateKeyValueResponse_State_value = map[string]int32{
-	"SUCCESS": 0,
-}
-
-func (x CreateKeyValueResponse_State) String() string {
-	return proto.EnumName(CreateKeyValueResponse_State_name, int32(x))
-}
-func (CreateKeyValueResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{8, 0}
-}
-
-type EditKeyValueResponse_State int32
-
-const (
-	EditKeyValueResponse_SUCCESS   EditKeyValueResponse_State = 0
-	EditKeyValueResponse_NOT_FOUND EditKeyValueResponse_State = 1
-)
-
-var EditKeyValueResponse_State_name = map[int32]string{
-	0: "SUCCESS",
-	1: "NOT_FOUND",
-}
-var EditKeyValueResponse_State_value = map[string]int32{
-	"SUCCESS":   0,
-	"NOT_FOUND": 1,
-}
-
-func (x EditKeyValueResponse_State) String() string {
-	return proto.EnumName(EditKeyValueResponse_State_name, int32(x))
-}
-func (EditKeyValueResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{10, 0}
-}
-
-type RemoveKeyValueResponse_State int32
-
-const (
-	RemoveKeyValueResponse_SUCCESS   RemoveKeyValueResponse_State = 0
-	RemoveKeyValueResponse_NOT_FOUND RemoveKeyValueResponse_State = 1
-)
-
-var RemoveKeyValueResponse_State_name = map[int32]string{
-	0: "SUCCESS",
-	1: "NOT_FOUND",
-}
-var RemoveKeyValueResponse_State_value = map[string]int32{
-	"SUCCESS":   0,
-	"NOT_FOUND": 1,
-}
-
-func (x RemoveKeyValueResponse_State) String() string {
-	return proto.EnumName(RemoveKeyValueResponse_State_name, int32(x))
-}
-func (RemoveKeyValueResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{12, 0}
-}
-
 type DeviceInfo struct {
 	Id uint32 `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
 }
@@ -86,53 +20,13 @@ type DeviceInfo struct {
 func (m *DeviceInfo) Reset()                    { *m = DeviceInfo{} }
 func (m *DeviceInfo) String() string            { return proto.CompactTextString(m) }
 func (*DeviceInfo) ProtoMessage()               {}
-func (*DeviceInfo) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{0} }
+func (*DeviceInfo) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{0} }
 
 func (m *DeviceInfo) GetId() uint32 {
 	if m != nil {
 		return m.Id
 	}
 	return 0
-}
-
-type KeyValue struct {
-	Id           uint32 `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
-	DeviceInfoId uint32 `protobuf:"varint,2,opt,name=deviceInfoId" json:"deviceInfoId,omitempty"`
-	Key          string `protobuf:"bytes,3,opt,name=key" json:"key,omitempty"`
-	Value        string `protobuf:"bytes,4,opt,name=value" json:"value,omitempty"`
-}
-
-func (m *KeyValue) Reset()                    { *m = KeyValue{} }
-func (m *KeyValue) String() string            { return proto.CompactTextString(m) }
-func (*KeyValue) ProtoMessage()               {}
-func (*KeyValue) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1} }
-
-func (m *KeyValue) GetId() uint32 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-func (m *KeyValue) GetDeviceInfoId() uint32 {
-	if m != nil {
-		return m.DeviceInfoId
-	}
-	return 0
-}
-
-func (m *KeyValue) GetKey() string {
-	if m != nil {
-		return m.Key
-	}
-	return ""
-}
-
-func (m *KeyValue) GetValue() string {
-	if m != nil {
-		return m.Value
-	}
-	return ""
 }
 
 type FetchDeviceInfoByIdRequest struct {
@@ -142,7 +36,7 @@ type FetchDeviceInfoByIdRequest struct {
 func (m *FetchDeviceInfoByIdRequest) Reset()                    { *m = FetchDeviceInfoByIdRequest{} }
 func (m *FetchDeviceInfoByIdRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchDeviceInfoByIdRequest) ProtoMessage()               {}
-func (*FetchDeviceInfoByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{2} }
+func (*FetchDeviceInfoByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1} }
 
 func (m *FetchDeviceInfoByIdRequest) GetDeviceInfoIdt() []uint32 {
 	if m != nil {
@@ -158,7 +52,7 @@ type FetchDeviceInfoByIdResponse struct {
 func (m *FetchDeviceInfoByIdResponse) Reset()                    { *m = FetchDeviceInfoByIdResponse{} }
 func (m *FetchDeviceInfoByIdResponse) String() string            { return proto.CompactTextString(m) }
 func (*FetchDeviceInfoByIdResponse) ProtoMessage()               {}
-func (*FetchDeviceInfoByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{3} }
+func (*FetchDeviceInfoByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{2} }
 
 func (m *FetchDeviceInfoByIdResponse) GetDeviceInfos() []*DeviceInfo {
 	if m != nil {
@@ -167,260 +61,25 @@ func (m *FetchDeviceInfoByIdResponse) GetDeviceInfos() []*DeviceInfo {
 	return nil
 }
 
-type FetchKeyValuesByDeviceInfoIdRequest struct {
-	DeviceInfoIdt []uint32 `protobuf:"varint,1,rep,packed,name=deviceInfoIdt" json:"deviceInfoIdt,omitempty"`
-}
-
-func (m *FetchKeyValuesByDeviceInfoIdRequest) Reset()         { *m = FetchKeyValuesByDeviceInfoIdRequest{} }
-func (m *FetchKeyValuesByDeviceInfoIdRequest) String() string { return proto.CompactTextString(m) }
-func (*FetchKeyValuesByDeviceInfoIdRequest) ProtoMessage()    {}
-func (*FetchKeyValuesByDeviceInfoIdRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{4}
-}
-
-func (m *FetchKeyValuesByDeviceInfoIdRequest) GetDeviceInfoIdt() []uint32 {
-	if m != nil {
-		return m.DeviceInfoIdt
-	}
-	return nil
-}
-
-type DeviceInfoKeyValues struct {
-	KeyValues    []*KeyValue `protobuf:"bytes,1,rep,name=keyValues" json:"keyValues,omitempty"`
-	DeviceInfoId uint32      `protobuf:"varint,2,opt,name=deviceInfoId" json:"deviceInfoId,omitempty"`
-}
-
-func (m *DeviceInfoKeyValues) Reset()                    { *m = DeviceInfoKeyValues{} }
-func (m *DeviceInfoKeyValues) String() string            { return proto.CompactTextString(m) }
-func (*DeviceInfoKeyValues) ProtoMessage()               {}
-func (*DeviceInfoKeyValues) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{5} }
-
-func (m *DeviceInfoKeyValues) GetKeyValues() []*KeyValue {
-	if m != nil {
-		return m.KeyValues
-	}
-	return nil
-}
-
-func (m *DeviceInfoKeyValues) GetDeviceInfoId() uint32 {
-	if m != nil {
-		return m.DeviceInfoId
-	}
-	return 0
-}
-
-type FetchKeyValuesByDeviceInfoIdResponse struct {
-	DeviceInfoKeyValues []*DeviceInfoKeyValues `protobuf:"bytes,1,rep,name=deviceInfoKeyValues" json:"deviceInfoKeyValues,omitempty"`
-}
-
-func (m *FetchKeyValuesByDeviceInfoIdResponse) Reset()         { *m = FetchKeyValuesByDeviceInfoIdResponse{} }
-func (m *FetchKeyValuesByDeviceInfoIdResponse) String() string { return proto.CompactTextString(m) }
-func (*FetchKeyValuesByDeviceInfoIdResponse) ProtoMessage()    {}
-func (*FetchKeyValuesByDeviceInfoIdResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor3, []int{6}
-}
-
-func (m *FetchKeyValuesByDeviceInfoIdResponse) GetDeviceInfoKeyValues() []*DeviceInfoKeyValues {
-	if m != nil {
-		return m.DeviceInfoKeyValues
-	}
-	return nil
-}
-
-type CreateKeyValueRequest struct {
-	DeviceInfoId uint32 `protobuf:"varint,1,opt,name=deviceInfoId" json:"deviceInfoId,omitempty"`
-	Key          string `protobuf:"bytes,2,opt,name=key" json:"key,omitempty"`
-	Value        string `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
-}
-
-func (m *CreateKeyValueRequest) Reset()                    { *m = CreateKeyValueRequest{} }
-func (m *CreateKeyValueRequest) String() string            { return proto.CompactTextString(m) }
-func (*CreateKeyValueRequest) ProtoMessage()               {}
-func (*CreateKeyValueRequest) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{7} }
-
-func (m *CreateKeyValueRequest) GetDeviceInfoId() uint32 {
-	if m != nil {
-		return m.DeviceInfoId
-	}
-	return 0
-}
-
-func (m *CreateKeyValueRequest) GetKey() string {
-	if m != nil {
-		return m.Key
-	}
-	return ""
-}
-
-func (m *CreateKeyValueRequest) GetValue() string {
-	if m != nil {
-		return m.Value
-	}
-	return ""
-}
-
-type CreateKeyValueResponse struct {
-	State    CreateKeyValueResponse_State `protobuf:"varint,1,opt,name=state,enum=WompattiService.CreateKeyValueResponse_State" json:"state,omitempty"`
-	KeyValue *KeyValue                    `protobuf:"bytes,2,opt,name=keyValue" json:"keyValue,omitempty"`
-}
-
-func (m *CreateKeyValueResponse) Reset()                    { *m = CreateKeyValueResponse{} }
-func (m *CreateKeyValueResponse) String() string            { return proto.CompactTextString(m) }
-func (*CreateKeyValueResponse) ProtoMessage()               {}
-func (*CreateKeyValueResponse) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{8} }
-
-func (m *CreateKeyValueResponse) GetState() CreateKeyValueResponse_State {
-	if m != nil {
-		return m.State
-	}
-	return CreateKeyValueResponse_SUCCESS
-}
-
-func (m *CreateKeyValueResponse) GetKeyValue() *KeyValue {
-	if m != nil {
-		return m.KeyValue
-	}
-	return nil
-}
-
-type EditKeyValueRequest struct {
-	KeyValueId uint32 `protobuf:"varint,1,opt,name=keyValueId" json:"keyValueId,omitempty"`
-	Key        string `protobuf:"bytes,2,opt,name=key" json:"key,omitempty"`
-	Value      string `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
-}
-
-func (m *EditKeyValueRequest) Reset()                    { *m = EditKeyValueRequest{} }
-func (m *EditKeyValueRequest) String() string            { return proto.CompactTextString(m) }
-func (*EditKeyValueRequest) ProtoMessage()               {}
-func (*EditKeyValueRequest) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{9} }
-
-func (m *EditKeyValueRequest) GetKeyValueId() uint32 {
-	if m != nil {
-		return m.KeyValueId
-	}
-	return 0
-}
-
-func (m *EditKeyValueRequest) GetKey() string {
-	if m != nil {
-		return m.Key
-	}
-	return ""
-}
-
-func (m *EditKeyValueRequest) GetValue() string {
-	if m != nil {
-		return m.Value
-	}
-	return ""
-}
-
-type EditKeyValueResponse struct {
-	State    EditKeyValueResponse_State `protobuf:"varint,1,opt,name=state,enum=WompattiService.EditKeyValueResponse_State" json:"state,omitempty"`
-	KeyValue *KeyValue                  `protobuf:"bytes,2,opt,name=keyValue" json:"keyValue,omitempty"`
-}
-
-func (m *EditKeyValueResponse) Reset()                    { *m = EditKeyValueResponse{} }
-func (m *EditKeyValueResponse) String() string            { return proto.CompactTextString(m) }
-func (*EditKeyValueResponse) ProtoMessage()               {}
-func (*EditKeyValueResponse) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{10} }
-
-func (m *EditKeyValueResponse) GetState() EditKeyValueResponse_State {
-	if m != nil {
-		return m.State
-	}
-	return EditKeyValueResponse_SUCCESS
-}
-
-func (m *EditKeyValueResponse) GetKeyValue() *KeyValue {
-	if m != nil {
-		return m.KeyValue
-	}
-	return nil
-}
-
-type RemoveKeyValueRequest struct {
-	KeyValueId uint32 `protobuf:"varint,1,opt,name=keyValueId" json:"keyValueId,omitempty"`
-}
-
-func (m *RemoveKeyValueRequest) Reset()                    { *m = RemoveKeyValueRequest{} }
-func (m *RemoveKeyValueRequest) String() string            { return proto.CompactTextString(m) }
-func (*RemoveKeyValueRequest) ProtoMessage()               {}
-func (*RemoveKeyValueRequest) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{11} }
-
-func (m *RemoveKeyValueRequest) GetKeyValueId() uint32 {
-	if m != nil {
-		return m.KeyValueId
-	}
-	return 0
-}
-
-type RemoveKeyValueResponse struct {
-	State RemoveKeyValueResponse_State `protobuf:"varint,1,opt,name=state,enum=WompattiService.RemoveKeyValueResponse_State" json:"state,omitempty"`
-}
-
-func (m *RemoveKeyValueResponse) Reset()                    { *m = RemoveKeyValueResponse{} }
-func (m *RemoveKeyValueResponse) String() string            { return proto.CompactTextString(m) }
-func (*RemoveKeyValueResponse) ProtoMessage()               {}
-func (*RemoveKeyValueResponse) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{12} }
-
-func (m *RemoveKeyValueResponse) GetState() RemoveKeyValueResponse_State {
-	if m != nil {
-		return m.State
-	}
-	return RemoveKeyValueResponse_SUCCESS
-}
-
 func init() {
 	proto.RegisterType((*DeviceInfo)(nil), "WompattiService.DeviceInfo")
-	proto.RegisterType((*KeyValue)(nil), "WompattiService.KeyValue")
 	proto.RegisterType((*FetchDeviceInfoByIdRequest)(nil), "WompattiService.FetchDeviceInfoByIdRequest")
 	proto.RegisterType((*FetchDeviceInfoByIdResponse)(nil), "WompattiService.FetchDeviceInfoByIdResponse")
-	proto.RegisterType((*FetchKeyValuesByDeviceInfoIdRequest)(nil), "WompattiService.FetchKeyValuesByDeviceInfoIdRequest")
-	proto.RegisterType((*DeviceInfoKeyValues)(nil), "WompattiService.DeviceInfoKeyValues")
-	proto.RegisterType((*FetchKeyValuesByDeviceInfoIdResponse)(nil), "WompattiService.FetchKeyValuesByDeviceInfoIdResponse")
-	proto.RegisterType((*CreateKeyValueRequest)(nil), "WompattiService.CreateKeyValueRequest")
-	proto.RegisterType((*CreateKeyValueResponse)(nil), "WompattiService.CreateKeyValueResponse")
-	proto.RegisterType((*EditKeyValueRequest)(nil), "WompattiService.EditKeyValueRequest")
-	proto.RegisterType((*EditKeyValueResponse)(nil), "WompattiService.EditKeyValueResponse")
-	proto.RegisterType((*RemoveKeyValueRequest)(nil), "WompattiService.RemoveKeyValueRequest")
-	proto.RegisterType((*RemoveKeyValueResponse)(nil), "WompattiService.RemoveKeyValueResponse")
-	proto.RegisterEnum("WompattiService.CreateKeyValueResponse_State", CreateKeyValueResponse_State_name, CreateKeyValueResponse_State_value)
-	proto.RegisterEnum("WompattiService.EditKeyValueResponse_State", EditKeyValueResponse_State_name, EditKeyValueResponse_State_value)
-	proto.RegisterEnum("WompattiService.RemoveKeyValueResponse_State", RemoveKeyValueResponse_State_name, RemoveKeyValueResponse_State_value)
 }
 
-func init() { proto.RegisterFile("device_info.proto", fileDescriptor3) }
+func init() { proto.RegisterFile("device_info.proto", fileDescriptor4) }
 
-var fileDescriptor3 = []byte{
-	// 463 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x94, 0x4f, 0x8b, 0xd3, 0x40,
-	0x18, 0xc6, 0x9d, 0xc4, 0xea, 0xf6, 0xad, 0x59, 0xeb, 0xb4, 0xbb, 0x44, 0x57, 0xa4, 0xcc, 0xf6,
-	0x50, 0x10, 0x73, 0x58, 0x91, 0x3d, 0x79, 0xb0, 0xe9, 0x2e, 0x94, 0x85, 0x5d, 0x98, 0xb8, 0xf5,
-	0xa2, 0x94, 0xd8, 0x99, 0x62, 0xa8, 0x6d, 0x6a, 0x32, 0x2d, 0xe4, 0xe2, 0xc1, 0x8f, 0xe3, 0xdd,
-	0xef, 0x27, 0x99, 0xe6, 0x7f, 0x62, 0x49, 0xc1, 0x5b, 0xe6, 0x9d, 0xf7, 0x79, 0xe6, 0x79, 0x7f,
-	0x33, 0x04, 0x9e, 0x31, 0xbe, 0x75, 0x66, 0x7c, 0xea, 0xac, 0xe6, 0xae, 0xb1, 0xf6, 0x5c, 0xe1,
-	0xe2, 0xa7, 0x9f, 0xdc, 0xe5, 0xda, 0x16, 0xc2, 0xb1, 0xb8, 0x17, 0xee, 0x91, 0x97, 0x00, 0x23,
-	0xd9, 0x35, 0x5e, 0xcd, 0x5d, 0x7c, 0x0c, 0x8a, 0xc3, 0x74, 0xd4, 0x43, 0x03, 0x8d, 0x2a, 0x0e,
-	0x23, 0x73, 0x38, 0xba, 0xe1, 0xc1, 0xc4, 0xfe, 0xbe, 0xe1, 0xc5, 0x3d, 0x4c, 0xe0, 0x09, 0x4b,
-	0x94, 0x63, 0xa6, 0x2b, 0x72, 0x27, 0x57, 0xc3, 0x6d, 0x50, 0x17, 0x3c, 0xd0, 0xd5, 0x1e, 0x1a,
-	0x34, 0x69, 0xf8, 0x89, 0xbb, 0xd0, 0xd8, 0x86, 0x76, 0xfa, 0x43, 0x59, 0xdb, 0x2d, 0xc8, 0x10,
-	0x5e, 0x5c, 0x73, 0x31, 0xfb, 0x96, 0x46, 0x19, 0x06, 0x63, 0x46, 0xf9, 0x8f, 0x0d, 0xf7, 0x05,
-	0xee, 0x83, 0x96, 0x75, 0x15, 0x3a, 0xea, 0xa9, 0x03, 0x8d, 0xe6, 0x8b, 0xe4, 0x33, 0x9c, 0x55,
-	0x7a, 0xf8, 0x6b, 0x77, 0xe5, 0x73, 0xfc, 0x1e, 0x5a, 0x69, 0xbf, 0x2f, 0x2d, 0x5a, 0x17, 0x67,
-	0x46, 0x81, 0x87, 0x91, 0xaa, 0x69, 0xb6, 0x9f, 0xdc, 0xc0, 0xb9, 0x74, 0x8f, 0x71, 0xf8, 0xc3,
-	0x60, 0x94, 0x39, 0xfe, 0xb0, 0xa8, 0x1e, 0x74, 0x52, 0x71, 0xe2, 0x88, 0x2f, 0xa1, 0xb9, 0x88,
-	0x17, 0x51, 0xc0, 0xe7, 0xa5, 0x80, 0x71, 0x3b, 0x4d, 0x7b, 0xeb, 0x5c, 0x05, 0xf9, 0x09, 0xfd,
-	0xfd, 0x03, 0x44, 0x9c, 0x26, 0xd0, 0x61, 0xe5, 0x6c, 0x51, 0x9c, 0xfe, 0x1e, 0x5e, 0x49, 0x2f,
-	0xad, 0x32, 0x20, 0x33, 0x38, 0x31, 0x3d, 0x6e, 0x0b, 0x9e, 0x0c, 0x10, 0x21, 0x2b, 0x86, 0x47,
-	0xff, 0x7e, 0x47, 0x4a, 0xc5, 0x3b, 0x52, 0xb3, 0xef, 0xe8, 0x37, 0x82, 0xd3, 0xe2, 0x29, 0xd1,
-	0x5c, 0x26, 0x34, 0x7c, 0x61, 0x0b, 0x2e, 0xfd, 0x8f, 0x2f, 0xde, 0x94, 0x26, 0xa9, 0xd6, 0x19,
-	0x56, 0x28, 0xa2, 0x3b, 0x2d, 0x7e, 0x07, 0x47, 0x31, 0x75, 0x19, 0x66, 0xef, 0x05, 0x25, 0xad,
-	0xa4, 0x0b, 0x0d, 0x69, 0x83, 0x5b, 0xf0, 0xd8, 0xba, 0x37, 0xcd, 0x2b, 0xcb, 0x6a, 0x3f, 0x20,
-	0x5f, 0xa0, 0x73, 0xc5, 0x1c, 0x51, 0xe4, 0xf1, 0x0a, 0x20, 0x16, 0x26, 0x34, 0x32, 0x95, 0xda,
-	0x2c, 0xfe, 0x20, 0xe8, 0xe6, 0xfd, 0x23, 0x12, 0x1f, 0xf2, 0x24, 0x5e, 0x97, 0x26, 0xa8, 0x52,
-	0xfd, 0x17, 0x0e, 0xe7, 0x55, 0x1c, 0xb0, 0x06, 0xcd, 0xdb, 0xbb, 0x8f, 0xd3, 0xeb, 0xbb, 0xfb,
-	0xdb, 0x51, 0x1b, 0x91, 0x4b, 0x38, 0xa1, 0x7c, 0xe9, 0x6e, 0xf9, 0x81, 0x60, 0xc8, 0x2f, 0x04,
-	0xa7, 0x45, 0x65, 0xdd, 0xcb, 0xaf, 0xd6, 0xe5, 0x86, 0xae, 0x95, 0xfe, 0xeb, 0x23, 0xf9, 0x9f,
-	0x7d, 0xfb, 0x37, 0x00, 0x00, 0xff, 0xff, 0x67, 0x70, 0xe5, 0x56, 0x7c, 0x05, 0x00, 0x00,
+var fileDescriptor4 = []byte{
+	// 165 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4c, 0x49, 0x2d, 0xcb,
+	0x4c, 0x4e, 0x8d, 0xcf, 0xcc, 0x4b, 0xcb, 0xd7, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x0f,
+	0xcf, 0xcf, 0x2d, 0x48, 0x2c, 0x29, 0xc9, 0x0c, 0x4e, 0x2d, 0x02, 0xc9, 0x29, 0xc9, 0x70, 0x71,
+	0xb9, 0x80, 0x55, 0x79, 0xe6, 0xa5, 0xe5, 0x0b, 0xf1, 0x71, 0x31, 0x65, 0xa6, 0x48, 0x30, 0x2a,
+	0x30, 0x6a, 0xf0, 0x06, 0x31, 0x65, 0xa6, 0x28, 0x39, 0x71, 0x49, 0xb9, 0xa5, 0x96, 0x24, 0x67,
+	0x20, 0x94, 0x38, 0x55, 0x7a, 0xa6, 0x04, 0xa5, 0x16, 0x96, 0xa6, 0x16, 0x97, 0x08, 0xa9, 0x70,
+	0xf1, 0xa6, 0xc0, 0x25, 0x3c, 0x53, 0x4a, 0x24, 0x18, 0x15, 0x98, 0x35, 0x78, 0x83, 0x50, 0x05,
+	0x95, 0x62, 0xb8, 0xa4, 0xb1, 0x9a, 0x51, 0x5c, 0x90, 0x9f, 0x57, 0x9c, 0x2a, 0x64, 0xcb, 0xc5,
+	0x8d, 0x50, 0x5f, 0x0c, 0x36, 0x82, 0xdb, 0x48, 0x5a, 0x0f, 0xcd, 0x9d, 0x7a, 0x08, 0xdd, 0x41,
+	0xc8, 0xea, 0x93, 0xd8, 0xc0, 0xfe, 0x32, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0x01, 0xeb, 0x21,
+	0x67, 0xec, 0x00, 0x00, 0x00,
 }

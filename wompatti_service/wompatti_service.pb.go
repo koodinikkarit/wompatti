@@ -29,26 +29,26 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for Wompatti service
 
 type WompattiClient interface {
-	// Queries
-	FetchComputers(ctx context.Context, in *FetchComputersRequest, opts ...grpc.CallOption) (*ComputersConnection, error)
-	FetchComputerById(ctx context.Context, in *FetchComputerByIdRequest, opts ...grpc.CallOption) (*FetchComputerByIdResponse, error)
-	FetchDevices(ctx context.Context, in *FetchDevicesRequest, opts ...grpc.CallOption) (*DevicesConnection, error)
-	FetchDeviceById(ctx context.Context, in *FetchDeviceByIdRequest, opts ...grpc.CallOption) (*FetchDeviceByIdResponse, error)
-	FetchDeviceInfoById(ctx context.Context, in *FetchDeviceInfoByIdRequest, opts ...grpc.CallOption) (*FetchDeviceInfoByIdResponse, error)
-	FetchKeyValuesByDeviceInfoId(ctx context.Context, in *FetchKeyValuesByDeviceInfoIdRequest, opts ...grpc.CallOption) (*FetchKeyValuesByDeviceInfoIdResponse, error)
-	FetchEthernetInterfaces(ctx context.Context, in *FetchEthernetInterfacesRequest, opts ...grpc.CallOption) (*EthernetInterfacesConnection, error)
-	FetchWolInterfaceById(ctx context.Context, in *FetchWolInterfaceByIdRequest, opts ...grpc.CallOption) (*FetchWolInterfaceByIdResponse, error)
-	FetchDeviceTypes(ctx context.Context, in *FetchDeviceTypesRequest, opts ...grpc.CallOption) (*DeviceTypesConnection, error)
-	FetchDeviceTypeById(ctx context.Context, in *FetchDeviceTypeByIdRequest, opts ...grpc.CallOption) (*FetchDeviceTypeByIdResponse, error)
-	FetchCommandsByDeviceTypeId(ctx context.Context, in *FetchCommandsByDeviceTypeIdRequest, opts ...grpc.CallOption) (*FetchCommandsByDeviceTypeIdResponse, error)
-	FetchTelnetInterfaces(ctx context.Context, in *FetchTelnetInterfacesRequest, opts ...grpc.CallOption) (*TelnetInterfacesConnection, error)
+	// Fetch
+	FetchTelnetInterfaces(ctx context.Context, in *FetchTelnetInterfacesRequest, opts ...grpc.CallOption) (*FetchTelnetInterfacesResponse, error)
 	FetchTelnetInterfaceById(ctx context.Context, in *FetchTelnetInterfaceByIdRequest, opts ...grpc.CallOption) (*FetchTelnetInterfaceByIdResponse, error)
-	FetchSerialInterfaces(ctx context.Context, in *FetchSerialInterfacesRequest, opts ...grpc.CallOption) (*SerialInterfacesConnection, error)
-	FetchSerialInterfaceById(ctx context.Context, in *FetchSerialInterfaceByIdRequest, opts ...grpc.CallOption) (*FetchSerialInterfaceByIdResponse, error)
-	// Mutations
-	CreateComputer(ctx context.Context, in *CreateComputerRequest, opts ...grpc.CallOption) (*CreateComputerResponse, error)
-	EditComputer(ctx context.Context, in *EditComputerRequest, opts ...grpc.CallOption) (*EditComputerResponse, error)
-	RemoveComputer(ctx context.Context, in *RemoveComputerRequest, opts ...grpc.CallOption) (*RemoveComputerResponse, error)
+	FetchDevices(ctx context.Context, in *FetchDevicesRequest, opts ...grpc.CallOption) (*FetchDevicesResponse, error)
+	FetchDeviceById(ctx context.Context, in *FetchDeviceByIdRequest, opts ...grpc.CallOption) (*FetchDeviceByIdResponse, error)
+	FetchDeviceTypes(ctx context.Context, in *FetchDeviceTypesRequest, opts ...grpc.CallOption) (*FetchDeviceTypesResponse, error)
+	FetchDeviceTypeById(ctx context.Context, in *FetchDeviceTypeByIdRequest, opts ...grpc.CallOption) (*FetchDeviceTypeByIdResponse, error)
+	FetchCommands(ctx context.Context, in *FetchCommandsRequest, opts ...grpc.CallOption) (*FetchCommandsResponse, error)
+	FetchCommandsByDeviceTypeId(ctx context.Context, in *FetchCommandsByDeviceTypeIdRequest, opts ...grpc.CallOption) (*FetchCommandsByDeviceTypeIdResponse, error)
+	FetchCommandById(ctx context.Context, in *FetchCommandByIdRequest, opts ...grpc.CallOption) (*FetchCommandByIdResponse, error)
+	FetchKeijos(ctx context.Context, in *FetchKeijosRequest, opts ...grpc.CallOption) (*FetchKeijosResponse, error)
+	FetchKeijoById(ctx context.Context, in *FetchKeijoByIdRequest, opts ...grpc.CallOption) (*FetchKeijoByIdResponse, error)
+	FetchSeveris(ctx context.Context, in *FetchSeverisRequest, opts ...grpc.CallOption) (*FetchSeverisResponse, error)
+	FetchSeveriById(ctx context.Context, in *FetchSeveriByIdRequest, opts ...grpc.CallOption) (*FetchSeveriByIdResponse, error)
+	FetchWolInterfaces(ctx context.Context, in *FetchWolInterfacesRequest, opts ...grpc.CallOption) (*FetchWolInterfacesResponse, error)
+	FetchWolInterfaceById(ctx context.Context, in *FetchWolInterfaceByIdRequest, opts ...grpc.CallOption) (*FetchWolInterfaceByIdResponse, error)
+	// Mutate
+	CreateTelnetInterface(ctx context.Context, in *CreateTelnetInterfaceRequest, opts ...grpc.CallOption) (*CreateTelnetInterfaceResponse, error)
+	EditTelnetInterface(ctx context.Context, in *EditTelnetInterfaceRequest, opts ...grpc.CallOption) (*EditTelnetInterfaceResponse, error)
+	RemoveTelnetInterface(ctx context.Context, in *RemoveTelnetInterfaceRequest, opts ...grpc.CallOption) (*RemoveTelnetInterfaceResponse, error)
 	CreateDevice(ctx context.Context, in *CreateDeviceRequest, opts ...grpc.CallOption) (*CreateDeviceResponse, error)
 	EditDevice(ctx context.Context, in *EditDeviceRequest, opts ...grpc.CallOption) (*EditDeviceResponse, error)
 	RemoveDevice(ctx context.Context, in *RemoveDeviceRequest, opts ...grpc.CallOption) (*RemoveDeviceResponse, error)
@@ -58,19 +58,16 @@ type WompattiClient interface {
 	CreateCommand(ctx context.Context, in *CreateCommandRequest, opts ...grpc.CallOption) (*CreateCommandResponse, error)
 	EditCommand(ctx context.Context, in *EditCommandRequest, opts ...grpc.CallOption) (*EditCommandReponse, error)
 	RemoveCommand(ctx context.Context, in *RemoveCommandRequest, opts ...grpc.CallOption) (*RemoveCommandResponse, error)
-	CreateKeyValue(ctx context.Context, in *CreateKeyValueRequest, opts ...grpc.CallOption) (*CreateKeyValueResponse, error)
-	EditKeyValue(ctx context.Context, in *EditKeyValueRequest, opts ...grpc.CallOption) (*EditKeyValueResponse, error)
-	RemoveKeyValue(ctx context.Context, in *RemoveKeyValueRequest, opts ...grpc.CallOption) (*RemoveKeyValueResponse, error)
+	CreateKeijo(ctx context.Context, in *CreateKeijoRequest, opts ...grpc.CallOption) (*CreateKeijoResponse, error)
+	EditKeijo(ctx context.Context, in *EditKeijoRequest, opts ...grpc.CallOption) (*EditKeijoResponse, error)
+	RemoveKeijo(ctx context.Context, in *RemoveKeijoRequest, opts ...grpc.CallOption) (*RemoveKeijoResponse, error)
+	CreateSeveri(ctx context.Context, in *CreateSeveriRequest, opts ...grpc.CallOption) (*CreateSeveriResponse, error)
+	EditSeveri(ctx context.Context, in *EditSeveriRequest, opts ...grpc.CallOption) (*EditSeveriResponse, error)
+	RemoveSeveri(ctx context.Context, in *RemoveSeveriRequest, opts ...grpc.CallOption) (*RemoveSeveriResponse, error)
 	CreateWolInterface(ctx context.Context, in *CreateWolInterfaceRequest, opts ...grpc.CallOption) (*CreateWolInterfaceResponse, error)
 	EditWolInterface(ctx context.Context, in *EditWolInterfaceRequest, opts ...grpc.CallOption) (*EditWolInterfaceResponse, error)
 	RemoveWolInterface(ctx context.Context, in *RemoveWolInterfaceRequest, opts ...grpc.CallOption) (*RemoveWolInterfaceResponse, error)
-	ExecuteWolInterface(ctx context.Context, in *ExecuteWolInterfaceRequest, opts ...grpc.CallOption) (*ExecuteWolInterfaceResponse, error)
-	CreateTelnetInterface(ctx context.Context, in *CreateTelnetInterfaceRequest, opts ...grpc.CallOption) (*CreateTelnetInterfaceResponse, error)
-	EditTelnetInterface(ctx context.Context, in *EditTelnetInterfaceRequest, opts ...grpc.CallOption) (*EditTelnetInterfaceResponse, error)
-	RemoveTelnetInterface(ctx context.Context, in *RemoveTelnetInterfaceRequest, opts ...grpc.CallOption) (*RemoveTelnetInterfaceResponse, error)
-	CreateSerialInterface(ctx context.Context, in *CreateSerialInterfaceRequest, opts ...grpc.CallOption) (*CreateSerialInterfaceResponse, error)
-	EditSerialInterface(ctx context.Context, in *EditSerialInterfaceRequest, opts ...grpc.CallOption) (*EditSerialInterfaceResponse, error)
-	RemoveSerialInterface(ctx context.Context, in *RemoveSerialInterfaceRequest, opts ...grpc.CallOption) (*RemoveSerialInterfaceResponse, error)
+	WakeupWolInterface(ctx context.Context, in *WakeupWolInterfaceRequest, opts ...grpc.CallOption) (*WakeupWolInterfaceResponse, error)
 }
 
 type wompattiClient struct {
@@ -81,107 +78,8 @@ func NewWompattiClient(cc *grpc.ClientConn) WompattiClient {
 	return &wompattiClient{cc}
 }
 
-func (c *wompattiClient) FetchComputers(ctx context.Context, in *FetchComputersRequest, opts ...grpc.CallOption) (*ComputersConnection, error) {
-	out := new(ComputersConnection)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchComputers", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchComputerById(ctx context.Context, in *FetchComputerByIdRequest, opts ...grpc.CallOption) (*FetchComputerByIdResponse, error) {
-	out := new(FetchComputerByIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchComputerById", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchDevices(ctx context.Context, in *FetchDevicesRequest, opts ...grpc.CallOption) (*DevicesConnection, error) {
-	out := new(DevicesConnection)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchDevices", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchDeviceById(ctx context.Context, in *FetchDeviceByIdRequest, opts ...grpc.CallOption) (*FetchDeviceByIdResponse, error) {
-	out := new(FetchDeviceByIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchDeviceById", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchDeviceInfoById(ctx context.Context, in *FetchDeviceInfoByIdRequest, opts ...grpc.CallOption) (*FetchDeviceInfoByIdResponse, error) {
-	out := new(FetchDeviceInfoByIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchDeviceInfoById", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchKeyValuesByDeviceInfoId(ctx context.Context, in *FetchKeyValuesByDeviceInfoIdRequest, opts ...grpc.CallOption) (*FetchKeyValuesByDeviceInfoIdResponse, error) {
-	out := new(FetchKeyValuesByDeviceInfoIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchKeyValuesByDeviceInfoId", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchEthernetInterfaces(ctx context.Context, in *FetchEthernetInterfacesRequest, opts ...grpc.CallOption) (*EthernetInterfacesConnection, error) {
-	out := new(EthernetInterfacesConnection)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchEthernetInterfaces", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchWolInterfaceById(ctx context.Context, in *FetchWolInterfaceByIdRequest, opts ...grpc.CallOption) (*FetchWolInterfaceByIdResponse, error) {
-	out := new(FetchWolInterfaceByIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchWolInterfaceById", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchDeviceTypes(ctx context.Context, in *FetchDeviceTypesRequest, opts ...grpc.CallOption) (*DeviceTypesConnection, error) {
-	out := new(DeviceTypesConnection)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchDeviceTypes", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchDeviceTypeById(ctx context.Context, in *FetchDeviceTypeByIdRequest, opts ...grpc.CallOption) (*FetchDeviceTypeByIdResponse, error) {
-	out := new(FetchDeviceTypeByIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchDeviceTypeById", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchCommandsByDeviceTypeId(ctx context.Context, in *FetchCommandsByDeviceTypeIdRequest, opts ...grpc.CallOption) (*FetchCommandsByDeviceTypeIdResponse, error) {
-	out := new(FetchCommandsByDeviceTypeIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchCommandsByDeviceTypeId", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) FetchTelnetInterfaces(ctx context.Context, in *FetchTelnetInterfacesRequest, opts ...grpc.CallOption) (*TelnetInterfacesConnection, error) {
-	out := new(TelnetInterfacesConnection)
+func (c *wompattiClient) FetchTelnetInterfaces(ctx context.Context, in *FetchTelnetInterfacesRequest, opts ...grpc.CallOption) (*FetchTelnetInterfacesResponse, error) {
+	out := new(FetchTelnetInterfacesResponse)
 	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchTelnetInterfaces", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -198,45 +96,144 @@ func (c *wompattiClient) FetchTelnetInterfaceById(ctx context.Context, in *Fetch
 	return out, nil
 }
 
-func (c *wompattiClient) FetchSerialInterfaces(ctx context.Context, in *FetchSerialInterfacesRequest, opts ...grpc.CallOption) (*SerialInterfacesConnection, error) {
-	out := new(SerialInterfacesConnection)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchSerialInterfaces", in, out, c.cc, opts...)
+func (c *wompattiClient) FetchDevices(ctx context.Context, in *FetchDevicesRequest, opts ...grpc.CallOption) (*FetchDevicesResponse, error) {
+	out := new(FetchDevicesResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchDevices", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) FetchSerialInterfaceById(ctx context.Context, in *FetchSerialInterfaceByIdRequest, opts ...grpc.CallOption) (*FetchSerialInterfaceByIdResponse, error) {
-	out := new(FetchSerialInterfaceByIdResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchSerialInterfaceById", in, out, c.cc, opts...)
+func (c *wompattiClient) FetchDeviceById(ctx context.Context, in *FetchDeviceByIdRequest, opts ...grpc.CallOption) (*FetchDeviceByIdResponse, error) {
+	out := new(FetchDeviceByIdResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchDeviceById", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) CreateComputer(ctx context.Context, in *CreateComputerRequest, opts ...grpc.CallOption) (*CreateComputerResponse, error) {
-	out := new(CreateComputerResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createComputer", in, out, c.cc, opts...)
+func (c *wompattiClient) FetchDeviceTypes(ctx context.Context, in *FetchDeviceTypesRequest, opts ...grpc.CallOption) (*FetchDeviceTypesResponse, error) {
+	out := new(FetchDeviceTypesResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchDeviceTypes", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) EditComputer(ctx context.Context, in *EditComputerRequest, opts ...grpc.CallOption) (*EditComputerResponse, error) {
-	out := new(EditComputerResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editComputer", in, out, c.cc, opts...)
+func (c *wompattiClient) FetchDeviceTypeById(ctx context.Context, in *FetchDeviceTypeByIdRequest, opts ...grpc.CallOption) (*FetchDeviceTypeByIdResponse, error) {
+	out := new(FetchDeviceTypeByIdResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchDeviceTypeById", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) RemoveComputer(ctx context.Context, in *RemoveComputerRequest, opts ...grpc.CallOption) (*RemoveComputerResponse, error) {
-	out := new(RemoveComputerResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeComputer", in, out, c.cc, opts...)
+func (c *wompattiClient) FetchCommands(ctx context.Context, in *FetchCommandsRequest, opts ...grpc.CallOption) (*FetchCommandsResponse, error) {
+	out := new(FetchCommandsResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchCommands", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) FetchCommandsByDeviceTypeId(ctx context.Context, in *FetchCommandsByDeviceTypeIdRequest, opts ...grpc.CallOption) (*FetchCommandsByDeviceTypeIdResponse, error) {
+	out := new(FetchCommandsByDeviceTypeIdResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchCommandsByDeviceTypeId", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) FetchCommandById(ctx context.Context, in *FetchCommandByIdRequest, opts ...grpc.CallOption) (*FetchCommandByIdResponse, error) {
+	out := new(FetchCommandByIdResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchCommandById", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) FetchKeijos(ctx context.Context, in *FetchKeijosRequest, opts ...grpc.CallOption) (*FetchKeijosResponse, error) {
+	out := new(FetchKeijosResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchKeijos", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) FetchKeijoById(ctx context.Context, in *FetchKeijoByIdRequest, opts ...grpc.CallOption) (*FetchKeijoByIdResponse, error) {
+	out := new(FetchKeijoByIdResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchKeijoById", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) FetchSeveris(ctx context.Context, in *FetchSeverisRequest, opts ...grpc.CallOption) (*FetchSeverisResponse, error) {
+	out := new(FetchSeverisResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchSeveris", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) FetchSeveriById(ctx context.Context, in *FetchSeveriByIdRequest, opts ...grpc.CallOption) (*FetchSeveriByIdResponse, error) {
+	out := new(FetchSeveriByIdResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchSeveriById", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) FetchWolInterfaces(ctx context.Context, in *FetchWolInterfacesRequest, opts ...grpc.CallOption) (*FetchWolInterfacesResponse, error) {
+	out := new(FetchWolInterfacesResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchWolInterfaces", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) FetchWolInterfaceById(ctx context.Context, in *FetchWolInterfaceByIdRequest, opts ...grpc.CallOption) (*FetchWolInterfaceByIdResponse, error) {
+	out := new(FetchWolInterfaceByIdResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/fetchWolInterfaceById", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) CreateTelnetInterface(ctx context.Context, in *CreateTelnetInterfaceRequest, opts ...grpc.CallOption) (*CreateTelnetInterfaceResponse, error) {
+	out := new(CreateTelnetInterfaceResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createTelnetInterface", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) EditTelnetInterface(ctx context.Context, in *EditTelnetInterfaceRequest, opts ...grpc.CallOption) (*EditTelnetInterfaceResponse, error) {
+	out := new(EditTelnetInterfaceResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editTelnetInterface", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) RemoveTelnetInterface(ctx context.Context, in *RemoveTelnetInterfaceRequest, opts ...grpc.CallOption) (*RemoveTelnetInterfaceResponse, error) {
+	out := new(RemoveTelnetInterfaceResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeTelnetInterface", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -324,27 +321,54 @@ func (c *wompattiClient) RemoveCommand(ctx context.Context, in *RemoveCommandReq
 	return out, nil
 }
 
-func (c *wompattiClient) CreateKeyValue(ctx context.Context, in *CreateKeyValueRequest, opts ...grpc.CallOption) (*CreateKeyValueResponse, error) {
-	out := new(CreateKeyValueResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createKeyValue", in, out, c.cc, opts...)
+func (c *wompattiClient) CreateKeijo(ctx context.Context, in *CreateKeijoRequest, opts ...grpc.CallOption) (*CreateKeijoResponse, error) {
+	out := new(CreateKeijoResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createKeijo", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) EditKeyValue(ctx context.Context, in *EditKeyValueRequest, opts ...grpc.CallOption) (*EditKeyValueResponse, error) {
-	out := new(EditKeyValueResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editKeyValue", in, out, c.cc, opts...)
+func (c *wompattiClient) EditKeijo(ctx context.Context, in *EditKeijoRequest, opts ...grpc.CallOption) (*EditKeijoResponse, error) {
+	out := new(EditKeijoResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editKeijo", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *wompattiClient) RemoveKeyValue(ctx context.Context, in *RemoveKeyValueRequest, opts ...grpc.CallOption) (*RemoveKeyValueResponse, error) {
-	out := new(RemoveKeyValueResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeKeyValue", in, out, c.cc, opts...)
+func (c *wompattiClient) RemoveKeijo(ctx context.Context, in *RemoveKeijoRequest, opts ...grpc.CallOption) (*RemoveKeijoResponse, error) {
+	out := new(RemoveKeijoResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeKeijo", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) CreateSeveri(ctx context.Context, in *CreateSeveriRequest, opts ...grpc.CallOption) (*CreateSeveriResponse, error) {
+	out := new(CreateSeveriResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createSeveri", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) EditSeveri(ctx context.Context, in *EditSeveriRequest, opts ...grpc.CallOption) (*EditSeveriResponse, error) {
+	out := new(EditSeveriResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editSeveri", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wompattiClient) RemoveSeveri(ctx context.Context, in *RemoveSeveriRequest, opts ...grpc.CallOption) (*RemoveSeveriResponse, error) {
+	out := new(RemoveSeveriResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeSeveri", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -378,63 +402,9 @@ func (c *wompattiClient) RemoveWolInterface(ctx context.Context, in *RemoveWolIn
 	return out, nil
 }
 
-func (c *wompattiClient) ExecuteWolInterface(ctx context.Context, in *ExecuteWolInterfaceRequest, opts ...grpc.CallOption) (*ExecuteWolInterfaceResponse, error) {
-	out := new(ExecuteWolInterfaceResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/executeWolInterface", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) CreateTelnetInterface(ctx context.Context, in *CreateTelnetInterfaceRequest, opts ...grpc.CallOption) (*CreateTelnetInterfaceResponse, error) {
-	out := new(CreateTelnetInterfaceResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createTelnetInterface", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) EditTelnetInterface(ctx context.Context, in *EditTelnetInterfaceRequest, opts ...grpc.CallOption) (*EditTelnetInterfaceResponse, error) {
-	out := new(EditTelnetInterfaceResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editTelnetInterface", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) RemoveTelnetInterface(ctx context.Context, in *RemoveTelnetInterfaceRequest, opts ...grpc.CallOption) (*RemoveTelnetInterfaceResponse, error) {
-	out := new(RemoveTelnetInterfaceResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeTelnetInterface", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) CreateSerialInterface(ctx context.Context, in *CreateSerialInterfaceRequest, opts ...grpc.CallOption) (*CreateSerialInterfaceResponse, error) {
-	out := new(CreateSerialInterfaceResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/createSerialInterface", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) EditSerialInterface(ctx context.Context, in *EditSerialInterfaceRequest, opts ...grpc.CallOption) (*EditSerialInterfaceResponse, error) {
-	out := new(EditSerialInterfaceResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/editSerialInterface", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *wompattiClient) RemoveSerialInterface(ctx context.Context, in *RemoveSerialInterfaceRequest, opts ...grpc.CallOption) (*RemoveSerialInterfaceResponse, error) {
-	out := new(RemoveSerialInterfaceResponse)
-	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/removeSerialInterface", in, out, c.cc, opts...)
+func (c *wompattiClient) WakeupWolInterface(ctx context.Context, in *WakeupWolInterfaceRequest, opts ...grpc.CallOption) (*WakeupWolInterfaceResponse, error) {
+	out := new(WakeupWolInterfaceResponse)
+	err := grpc.Invoke(ctx, "/WompattiService.Wompatti/wakeupWolInterface", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -444,26 +414,26 @@ func (c *wompattiClient) RemoveSerialInterface(ctx context.Context, in *RemoveSe
 // Server API for Wompatti service
 
 type WompattiServer interface {
-	// Queries
-	FetchComputers(context.Context, *FetchComputersRequest) (*ComputersConnection, error)
-	FetchComputerById(context.Context, *FetchComputerByIdRequest) (*FetchComputerByIdResponse, error)
-	FetchDevices(context.Context, *FetchDevicesRequest) (*DevicesConnection, error)
-	FetchDeviceById(context.Context, *FetchDeviceByIdRequest) (*FetchDeviceByIdResponse, error)
-	FetchDeviceInfoById(context.Context, *FetchDeviceInfoByIdRequest) (*FetchDeviceInfoByIdResponse, error)
-	FetchKeyValuesByDeviceInfoId(context.Context, *FetchKeyValuesByDeviceInfoIdRequest) (*FetchKeyValuesByDeviceInfoIdResponse, error)
-	FetchEthernetInterfaces(context.Context, *FetchEthernetInterfacesRequest) (*EthernetInterfacesConnection, error)
-	FetchWolInterfaceById(context.Context, *FetchWolInterfaceByIdRequest) (*FetchWolInterfaceByIdResponse, error)
-	FetchDeviceTypes(context.Context, *FetchDeviceTypesRequest) (*DeviceTypesConnection, error)
-	FetchDeviceTypeById(context.Context, *FetchDeviceTypeByIdRequest) (*FetchDeviceTypeByIdResponse, error)
-	FetchCommandsByDeviceTypeId(context.Context, *FetchCommandsByDeviceTypeIdRequest) (*FetchCommandsByDeviceTypeIdResponse, error)
-	FetchTelnetInterfaces(context.Context, *FetchTelnetInterfacesRequest) (*TelnetInterfacesConnection, error)
+	// Fetch
+	FetchTelnetInterfaces(context.Context, *FetchTelnetInterfacesRequest) (*FetchTelnetInterfacesResponse, error)
 	FetchTelnetInterfaceById(context.Context, *FetchTelnetInterfaceByIdRequest) (*FetchTelnetInterfaceByIdResponse, error)
-	FetchSerialInterfaces(context.Context, *FetchSerialInterfacesRequest) (*SerialInterfacesConnection, error)
-	FetchSerialInterfaceById(context.Context, *FetchSerialInterfaceByIdRequest) (*FetchSerialInterfaceByIdResponse, error)
-	// Mutations
-	CreateComputer(context.Context, *CreateComputerRequest) (*CreateComputerResponse, error)
-	EditComputer(context.Context, *EditComputerRequest) (*EditComputerResponse, error)
-	RemoveComputer(context.Context, *RemoveComputerRequest) (*RemoveComputerResponse, error)
+	FetchDevices(context.Context, *FetchDevicesRequest) (*FetchDevicesResponse, error)
+	FetchDeviceById(context.Context, *FetchDeviceByIdRequest) (*FetchDeviceByIdResponse, error)
+	FetchDeviceTypes(context.Context, *FetchDeviceTypesRequest) (*FetchDeviceTypesResponse, error)
+	FetchDeviceTypeById(context.Context, *FetchDeviceTypeByIdRequest) (*FetchDeviceTypeByIdResponse, error)
+	FetchCommands(context.Context, *FetchCommandsRequest) (*FetchCommandsResponse, error)
+	FetchCommandsByDeviceTypeId(context.Context, *FetchCommandsByDeviceTypeIdRequest) (*FetchCommandsByDeviceTypeIdResponse, error)
+	FetchCommandById(context.Context, *FetchCommandByIdRequest) (*FetchCommandByIdResponse, error)
+	FetchKeijos(context.Context, *FetchKeijosRequest) (*FetchKeijosResponse, error)
+	FetchKeijoById(context.Context, *FetchKeijoByIdRequest) (*FetchKeijoByIdResponse, error)
+	FetchSeveris(context.Context, *FetchSeverisRequest) (*FetchSeverisResponse, error)
+	FetchSeveriById(context.Context, *FetchSeveriByIdRequest) (*FetchSeveriByIdResponse, error)
+	FetchWolInterfaces(context.Context, *FetchWolInterfacesRequest) (*FetchWolInterfacesResponse, error)
+	FetchWolInterfaceById(context.Context, *FetchWolInterfaceByIdRequest) (*FetchWolInterfaceByIdResponse, error)
+	// Mutate
+	CreateTelnetInterface(context.Context, *CreateTelnetInterfaceRequest) (*CreateTelnetInterfaceResponse, error)
+	EditTelnetInterface(context.Context, *EditTelnetInterfaceRequest) (*EditTelnetInterfaceResponse, error)
+	RemoveTelnetInterface(context.Context, *RemoveTelnetInterfaceRequest) (*RemoveTelnetInterfaceResponse, error)
 	CreateDevice(context.Context, *CreateDeviceRequest) (*CreateDeviceResponse, error)
 	EditDevice(context.Context, *EditDeviceRequest) (*EditDeviceResponse, error)
 	RemoveDevice(context.Context, *RemoveDeviceRequest) (*RemoveDeviceResponse, error)
@@ -473,57 +443,54 @@ type WompattiServer interface {
 	CreateCommand(context.Context, *CreateCommandRequest) (*CreateCommandResponse, error)
 	EditCommand(context.Context, *EditCommandRequest) (*EditCommandReponse, error)
 	RemoveCommand(context.Context, *RemoveCommandRequest) (*RemoveCommandResponse, error)
-	CreateKeyValue(context.Context, *CreateKeyValueRequest) (*CreateKeyValueResponse, error)
-	EditKeyValue(context.Context, *EditKeyValueRequest) (*EditKeyValueResponse, error)
-	RemoveKeyValue(context.Context, *RemoveKeyValueRequest) (*RemoveKeyValueResponse, error)
+	CreateKeijo(context.Context, *CreateKeijoRequest) (*CreateKeijoResponse, error)
+	EditKeijo(context.Context, *EditKeijoRequest) (*EditKeijoResponse, error)
+	RemoveKeijo(context.Context, *RemoveKeijoRequest) (*RemoveKeijoResponse, error)
+	CreateSeveri(context.Context, *CreateSeveriRequest) (*CreateSeveriResponse, error)
+	EditSeveri(context.Context, *EditSeveriRequest) (*EditSeveriResponse, error)
+	RemoveSeveri(context.Context, *RemoveSeveriRequest) (*RemoveSeveriResponse, error)
 	CreateWolInterface(context.Context, *CreateWolInterfaceRequest) (*CreateWolInterfaceResponse, error)
 	EditWolInterface(context.Context, *EditWolInterfaceRequest) (*EditWolInterfaceResponse, error)
 	RemoveWolInterface(context.Context, *RemoveWolInterfaceRequest) (*RemoveWolInterfaceResponse, error)
-	ExecuteWolInterface(context.Context, *ExecuteWolInterfaceRequest) (*ExecuteWolInterfaceResponse, error)
-	CreateTelnetInterface(context.Context, *CreateTelnetInterfaceRequest) (*CreateTelnetInterfaceResponse, error)
-	EditTelnetInterface(context.Context, *EditTelnetInterfaceRequest) (*EditTelnetInterfaceResponse, error)
-	RemoveTelnetInterface(context.Context, *RemoveTelnetInterfaceRequest) (*RemoveTelnetInterfaceResponse, error)
-	CreateSerialInterface(context.Context, *CreateSerialInterfaceRequest) (*CreateSerialInterfaceResponse, error)
-	EditSerialInterface(context.Context, *EditSerialInterfaceRequest) (*EditSerialInterfaceResponse, error)
-	RemoveSerialInterface(context.Context, *RemoveSerialInterfaceRequest) (*RemoveSerialInterfaceResponse, error)
+	WakeupWolInterface(context.Context, *WakeupWolInterfaceRequest) (*WakeupWolInterfaceResponse, error)
 }
 
 func RegisterWompattiServer(s *grpc.Server, srv WompattiServer) {
 	s.RegisterService(&_Wompatti_serviceDesc, srv)
 }
 
-func _Wompatti_FetchComputers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchComputersRequest)
+func _Wompatti_FetchTelnetInterfaces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchTelnetInterfacesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).FetchComputers(ctx, in)
+		return srv.(WompattiServer).FetchTelnetInterfaces(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchComputers",
+		FullMethod: "/WompattiService.Wompatti/FetchTelnetInterfaces",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchComputers(ctx, req.(*FetchComputersRequest))
+		return srv.(WompattiServer).FetchTelnetInterfaces(ctx, req.(*FetchTelnetInterfacesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_FetchComputerById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchComputerByIdRequest)
+func _Wompatti_FetchTelnetInterfaceById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchTelnetInterfaceByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).FetchComputerById(ctx, in)
+		return srv.(WompattiServer).FetchTelnetInterfaceById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchComputerById",
+		FullMethod: "/WompattiService.Wompatti/FetchTelnetInterfaceById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchComputerById(ctx, req.(*FetchComputerByIdRequest))
+		return srv.(WompattiServer).FetchTelnetInterfaceById(ctx, req.(*FetchTelnetInterfaceByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -564,78 +531,6 @@ func _Wompatti_FetchDeviceById_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_FetchDeviceInfoById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchDeviceInfoByIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).FetchDeviceInfoById(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchDeviceInfoById",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchDeviceInfoById(ctx, req.(*FetchDeviceInfoByIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_FetchKeyValuesByDeviceInfoId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchKeyValuesByDeviceInfoIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).FetchKeyValuesByDeviceInfoId(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchKeyValuesByDeviceInfoId",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchKeyValuesByDeviceInfoId(ctx, req.(*FetchKeyValuesByDeviceInfoIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_FetchEthernetInterfaces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchEthernetInterfacesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).FetchEthernetInterfaces(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchEthernetInterfaces",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchEthernetInterfaces(ctx, req.(*FetchEthernetInterfacesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_FetchWolInterfaceById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchWolInterfaceByIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).FetchWolInterfaceById(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchWolInterfaceById",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchWolInterfaceById(ctx, req.(*FetchWolInterfaceByIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Wompatti_FetchDeviceTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FetchDeviceTypesRequest)
 	if err := dec(in); err != nil {
@@ -672,6 +567,24 @@ func _Wompatti_FetchDeviceTypeById_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wompatti_FetchCommands_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchCommandsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WompattiServer).FetchCommands(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WompattiService.Wompatti/FetchCommands",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WompattiServer).FetchCommands(ctx, req.(*FetchCommandsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wompatti_FetchCommandsByDeviceTypeId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FetchCommandsByDeviceTypeIdRequest)
 	if err := dec(in); err != nil {
@@ -690,128 +603,182 @@ func _Wompatti_FetchCommandsByDeviceTypeId_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_FetchTelnetInterfaces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchTelnetInterfacesRequest)
+func _Wompatti_FetchCommandById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchCommandByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).FetchTelnetInterfaces(ctx, in)
+		return srv.(WompattiServer).FetchCommandById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchTelnetInterfaces",
+		FullMethod: "/WompattiService.Wompatti/FetchCommandById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchTelnetInterfaces(ctx, req.(*FetchTelnetInterfacesRequest))
+		return srv.(WompattiServer).FetchCommandById(ctx, req.(*FetchCommandByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_FetchTelnetInterfaceById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchTelnetInterfaceByIdRequest)
+func _Wompatti_FetchKeijos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchKeijosRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).FetchTelnetInterfaceById(ctx, in)
+		return srv.(WompattiServer).FetchKeijos(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchTelnetInterfaceById",
+		FullMethod: "/WompattiService.Wompatti/FetchKeijos",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchTelnetInterfaceById(ctx, req.(*FetchTelnetInterfaceByIdRequest))
+		return srv.(WompattiServer).FetchKeijos(ctx, req.(*FetchKeijosRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_FetchSerialInterfaces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchSerialInterfacesRequest)
+func _Wompatti_FetchKeijoById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchKeijoByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).FetchSerialInterfaces(ctx, in)
+		return srv.(WompattiServer).FetchKeijoById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchSerialInterfaces",
+		FullMethod: "/WompattiService.Wompatti/FetchKeijoById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchSerialInterfaces(ctx, req.(*FetchSerialInterfacesRequest))
+		return srv.(WompattiServer).FetchKeijoById(ctx, req.(*FetchKeijoByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_FetchSerialInterfaceById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchSerialInterfaceByIdRequest)
+func _Wompatti_FetchSeveris_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchSeverisRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).FetchSerialInterfaceById(ctx, in)
+		return srv.(WompattiServer).FetchSeveris(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/FetchSerialInterfaceById",
+		FullMethod: "/WompattiService.Wompatti/FetchSeveris",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).FetchSerialInterfaceById(ctx, req.(*FetchSerialInterfaceByIdRequest))
+		return srv.(WompattiServer).FetchSeveris(ctx, req.(*FetchSeverisRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_CreateComputer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateComputerRequest)
+func _Wompatti_FetchSeveriById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchSeveriByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).CreateComputer(ctx, in)
+		return srv.(WompattiServer).FetchSeveriById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/CreateComputer",
+		FullMethod: "/WompattiService.Wompatti/FetchSeveriById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).CreateComputer(ctx, req.(*CreateComputerRequest))
+		return srv.(WompattiServer).FetchSeveriById(ctx, req.(*FetchSeveriByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_EditComputer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EditComputerRequest)
+func _Wompatti_FetchWolInterfaces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchWolInterfacesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).EditComputer(ctx, in)
+		return srv.(WompattiServer).FetchWolInterfaces(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/EditComputer",
+		FullMethod: "/WompattiService.Wompatti/FetchWolInterfaces",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).EditComputer(ctx, req.(*EditComputerRequest))
+		return srv.(WompattiServer).FetchWolInterfaces(ctx, req.(*FetchWolInterfacesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_RemoveComputer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveComputerRequest)
+func _Wompatti_FetchWolInterfaceById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchWolInterfaceByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).RemoveComputer(ctx, in)
+		return srv.(WompattiServer).FetchWolInterfaceById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/RemoveComputer",
+		FullMethod: "/WompattiService.Wompatti/FetchWolInterfaceById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).RemoveComputer(ctx, req.(*RemoveComputerRequest))
+		return srv.(WompattiServer).FetchWolInterfaceById(ctx, req.(*FetchWolInterfaceByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wompatti_CreateTelnetInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTelnetInterfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WompattiServer).CreateTelnetInterface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WompattiService.Wompatti/CreateTelnetInterface",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WompattiServer).CreateTelnetInterface(ctx, req.(*CreateTelnetInterfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wompatti_EditTelnetInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditTelnetInterfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WompattiServer).EditTelnetInterface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WompattiService.Wompatti/EditTelnetInterface",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WompattiServer).EditTelnetInterface(ctx, req.(*EditTelnetInterfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wompatti_RemoveTelnetInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveTelnetInterfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WompattiServer).RemoveTelnetInterface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WompattiService.Wompatti/RemoveTelnetInterface",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WompattiServer).RemoveTelnetInterface(ctx, req.(*RemoveTelnetInterfaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -978,56 +945,110 @@ func _Wompatti_RemoveCommand_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_CreateKeyValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateKeyValueRequest)
+func _Wompatti_CreateKeijo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateKeijoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).CreateKeyValue(ctx, in)
+		return srv.(WompattiServer).CreateKeijo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/CreateKeyValue",
+		FullMethod: "/WompattiService.Wompatti/CreateKeijo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).CreateKeyValue(ctx, req.(*CreateKeyValueRequest))
+		return srv.(WompattiServer).CreateKeijo(ctx, req.(*CreateKeijoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_EditKeyValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EditKeyValueRequest)
+func _Wompatti_EditKeijo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditKeijoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).EditKeyValue(ctx, in)
+		return srv.(WompattiServer).EditKeijo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/EditKeyValue",
+		FullMethod: "/WompattiService.Wompatti/EditKeijo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).EditKeyValue(ctx, req.(*EditKeyValueRequest))
+		return srv.(WompattiServer).EditKeijo(ctx, req.(*EditKeijoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_RemoveKeyValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveKeyValueRequest)
+func _Wompatti_RemoveKeijo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveKeijoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).RemoveKeyValue(ctx, in)
+		return srv.(WompattiServer).RemoveKeijo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/RemoveKeyValue",
+		FullMethod: "/WompattiService.Wompatti/RemoveKeijo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).RemoveKeyValue(ctx, req.(*RemoveKeyValueRequest))
+		return srv.(WompattiServer).RemoveKeijo(ctx, req.(*RemoveKeijoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wompatti_CreateSeveri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSeveriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WompattiServer).CreateSeveri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WompattiService.Wompatti/CreateSeveri",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WompattiServer).CreateSeveri(ctx, req.(*CreateSeveriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wompatti_EditSeveri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditSeveriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WompattiServer).EditSeveri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WompattiService.Wompatti/EditSeveri",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WompattiServer).EditSeveri(ctx, req.(*EditSeveriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wompatti_RemoveSeveri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveSeveriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WompattiServer).RemoveSeveri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WompattiService.Wompatti/RemoveSeveri",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WompattiServer).RemoveSeveri(ctx, req.(*RemoveSeveriRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1086,128 +1107,20 @@ func _Wompatti_RemoveWolInterface_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Wompatti_ExecuteWolInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExecuteWolInterfaceRequest)
+func _Wompatti_WakeupWolInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WakeupWolInterfaceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WompattiServer).ExecuteWolInterface(ctx, in)
+		return srv.(WompattiServer).WakeupWolInterface(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/ExecuteWolInterface",
+		FullMethod: "/WompattiService.Wompatti/WakeupWolInterface",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).ExecuteWolInterface(ctx, req.(*ExecuteWolInterfaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_CreateTelnetInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateTelnetInterfaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).CreateTelnetInterface(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/CreateTelnetInterface",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).CreateTelnetInterface(ctx, req.(*CreateTelnetInterfaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_EditTelnetInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EditTelnetInterfaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).EditTelnetInterface(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/EditTelnetInterface",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).EditTelnetInterface(ctx, req.(*EditTelnetInterfaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_RemoveTelnetInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveTelnetInterfaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).RemoveTelnetInterface(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/RemoveTelnetInterface",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).RemoveTelnetInterface(ctx, req.(*RemoveTelnetInterfaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_CreateSerialInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateSerialInterfaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).CreateSerialInterface(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/CreateSerialInterface",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).CreateSerialInterface(ctx, req.(*CreateSerialInterfaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_EditSerialInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EditSerialInterfaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).EditSerialInterface(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/EditSerialInterface",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).EditSerialInterface(ctx, req.(*EditSerialInterfaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wompatti_RemoveSerialInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveSerialInterfaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WompattiServer).RemoveSerialInterface(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/WompattiService.Wompatti/RemoveSerialInterface",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WompattiServer).RemoveSerialInterface(ctx, req.(*RemoveSerialInterfaceRequest))
+		return srv.(WompattiServer).WakeupWolInterface(ctx, req.(*WakeupWolInterfaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1217,12 +1130,12 @@ var _Wompatti_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*WompattiServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "fetchComputers",
-			Handler:    _Wompatti_FetchComputers_Handler,
+			MethodName: "fetchTelnetInterfaces",
+			Handler:    _Wompatti_FetchTelnetInterfaces_Handler,
 		},
 		{
-			MethodName: "fetchComputerById",
-			Handler:    _Wompatti_FetchComputerById_Handler,
+			MethodName: "fetchTelnetInterfaceById",
+			Handler:    _Wompatti_FetchTelnetInterfaceById_Handler,
 		},
 		{
 			MethodName: "fetchDevices",
@@ -1233,22 +1146,6 @@ var _Wompatti_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Wompatti_FetchDeviceById_Handler,
 		},
 		{
-			MethodName: "fetchDeviceInfoById",
-			Handler:    _Wompatti_FetchDeviceInfoById_Handler,
-		},
-		{
-			MethodName: "fetchKeyValuesByDeviceInfoId",
-			Handler:    _Wompatti_FetchKeyValuesByDeviceInfoId_Handler,
-		},
-		{
-			MethodName: "fetchEthernetInterfaces",
-			Handler:    _Wompatti_FetchEthernetInterfaces_Handler,
-		},
-		{
-			MethodName: "fetchWolInterfaceById",
-			Handler:    _Wompatti_FetchWolInterfaceById_Handler,
-		},
-		{
 			MethodName: "fetchDeviceTypes",
 			Handler:    _Wompatti_FetchDeviceTypes_Handler,
 		},
@@ -1257,36 +1154,52 @@ var _Wompatti_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Wompatti_FetchDeviceTypeById_Handler,
 		},
 		{
+			MethodName: "fetchCommands",
+			Handler:    _Wompatti_FetchCommands_Handler,
+		},
+		{
 			MethodName: "fetchCommandsByDeviceTypeId",
 			Handler:    _Wompatti_FetchCommandsByDeviceTypeId_Handler,
 		},
 		{
-			MethodName: "fetchTelnetInterfaces",
-			Handler:    _Wompatti_FetchTelnetInterfaces_Handler,
+			MethodName: "fetchCommandById",
+			Handler:    _Wompatti_FetchCommandById_Handler,
 		},
 		{
-			MethodName: "fetchTelnetInterfaceById",
-			Handler:    _Wompatti_FetchTelnetInterfaceById_Handler,
+			MethodName: "fetchKeijos",
+			Handler:    _Wompatti_FetchKeijos_Handler,
 		},
 		{
-			MethodName: "fetchSerialInterfaces",
-			Handler:    _Wompatti_FetchSerialInterfaces_Handler,
+			MethodName: "fetchKeijoById",
+			Handler:    _Wompatti_FetchKeijoById_Handler,
 		},
 		{
-			MethodName: "fetchSerialInterfaceById",
-			Handler:    _Wompatti_FetchSerialInterfaceById_Handler,
+			MethodName: "fetchSeveris",
+			Handler:    _Wompatti_FetchSeveris_Handler,
 		},
 		{
-			MethodName: "createComputer",
-			Handler:    _Wompatti_CreateComputer_Handler,
+			MethodName: "fetchSeveriById",
+			Handler:    _Wompatti_FetchSeveriById_Handler,
 		},
 		{
-			MethodName: "editComputer",
-			Handler:    _Wompatti_EditComputer_Handler,
+			MethodName: "fetchWolInterfaces",
+			Handler:    _Wompatti_FetchWolInterfaces_Handler,
 		},
 		{
-			MethodName: "removeComputer",
-			Handler:    _Wompatti_RemoveComputer_Handler,
+			MethodName: "fetchWolInterfaceById",
+			Handler:    _Wompatti_FetchWolInterfaceById_Handler,
+		},
+		{
+			MethodName: "createTelnetInterface",
+			Handler:    _Wompatti_CreateTelnetInterface_Handler,
+		},
+		{
+			MethodName: "editTelnetInterface",
+			Handler:    _Wompatti_EditTelnetInterface_Handler,
+		},
+		{
+			MethodName: "removeTelnetInterface",
+			Handler:    _Wompatti_RemoveTelnetInterface_Handler,
 		},
 		{
 			MethodName: "createDevice",
@@ -1325,16 +1238,28 @@ var _Wompatti_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Wompatti_RemoveCommand_Handler,
 		},
 		{
-			MethodName: "createKeyValue",
-			Handler:    _Wompatti_CreateKeyValue_Handler,
+			MethodName: "createKeijo",
+			Handler:    _Wompatti_CreateKeijo_Handler,
 		},
 		{
-			MethodName: "editKeyValue",
-			Handler:    _Wompatti_EditKeyValue_Handler,
+			MethodName: "editKeijo",
+			Handler:    _Wompatti_EditKeijo_Handler,
 		},
 		{
-			MethodName: "removeKeyValue",
-			Handler:    _Wompatti_RemoveKeyValue_Handler,
+			MethodName: "removeKeijo",
+			Handler:    _Wompatti_RemoveKeijo_Handler,
+		},
+		{
+			MethodName: "createSeveri",
+			Handler:    _Wompatti_CreateSeveri_Handler,
+		},
+		{
+			MethodName: "editSeveri",
+			Handler:    _Wompatti_EditSeveri_Handler,
+		},
+		{
+			MethodName: "removeSeveri",
+			Handler:    _Wompatti_RemoveSeveri_Handler,
 		},
 		{
 			MethodName: "createWolInterface",
@@ -1349,95 +1274,67 @@ var _Wompatti_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Wompatti_RemoveWolInterface_Handler,
 		},
 		{
-			MethodName: "executeWolInterface",
-			Handler:    _Wompatti_ExecuteWolInterface_Handler,
-		},
-		{
-			MethodName: "createTelnetInterface",
-			Handler:    _Wompatti_CreateTelnetInterface_Handler,
-		},
-		{
-			MethodName: "editTelnetInterface",
-			Handler:    _Wompatti_EditTelnetInterface_Handler,
-		},
-		{
-			MethodName: "removeTelnetInterface",
-			Handler:    _Wompatti_RemoveTelnetInterface_Handler,
-		},
-		{
-			MethodName: "createSerialInterface",
-			Handler:    _Wompatti_CreateSerialInterface_Handler,
-		},
-		{
-			MethodName: "editSerialInterface",
-			Handler:    _Wompatti_EditSerialInterface_Handler,
-		},
-		{
-			MethodName: "removeSerialInterface",
-			Handler:    _Wompatti_RemoveSerialInterface_Handler,
+			MethodName: "wakeupWolInterface",
+			Handler:    _Wompatti_WakeupWolInterface_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "wompatti_service.proto",
 }
 
-func init() { proto.RegisterFile("wompatti_service.proto", fileDescriptor10) }
+func init() { proto.RegisterFile("wompatti_service.proto", fileDescriptor14) }
 
-var fileDescriptor10 = []byte{
-	// 874 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x98, 0xdb, 0x4e, 0xdc, 0x3a,
-	0x14, 0x86, 0xe1, 0x66, 0x6b, 0xcb, 0xb0, 0x39, 0x18, 0xc1, 0x46, 0xb4, 0x57, 0xc3, 0xf9, 0x34,
-	0x3d, 0x40, 0x5f, 0x80, 0x29, 0x95, 0x46, 0xbd, 0x0b, 0xa8, 0xa8, 0x95, 0x2a, 0x48, 0x13, 0x8f,
-	0x88, 0x34, 0x93, 0x4c, 0x13, 0x0f, 0x30, 0xea, 0x55, 0x6f, 0x2b, 0xf5, 0xcd, 0xfa, 0x50, 0x55,
-	0x9c, 0xd8, 0xe3, 0xc3, 0x5a, 0x71, 0xb8, 0x9c, 0xf8, 0xcb, 0xfa, 0xfd, 0xff, 0xb6, 0x57, 0x0c,
-	0x64, 0xe3, 0x31, 0x1b, 0x8d, 0x43, 0xce, 0x93, 0xdb, 0x82, 0xe5, 0x0f, 0x49, 0xc4, 0xba, 0xe3,
-	0x3c, 0xe3, 0x19, 0x5d, 0xbe, 0xa9, 0x9f, 0x5f, 0x55, 0x8f, 0xb7, 0x96, 0xa2, 0x6c, 0x34, 0x9e,
-	0x70, 0x96, 0x57, 0xc0, 0xd6, 0x6a, 0xcc, 0xca, 0xe7, 0xb7, 0x49, 0x3a, 0xc8, 0xea, 0x47, 0x0b,
-	0x61, 0xce, 0xf9, 0xa4, 0xfe, 0xb1, 0x58, 0x8d, 0xd7, 0xbf, 0x36, 0x19, 0xbf, 0x67, 0x79, 0xca,
-	0xf8, 0x6d, 0x92, 0x72, 0x96, 0x0f, 0x42, 0x35, 0xb2, 0xf6, 0x98, 0x0d, 0x9d, 0x87, 0xb2, 0x38,
-	0x9f, 0x8e, 0xe5, 0xa3, 0x8d, 0x82, 0xe5, 0x49, 0xe8, 0xa2, 0x1b, 0x9c, 0x0d, 0x81, 0xba, 0x6f,
-	0xff, 0x74, 0xc8, 0xbf, 0xd2, 0x03, 0xbd, 0x23, 0x4b, 0x03, 0xc6, 0xa3, 0xfb, 0x5e, 0xed, 0xa1,
-	0xa0, 0x7b, 0x5d, 0xcb, 0x60, 0xf7, 0x83, 0x01, 0x04, 0xec, 0xfb, 0x84, 0x15, 0x7c, 0x6b, 0xc7,
-	0xe1, 0x14, 0xd2, 0xcb, 0xd2, 0x94, 0x45, 0x3c, 0xc9, 0xd2, 0xce, 0x1c, 0x1d, 0x92, 0x55, 0x43,
-	0xe1, 0x62, 0xda, 0x8f, 0xe9, 0x61, 0xb3, 0x48, 0xc9, 0x48, 0x9d, 0xa3, 0x36, 0x68, 0x31, 0xce,
-	0xd2, 0x82, 0x75, 0xe6, 0xe8, 0x17, 0xb2, 0x28, 0xd4, 0xde, 0x8b, 0x98, 0x0a, 0xba, 0x03, 0xbf,
-	0x5d, 0x0f, 0x4b, 0x8d, 0x8e, 0x43, 0xd5, 0x80, 0xe1, 0x64, 0x40, 0x96, 0xb5, 0xda, 0xc2, 0xc7,
-	0x7e, 0x53, 0x79, 0xdd, 0xc5, 0x81, 0x1f, 0x54, 0x1e, 0x72, 0xb2, 0xa6, 0xe9, 0xf4, 0xd3, 0x41,
-	0x26, 0xb4, 0x8e, 0x9b, 0x4a, 0x48, 0x4a, 0xea, 0x9d, 0xb4, 0x83, 0x95, 0xe6, 0xef, 0x79, 0xf2,
-	0x52, 0x88, 0x7e, 0x64, 0xd3, 0x4f, 0xe1, 0x70, 0xc2, 0x8a, 0x8b, 0xe9, 0x0c, 0xee, 0xc7, 0xf4,
-	0x1c, 0x2e, 0x88, 0xe0, 0x72, 0x1a, 0xef, 0x9e, 0xf9, 0x96, 0x9a, 0xcf, 0x0f, 0xf2, 0xbf, 0x98,
-	0xce, 0x65, 0x7d, 0x3a, 0xfa, 0x72, 0x13, 0x17, 0xf4, 0x15, 0x5c, 0xd3, 0x25, 0xe5, 0x24, 0x4e,
-	0x9d, 0x17, 0x5c, 0xd6, 0x58, 0xe8, 0x27, 0xb2, 0x2e, 0xc4, 0x6f, 0xb2, 0xa1, 0x22, 0xc4, 0x12,
-	0x9c, 0xc2, 0xd2, 0x36, 0x27, 0x85, 0xbb, 0x6d, 0x71, 0x65, 0x7b, 0x40, 0x56, 0xb4, 0xa5, 0xbf,
-	0x9e, 0x8e, 0x59, 0x41, 0x1b, 0xb7, 0x8e, 0x40, 0xa4, 0xde, 0x1e, 0xb2, 0x8d, 0x05, 0x64, 0x38,
-	0x34, 0xb7, 0x58, 0x39, 0xee, 0xdf, 0x62, 0x92, 0x6a, 0xb5, 0xc5, 0x66, 0xb0, 0xf2, 0xf6, 0x6b,
-	0x9e, 0xbc, 0x90, 0x9d, 0x60, 0x14, 0xa6, 0xb1, 0x5a, 0xfc, 0x92, 0xed, 0xc7, 0xf4, 0x0c, 0x3d,
-	0xe8, 0x00, 0x2d, 0x27, 0x71, 0xfe, 0xbc, 0x97, 0xd4, 0x64, 0x26, 0xf5, 0x12, 0x5f, 0x8b, 0x1e,
-	0xa9, 0xed, 0x2e, 0x64, 0x89, 0x6d, 0x4e, 0xea, 0xbb, 0x89, 0xd9, 0xa4, 0x91, 0xfb, 0xcf, 0x79,
-	0xb2, 0x09, 0xe9, 0x8a, 0xf4, 0x5f, 0xb7, 0x92, 0xd6, 0x97, 0xe0, 0xcd, 0x33, 0xde, 0x70, 0xac,
-	0x5f, 0x89, 0xcf, 0x86, 0xdf, 0xba, 0xcd, 0xe1, 0xd6, 0x6d, 0x12, 0xb6, 0x6e, 0x51, 0x4d, 0xd6,
-	0x01, 0xd4, 0x63, 0x1d, 0x7c, 0x43, 0x59, 0x8f, 0xc8, 0x52, 0x94, 0xb3, 0x90, 0x33, 0xf9, 0xf5,
-	0x00, 0xbe, 0x76, 0x3d, 0x03, 0x90, 0x72, 0xfb, 0x5e, 0x4e, 0x89, 0x7c, 0x25, 0x8b, 0x2c, 0x4e,
-	0xb8, 0x92, 0x70, 0x3f, 0x41, 0x97, 0xda, 0xb0, 0x14, 0xd8, 0xf5, 0x50, 0xba, 0x87, 0x9c, 0x8d,
-	0xb2, 0x87, 0x26, 0x0f, 0x81, 0x01, 0xe0, 0x1e, 0x6c, 0x4e, 0xf7, 0x50, 0x05, 0x55, 0x1d, 0x1f,
-	0xc0, 0x43, 0x4f, 0x1b, 0xc6, 0x3d, 0x98, 0x94, 0x2a, 0x7f, 0x43, 0x48, 0x19, 0x51, 0x5d, 0xbc,
-	0x03, 0x5a, 0x37, 0x4b, 0x6f, 0x37, 0x32, 0xfa, 0xbc, 0xab, 0x70, 0xd0, 0x79, 0x07, 0xda, 0x30,
-	0x3e, 0x6f, 0x93, 0x52, 0xe5, 0x13, 0xb2, 0xa2, 0xc7, 0x52, 0x76, 0x15, 0xa0, 0x3d, 0xf7, 0x2c,
-	0x44, 0xca, 0x1c, 0xb6, 0x20, 0xf5, 0x65, 0x9e, 0x45, 0x24, 0x84, 0xf6, 0x1a, 0x22, 0xd0, 0x65,
-	0xf6, 0xbd, 0x9c, 0xee, 0x47, 0x8f, 0x0b, 0xf1, 0x13, 0x58, 0x08, 0xee, 0xc7, 0x25, 0x95, 0xd4,
-	0x1d, 0xf9, 0x4f, 0x1d, 0xbd, 0xb2, 0x35, 0xd3, 0x5d, 0xfc, 0x44, 0x95, 0xe3, 0xf8, 0x37, 0xcd,
-	0xc2, 0x94, 0xc2, 0x67, 0xb2, 0x50, 0x9f, 0x3b, 0x51, 0x7f, 0x1b, 0x3b, 0x50, 0x7a, 0x75, 0x0f,
-	0xa4, 0x4d, 0x5e, 0x9d, 0x39, 0x64, 0xf2, 0x81, 0x3e, 0x8e, 0x4f, 0xde, 0xc2, 0xdc, 0xce, 0x24,
-	0xaf, 0x46, 0x68, 0x67, 0x92, 0x80, 0xaf, 0x33, 0xcd, 0x38, 0xbb, 0x33, 0x29, 0x09, 0xb8, 0x33,
-	0xd9, 0x02, 0xbb, 0x1e, 0xca, 0xed, 0x4c, 0x0d, 0x1e, 0x02, 0x03, 0xf0, 0x75, 0x26, 0x40, 0x24,
-	0x23, 0xb4, 0x0a, 0x4a, 0xbf, 0x45, 0xd1, 0x23, 0x24, 0x04, 0x1d, 0xc2, 0xbf, 0x5b, 0x10, 0xab,
-	0x9f, 0x91, 0x32, 0x34, 0x43, 0xee, 0x00, 0x8c, 0x04, 0x12, 0x3b, 0x6c, 0x41, 0xea, 0xde, 0xaa,
-	0x00, 0x3d, 0xde, 0x02, 0x07, 0xc2, 0xbd, 0x41, 0xac, 0xfe, 0x97, 0x06, 0x7b, 0x62, 0xd1, 0xc4,
-	0x4a, 0xd3, 0xad, 0x72, 0xe9, 0x52, 0xf8, 0x35, 0x10, 0x84, 0x95, 0xe6, 0x13, 0x59, 0xaf, 0x16,
-	0xd0, 0xba, 0xa5, 0x00, 0xd7, 0x8f, 0x1e, 0xc4, 0xe1, 0x97, 0x6b, 0x04, 0x37, 0xdc, 0xc6, 0x09,
-	0xb7, 0x75, 0x8f, 0xc1, 0x25, 0x42, 0x54, 0x4f, 0xda, 0xc1, 0xba, 0xdb, 0x6a, 0x49, 0xfd, 0x6e,
-	0x03, 0x88, 0xc3, 0xdd, 0x22, 0xb8, 0x9b, 0xb3, 0x75, 0x25, 0x42, 0x73, 0xb6, 0x38, 0x5f, 0xce,
-	0x0e, 0x6e, 0xe7, 0x6c, 0xeb, 0xc2, 0x39, 0x23, 0xaa, 0x27, 0xed, 0x60, 0x37, 0x67, 0xbf, 0xdb,
-	0x00, 0xe2, 0x7c, 0x39, 0xa3, 0xca, 0xdf, 0xfe, 0x11, 0xff, 0x55, 0x39, 0xfb, 0x1b, 0x00, 0x00,
-	0xff, 0xff, 0x19, 0x13, 0x3c, 0x64, 0x30, 0x12, 0x00, 0x00,
+var fileDescriptor14 = []byte{
+	// 812 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x97, 0xdd, 0x6e, 0xd3, 0x4e,
+	0x10, 0xc5, 0xff, 0xbd, 0xf9, 0x0b, 0xb6, 0x5f, 0xb0, 0x15, 0x55, 0x15, 0x24, 0x24, 0xda, 0xd2,
+	0x0f, 0x4a, 0x23, 0xa0, 0x3c, 0x41, 0x03, 0x48, 0x15, 0x77, 0x6e, 0xa5, 0x08, 0x24, 0x14, 0x4c,
+	0x32, 0x51, 0x4d, 0x93, 0xd8, 0xd8, 0x9b, 0x84, 0x5c, 0x72, 0xcb, 0x0b, 0xf1, 0x7a, 0xc8, 0xbb,
+	0xde, 0xf5, 0xd8, 0xbb, 0xe3, 0x75, 0x2f, 0xe3, 0xf9, 0xf9, 0x9c, 0x99, 0x53, 0xef, 0xac, 0xca,
+	0x76, 0x97, 0xf1, 0x34, 0x09, 0x85, 0x88, 0x06, 0x19, 0xa4, 0x8b, 0x68, 0x08, 0xdd, 0x24, 0x8d,
+	0x45, 0xcc, 0xb7, 0xfb, 0xc5, 0xf3, 0x6b, 0xf5, 0xb8, 0xb3, 0x35, 0x8c, 0xa7, 0xc9, 0x5c, 0x40,
+	0xaa, 0x80, 0xce, 0xe3, 0x11, 0xe4, 0xcf, 0x07, 0xd1, 0x6c, 0x1c, 0x17, 0x8f, 0xb6, 0xef, 0x60,
+	0x35, 0x58, 0x84, 0x93, 0x79, 0x21, 0xd2, 0x59, 0x0f, 0x53, 0x21, 0xe6, 0xc5, 0x8f, 0x0d, 0xf5,
+	0x42, 0xf1, 0x6b, 0x0f, 0xc4, 0x2d, 0xa4, 0x33, 0x10, 0x83, 0x68, 0x26, 0x20, 0x1d, 0x87, 0xa6,
+	0xb2, 0xb3, 0x8c, 0x27, 0xd6, 0x43, 0xed, 0x26, 0x56, 0x89, 0x7e, 0xb4, 0x9b, 0x41, 0x1a, 0x85,
+	0x36, 0xba, 0x2b, 0x60, 0xe2, 0xd2, 0xdd, 0x1c, 0xc6, 0xd3, 0x69, 0x38, 0x1b, 0xe9, 0xde, 0xee,
+	0x20, 0xfa, 0xa1, 0x3b, 0xdf, 0xc8, 0x60, 0x01, 0x69, 0xa4, 0x7e, 0xbd, 0xfd, 0xfb, 0x8c, 0x3d,
+	0xd0, 0xe3, 0xf3, 0x5f, 0xec, 0xc9, 0x18, 0xc4, 0xf0, 0xf6, 0x46, 0xaa, 0x5e, 0x69, 0xd1, 0x8c,
+	0x9f, 0x77, 0x6b, 0x11, 0x75, 0x3f, 0xba, 0xb8, 0x00, 0x7e, 0xce, 0x21, 0x13, 0x9d, 0x6e, 0x5b,
+	0x3c, 0x4b, 0xe2, 0x59, 0x06, 0xfb, 0xff, 0xf1, 0xdf, 0x6b, 0x6c, 0xcf, 0x65, 0x7d, 0xb9, 0xba,
+	0x1a, 0xf1, 0xd7, 0xad, 0xe4, 0x72, 0x54, 0x37, 0xf0, 0xe6, 0x1e, 0x6f, 0x98, 0x1e, 0xbe, 0xb2,
+	0x0d, 0xd9, 0xc2, 0x7b, 0x19, 0x7f, 0xc6, 0x0f, 0xdd, 0x22, 0x45, 0x59, 0x5b, 0xbd, 0xf0, 0x50,
+	0x46, 0x7e, 0xcc, 0xb6, 0x91, 0xbc, 0x1c, 0xec, 0xb8, 0xe9, 0x5d, 0x3c, 0xcf, 0x89, 0x1f, 0x34,
+	0x3e, 0x11, 0x7b, 0x84, 0x7c, 0x6e, 0x56, 0x09, 0x64, 0xbc, 0xf1, 0x7d, 0x89, 0x68, 0xa7, 0xd3,
+	0x16, 0xa4, 0xb1, 0x4a, 0xd9, 0x4e, 0xcd, 0x4a, 0x8e, 0x75, 0xe6, 0xd3, 0xc0, 0xa3, 0xbd, 0x6a,
+	0x07, 0x1b, 0xcf, 0x6f, 0x6c, 0x53, 0x7a, 0xf6, 0xd4, 0x17, 0x9e, 0x71, 0xe2, 0x0f, 0xa0, 0xeb,
+	0xda, 0xe7, 0xc8, 0x87, 0x19, 0x87, 0x3f, 0x6b, 0xec, 0x69, 0xc5, 0xe2, 0x72, 0x55, 0x76, 0x73,
+	0x35, 0xe2, 0x17, 0xcd, 0x4a, 0x55, 0x5a, 0xdb, 0xbf, 0xbb, 0xdf, 0x4b, 0xd6, 0x5f, 0xb3, 0x00,
+	0x65, 0xbe, 0x27, 0x8d, 0x5a, 0x38, 0xdc, 0xd3, 0x16, 0xa4, 0xb1, 0xfa, 0xc2, 0xd6, 0xa5, 0xd5,
+	0xa7, 0x7c, 0x59, 0x64, 0xfc, 0xc0, 0xfd, 0xae, 0xaa, 0x6a, 0x83, 0xc3, 0x66, 0xc8, 0x68, 0x0f,
+	0xd9, 0x56, 0xa9, 0x2d, 0x87, 0x38, 0x6a, 0x78, 0x13, 0x8f, 0x70, 0xec, 0xe5, 0xac, 0x03, 0x7c,
+	0x2d, 0x17, 0x1c, 0x79, 0x80, 0x8b, 0xb2, 0xe7, 0x00, 0x1b, 0xca, 0x3a, 0xc0, 0xaa, 0xd2, 0x74,
+	0x80, 0x4b, 0xc2, 0x73, 0x80, 0x31, 0x68, 0x7c, 0x62, 0xc6, 0xa5, 0x4f, 0x3f, 0x9e, 0xa0, 0x15,
+	0xfc, 0xd2, 0xad, 0x50, 0x81, 0xb4, 0xdb, 0x59, 0x2b, 0xd6, 0x18, 0xea, 0xb5, 0x8f, 0xeb, 0x72,
+	0xbc, 0x73, 0xbf, 0x0e, 0x1e, 0xb2, 0xdb, 0x16, 0xc7, 0xce, 0xc3, 0x14, 0x42, 0x01, 0xb5, 0xcd,
+	0xec, 0x70, 0xee, 0xb9, 0x38, 0xda, 0x99, 0xc0, 0xf1, 0xea, 0x82, 0x51, 0x24, 0xea, 0xbe, 0x76,
+	0x72, 0x1f, 0x6c, 0x8a, 0x5e, 0x5d, 0x4e, 0x18, 0x4f, 0x9b, 0xc2, 0x34, 0x5e, 0xb4, 0x98, 0x36,
+	0x70, 0x71, 0xf4, 0xb4, 0x04, 0x8e, 0x4f, 0x86, 0xca, 0x59, 0x6d, 0x19, 0xc7, 0xc9, 0xe8, 0xa1,
+	0x32, 0x7d, 0x32, 0xaa, 0x94, 0x91, 0xef, 0x33, 0x96, 0x87, 0x59, 0x88, 0xef, 0x3b, 0x63, 0xa9,
+	0x4a, 0x1f, 0x34, 0x32, 0xb8, 0x6f, 0x95, 0x18, 0xd9, 0x77, 0x80, 0xca, 0x74, 0xdf, 0x55, 0x0a,
+	0x2f, 0x57, 0x1c, 0x4b, 0xbe, 0x7c, 0x1d, 0xcb, 0xb5, 0x57, 0x43, 0xe8, 0xe5, 0x6a, 0x93, 0x78,
+	0x01, 0x96, 0x11, 0x49, 0xa3, 0xa3, 0x86, 0x08, 0xb0, 0xcd, 0xb1, 0x97, 0xc3, 0xf3, 0xe0, 0xb8,
+	0x88, 0x79, 0x82, 0x1a, 0x42, 0xcf, 0x63, 0x93, 0xf8, 0x1a, 0x56, 0xd1, 0x15, 0x77, 0x09, 0xa7,
+	0x3e, 0x96, 0xa2, 0x4e, 0x5f, 0xc3, 0x35, 0xcc, 0x38, 0x7c, 0x66, 0xeb, 0x79, 0x62, 0x5a, 0xdf,
+	0xfd, 0xc5, 0xd4, 0xd4, 0x3d, 0x10, 0x6a, 0x5e, 0xe5, 0x44, 0x37, 0x1f, 0xe0, 0x3a, 0xdd, 0x7c,
+	0x0d, 0xc3, 0x77, 0xa9, 0x8a, 0x47, 0xde, 0x53, 0x8e, 0xe6, 0x7b, 0x65, 0x95, 0xbe, 0x4b, 0x2b,
+	0x90, 0xd1, 0xbe, 0x61, 0x0f, 0xf3, 0x60, 0x94, 0xf2, 0x73, 0xe7, 0xc4, 0x15, 0xdd, 0xfd, 0x26,
+	0x04, 0x77, 0xac, 0x32, 0xa1, 0x3a, 0x0e, 0xca, 0x2a, 0xdd, 0x71, 0x05, 0xb2, 0xd7, 0x8f, 0xba,
+	0xef, 0xc8, 0xf5, 0xa3, 0xca, 0xbe, 0xf5, 0xa3, 0xa9, 0xfa, 0xfa, 0x29, 0xc4, 0xdd, 0xe3, 0x56,
+	0xa5, 0x0f, 0x1a, 0x19, 0x7b, 0xfd, 0x90, 0x7d, 0x07, 0xa8, 0xec, 0x5b, 0x3f, 0x96, 0x7c, 0xcc,
+	0xb8, 0x8a, 0x05, 0xdf, 0x90, 0x8e, 0x8b, 0xbe, 0x67, 0x41, 0xf4, 0x45, 0xef, 0x62, 0xf1, 0x7e,
+	0xc8, 0x83, 0xaa, 0xd8, 0x9d, 0x38, 0xa3, 0x70, 0x99, 0x9d, 0xb6, 0x20, 0xf1, 0x6c, 0x2a, 0x3a,
+	0xcf, 0x6c, 0x81, 0x05, 0xd1, 0xb3, 0xb9, 0x58, 0x6c, 0xb8, 0x0c, 0xef, 0x60, 0x9e, 0x78, 0x0c,
+	0xfb, 0x16, 0x44, 0x1b, 0xba, 0x58, 0x6d, 0xf8, 0xfd, 0x7f, 0xf9, 0x0f, 0xf4, 0xc5, 0xbf, 0x00,
+	0x00, 0x00, 0xff, 0xff, 0x0a, 0x83, 0x34, 0x08, 0x56, 0x10, 0x00, 0x00,
 }

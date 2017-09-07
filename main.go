@@ -1,29 +1,22 @@
 package main
 
-import "github.com/koodinikkarit/wompatti/wompatti"
+import (
+	"github.com/koodinikkarit/wompatti/context"
+	"github.com/koodinikkarit/wompatti/wompatti_service_server"
+)
 
 func main() {
-	// context := wompatti.CreateContext(
-	// 	"jaska",
-	// 	"asdf321",
-	// 	"localhost",
-	// 	"3306",
-	// 	"wompatti",
-	// 	"5052",
-	// )
-
-	wompatti.CreateWompattiServer(
+	contextGenerator := WompattiContext.NewContextGenerator(
 		"jaska",
 		"asdf321",
 		"localhost",
 		"3306",
 		"wompatti",
-		"5052",
-		"3112",
+		true,
 	)
 
-	for {
-	}
-
-	// context.Start()
+	WompattiServiceServer.NewWompattiService(
+		contextGenerator.NewContext,
+		"3112",
+	)
 }

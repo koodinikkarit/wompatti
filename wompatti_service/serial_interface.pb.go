@@ -33,7 +33,7 @@ func (x CreateSerialInterfaceResponse_State) String() string {
 	return proto.EnumName(CreateSerialInterfaceResponse_State_name, int32(x))
 }
 func (CreateSerialInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor7, []int{7, 0}
+	return fileDescriptor10, []int{7, 0}
 }
 
 type EditSerialInterfaceResponse_State int32
@@ -56,7 +56,7 @@ func (x EditSerialInterfaceResponse_State) String() string {
 	return proto.EnumName(EditSerialInterfaceResponse_State_name, int32(x))
 }
 func (EditSerialInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor7, []int{9, 0}
+	return fileDescriptor10, []int{9, 0}
 }
 
 type RemoveSerialInterfaceResponse_State int32
@@ -79,7 +79,7 @@ func (x RemoveSerialInterfaceResponse_State) String() string {
 	return proto.EnumName(RemoveSerialInterfaceResponse_State_name, int32(x))
 }
 func (RemoveSerialInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor7, []int{11, 0}
+	return fileDescriptor10, []int{11, 0}
 }
 
 type SerialInterface struct {
@@ -90,7 +90,7 @@ type SerialInterface struct {
 func (m *SerialInterface) Reset()                    { *m = SerialInterface{} }
 func (m *SerialInterface) String() string            { return proto.CompactTextString(m) }
 func (*SerialInterface) ProtoMessage()               {}
-func (*SerialInterface) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{0} }
+func (*SerialInterface) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{0} }
 
 func (m *SerialInterface) GetId() uint32 {
 	if m != nil {
@@ -114,7 +114,7 @@ type SerialInterfacesEdge struct {
 func (m *SerialInterfacesEdge) Reset()                    { *m = SerialInterfacesEdge{} }
 func (m *SerialInterfacesEdge) String() string            { return proto.CompactTextString(m) }
 func (*SerialInterfacesEdge) ProtoMessage()               {}
-func (*SerialInterfacesEdge) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{1} }
+func (*SerialInterfacesEdge) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{1} }
 
 func (m *SerialInterfacesEdge) GetNode() *SerialInterface {
 	if m != nil {
@@ -139,7 +139,7 @@ type SerialInterfacesConnection struct {
 func (m *SerialInterfacesConnection) Reset()                    { *m = SerialInterfacesConnection{} }
 func (m *SerialInterfacesConnection) String() string            { return proto.CompactTextString(m) }
 func (*SerialInterfacesConnection) ProtoMessage()               {}
-func (*SerialInterfacesConnection) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{2} }
+func (*SerialInterfacesConnection) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{2} }
 
 func (m *SerialInterfacesConnection) GetPageInfo() *PageInfo {
 	if m != nil {
@@ -172,7 +172,7 @@ type FetchSerialInterfacesRequest struct {
 func (m *FetchSerialInterfacesRequest) Reset()                    { *m = FetchSerialInterfacesRequest{} }
 func (m *FetchSerialInterfacesRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchSerialInterfacesRequest) ProtoMessage()               {}
-func (*FetchSerialInterfacesRequest) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{3} }
+func (*FetchSerialInterfacesRequest) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{3} }
 
 func (m *FetchSerialInterfacesRequest) GetAfter() uint32 {
 	if m != nil {
@@ -206,10 +206,12 @@ type FetchSerialInterfaceByIdRequest struct {
 	SerialInterfaceIdt []uint32 `protobuf:"varint,1,rep,packed,name=serialInterfaceIdt" json:"serialInterfaceIdt,omitempty"`
 }
 
-func (m *FetchSerialInterfaceByIdRequest) Reset()                    { *m = FetchSerialInterfaceByIdRequest{} }
-func (m *FetchSerialInterfaceByIdRequest) String() string            { return proto.CompactTextString(m) }
-func (*FetchSerialInterfaceByIdRequest) ProtoMessage()               {}
-func (*FetchSerialInterfaceByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{4} }
+func (m *FetchSerialInterfaceByIdRequest) Reset()         { *m = FetchSerialInterfaceByIdRequest{} }
+func (m *FetchSerialInterfaceByIdRequest) String() string { return proto.CompactTextString(m) }
+func (*FetchSerialInterfaceByIdRequest) ProtoMessage()    {}
+func (*FetchSerialInterfaceByIdRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor10, []int{4}
+}
 
 func (m *FetchSerialInterfaceByIdRequest) GetSerialInterfaceIdt() []uint32 {
 	if m != nil {
@@ -226,7 +228,7 @@ func (m *FetchSerialInterfaceByIdResponse) Reset()         { *m = FetchSerialInt
 func (m *FetchSerialInterfaceByIdResponse) String() string { return proto.CompactTextString(m) }
 func (*FetchSerialInterfaceByIdResponse) ProtoMessage()    {}
 func (*FetchSerialInterfaceByIdResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor7, []int{5}
+	return fileDescriptor10, []int{5}
 }
 
 func (m *FetchSerialInterfaceByIdResponse) GetSerialInterfaces() []*SerialInterface {
@@ -243,7 +245,7 @@ type CreateSerialInterfaceRequest struct {
 func (m *CreateSerialInterfaceRequest) Reset()                    { *m = CreateSerialInterfaceRequest{} }
 func (m *CreateSerialInterfaceRequest) String() string            { return proto.CompactTextString(m) }
 func (*CreateSerialInterfaceRequest) ProtoMessage()               {}
-func (*CreateSerialInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{6} }
+func (*CreateSerialInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{6} }
 
 func (m *CreateSerialInterfaceRequest) GetSerialPortId() uint32 {
 	if m != nil {
@@ -260,7 +262,7 @@ type CreateSerialInterfaceResponse struct {
 func (m *CreateSerialInterfaceResponse) Reset()                    { *m = CreateSerialInterfaceResponse{} }
 func (m *CreateSerialInterfaceResponse) String() string            { return proto.CompactTextString(m) }
 func (*CreateSerialInterfaceResponse) ProtoMessage()               {}
-func (*CreateSerialInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{7} }
+func (*CreateSerialInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{7} }
 
 func (m *CreateSerialInterfaceResponse) GetState() CreateSerialInterfaceResponse_State {
 	if m != nil {
@@ -284,7 +286,7 @@ type EditSerialInterfaceRequest struct {
 func (m *EditSerialInterfaceRequest) Reset()                    { *m = EditSerialInterfaceRequest{} }
 func (m *EditSerialInterfaceRequest) String() string            { return proto.CompactTextString(m) }
 func (*EditSerialInterfaceRequest) ProtoMessage()               {}
-func (*EditSerialInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{8} }
+func (*EditSerialInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{8} }
 
 func (m *EditSerialInterfaceRequest) GetSerialInterfaceId() uint32 {
 	if m != nil {
@@ -308,7 +310,7 @@ type EditSerialInterfaceResponse struct {
 func (m *EditSerialInterfaceResponse) Reset()                    { *m = EditSerialInterfaceResponse{} }
 func (m *EditSerialInterfaceResponse) String() string            { return proto.CompactTextString(m) }
 func (*EditSerialInterfaceResponse) ProtoMessage()               {}
-func (*EditSerialInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{9} }
+func (*EditSerialInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{9} }
 
 func (m *EditSerialInterfaceResponse) GetState() EditSerialInterfaceResponse_State {
 	if m != nil {
@@ -331,7 +333,7 @@ type RemoveSerialInterfaceRequest struct {
 func (m *RemoveSerialInterfaceRequest) Reset()                    { *m = RemoveSerialInterfaceRequest{} }
 func (m *RemoveSerialInterfaceRequest) String() string            { return proto.CompactTextString(m) }
 func (*RemoveSerialInterfaceRequest) ProtoMessage()               {}
-func (*RemoveSerialInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{10} }
+func (*RemoveSerialInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{10} }
 
 func (m *RemoveSerialInterfaceRequest) GetSerialInterfaceId() uint32 {
 	if m != nil {
@@ -347,7 +349,7 @@ type RemoveSerialInterfaceResponse struct {
 func (m *RemoveSerialInterfaceResponse) Reset()                    { *m = RemoveSerialInterfaceResponse{} }
 func (m *RemoveSerialInterfaceResponse) String() string            { return proto.CompactTextString(m) }
 func (*RemoveSerialInterfaceResponse) ProtoMessage()               {}
-func (*RemoveSerialInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor7, []int{11} }
+func (*RemoveSerialInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor10, []int{11} }
 
 func (m *RemoveSerialInterfaceResponse) GetState() RemoveSerialInterfaceResponse_State {
 	if m != nil {
@@ -374,9 +376,9 @@ func init() {
 	proto.RegisterEnum("WompattiService.RemoveSerialInterfaceResponse_State", RemoveSerialInterfaceResponse_State_name, RemoveSerialInterfaceResponse_State_value)
 }
 
-func init() { proto.RegisterFile("serial_interface.proto", fileDescriptor7) }
+func init() { proto.RegisterFile("serial_interface.proto", fileDescriptor10) }
 
-var fileDescriptor7 = []byte{
+var fileDescriptor10 = []byte{
 	// 521 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x54, 0xd1, 0x6e, 0x12, 0x41,
 	0x14, 0x75, 0x29, 0x54, 0xbd, 0x48, 0xc1, 0x49, 0xd3, 0xac, 0x48, 0x95, 0x8c, 0x31, 0xe1, 0xc1,

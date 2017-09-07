@@ -26,7 +26,7 @@ type EthernetInterface struct {
 func (m *EthernetInterface) Reset()                    { *m = EthernetInterface{} }
 func (m *EthernetInterface) String() string            { return proto.CompactTextString(m) }
 func (*EthernetInterface) ProtoMessage()               {}
-func (*EthernetInterface) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{0} }
+func (*EthernetInterface) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
 
 func (m *EthernetInterface) GetId() uint32 {
 	if m != nil {
@@ -87,7 +87,7 @@ type FetchEthernetInterfacesRequest struct {
 func (m *FetchEthernetInterfacesRequest) Reset()                    { *m = FetchEthernetInterfacesRequest{} }
 func (m *FetchEthernetInterfacesRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchEthernetInterfacesRequest) ProtoMessage()               {}
-func (*FetchEthernetInterfacesRequest) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{1} }
+func (*FetchEthernetInterfacesRequest) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{1} }
 
 func (m *FetchEthernetInterfacesRequest) GetAfter() uint32 {
 	if m != nil {
@@ -126,7 +126,7 @@ type EthernetInterfacesConnection struct {
 func (m *EthernetInterfacesConnection) Reset()                    { *m = EthernetInterfacesConnection{} }
 func (m *EthernetInterfacesConnection) String() string            { return proto.CompactTextString(m) }
 func (*EthernetInterfacesConnection) ProtoMessage()               {}
-func (*EthernetInterfacesConnection) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{2} }
+func (*EthernetInterfacesConnection) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{2} }
 
 func (m *EthernetInterfacesConnection) GetPageInfo() *PageInfo {
 	if m != nil {
@@ -157,7 +157,7 @@ type EthernetInterfaceEdge struct {
 func (m *EthernetInterfaceEdge) Reset()                    { *m = EthernetInterfaceEdge{} }
 func (m *EthernetInterfaceEdge) String() string            { return proto.CompactTextString(m) }
 func (*EthernetInterfaceEdge) ProtoMessage()               {}
-func (*EthernetInterfaceEdge) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{3} }
+func (*EthernetInterfaceEdge) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{3} }
 
 func (m *EthernetInterfaceEdge) GetNode() *EthernetInterface {
 	if m != nil {
@@ -180,9 +180,9 @@ func init() {
 	proto.RegisterType((*EthernetInterfaceEdge)(nil), "WompattiService.EthernetInterfaceEdge")
 }
 
-func init() { proto.RegisterFile("ethernet_interface.proto", fileDescriptor5) }
+func init() { proto.RegisterFile("ethernet_interface.proto", fileDescriptor6) }
 
-var fileDescriptor5 = []byte{
+var fileDescriptor6 = []byte{
 	// 358 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x92, 0x4f, 0x4f, 0xe3, 0x30,
 	0x10, 0xc5, 0x95, 0xf4, 0xcf, 0xee, 0x4e, 0xb7, 0xdb, 0x5d, 0x6b, 0x41, 0x06, 0xa1, 0x2a, 0xca,

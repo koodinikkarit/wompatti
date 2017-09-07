@@ -23,7 +23,7 @@ type PageInfo struct {
 func (m *PageInfo) Reset()                    { *m = PageInfo{} }
 func (m *PageInfo) String() string            { return proto.CompactTextString(m) }
 func (*PageInfo) ProtoMessage()               {}
-func (*PageInfo) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
+func (*PageInfo) Descriptor() ([]byte, []int) { return fileDescriptor9, []int{0} }
 
 func (m *PageInfo) GetHasNextPage() bool {
 	if m != nil {
@@ -57,9 +57,9 @@ func init() {
 	proto.RegisterType((*PageInfo)(nil), "WompattiService.PageInfo")
 }
 
-func init() { proto.RegisterFile("page_info.proto", fileDescriptor6) }
+func init() { proto.RegisterFile("page_info.proto", fileDescriptor9) }
 
-var fileDescriptor6 = []byte{
+var fileDescriptor9 = []byte{
 	// 156 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2f, 0x48, 0x4c, 0x4f,
 	0x8d, 0xcf, 0xcc, 0x4b, 0xcb, 0xd7, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x0f, 0xcf, 0xcf,

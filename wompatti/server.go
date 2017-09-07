@@ -1,32 +1,25 @@
 package wompatti
 
-import (
-	"github.com/jinzhu/gorm"
-	"github.com/koodinikkarit/wompatti/db"
-	"google.golang.org/grpc"
-)
-
 type WompattiServer struct {
-	db              *gorm.DB
-	wompattiService *grpc.Server
-	arttuService    *grpc.Server
+	NewContext func() *WompattiContext
 }
 
 func CreateWompattiServer(
+	wompattiServerPort string,
 	dbUser string,
 	dbPass string,
 	dbIp string,
 	dbPort string,
 	dbName string,
-	wompattiServicePort string,
-	arttuServicePort string) {
+	dev bool,
+) {
+	contextGenerator := NewContextGenerator(
+		dbUser,
+		dbPass,
+		dbIp,
+		dbPort,
+		dbName,
+	)
 
-	db := wompatti.CreateDb(dbUser, dbPass, dbIp, dbPort, dbName)
-
-	CreateWompattiService(db, wompattiServicePort)
-	//CreateArttuService(db, arttuServicePort)
-
-	// return &WompattiServer{
-	// 	db: db,
-	// }
+	CreateWompattiService(contextGenerator.NewContext, wompattiServicePort)
 }
