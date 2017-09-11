@@ -27,6 +27,53 @@ func (c *Context) GetDb() *gorm.DB {
 	return c.db
 }
 
+func (c *Context) CreateComputer(
+	name string,
+) *WompattiModels.Computer {
+	computer := &WompattiModels.Computer{
+		Name: name,
+	}
+	c.db.Create(&computer)
+	return computer
+}
+
+func (c *Context) UpdateComputer(
+	computerID uint32,
+	name string,
+	wolInterfaceID uint32,
+	ip string,
+	mac string,
+) *WompattiModels.Computer {
+	var computer WompattiModels.Computer
+	c.db.First(&computer, computerID)
+	if computer.ID > 0 {
+		if name != "" {
+			computer.Name = name
+		}
+		if wolInterfaceID > 0 {
+			computer.WolInterfaceID = wolInterfaceID
+		}
+		if ip != "" {
+			computer.IP = ip
+		}
+		if mac != "" {
+			computer.mac = mac
+		}
+		c.db.Save(&computer)
+	}
+	return &computer
+}
+
+func (c *Context) RemoveComputer(computerID uint32) bool {
+	var computer WompattiModels.Computer
+	c.db.First(&computer, computerID)
+	if computer.ID > 0 {
+		c.db.Delete(&computer)
+		return true
+	}
+	return false
+}
+
 func (c *Context) CreateWolInterface(
 	EthernetInterfaceID uint32,
 	Mac string,
@@ -47,7 +94,7 @@ func (c *Context) EditWolInterface(
 	var wolInterface WompattiModels.WolInterface
 	c.db.First(&wolInterface, ID)
 	if wolInterface.ID > 0 {
-		c.db.Updates(wolInterface)
+		c.db.Model(&wolInterface).Update("mac", Mac)
 	}
 	return &wolInterface
 }

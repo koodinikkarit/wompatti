@@ -7,11 +7,63 @@ import (
 	WompattiService "github.com/koodinikkarit/wompatti/wompatti_service"
 )
 
+func (s *Server) FetchComputers(
+	ctx context.Context,
+	in *WompattiService.FetchComputersRequest,
+) (*WompattiService.FetchComputersResponse, error) {
+	res := &WompattiService.FetchComputersResponse{}
+	c := s.newContext()
+	computers := []WompattiModels.Computer{}
+	c.GetDb().Find(&computers)
+	for i := 0; i < len(computers); i++ {
+		res.Computers = append(
+			res.Computers,
+			NewComputer(&computers[i]),
+		)
+	}
+	return res, nil
+}
+
+func (s *Server) FetchComputerById(
+	ctx context.Context,
+	in *WompattiService.FetchComputerByIdRequest,
+) (*WompattiService.FetchComputerByIdResponse, error) {
+	res := &WompattiService.FetchComputerByIdResponse{}
+	c := s.newContext()
+	computers := []WompattiModels.Computer{}
+	c.GetDb().Where("id in (?)", in.ComputerIds).
+		Find(&computers)
+
+	for i := 0; i < len(in.ComputerIds); i++ {
+		found := false
+		for j := 0; j < len(computers); j++ {
+			if in.ComputerIds[i] == computers[j].ID {
+				found = true
+				res.Computers = append(
+					res.Computers,
+					NewComputer(&computers[j]),
+				)
+			}
+		}
+		if found == false {
+			res.Computers = append(
+				res.Computers,
+				&WompattiService.Computer{
+					Id: 0,
+				},
+			)
+		}
+	}
+
+	return res, nil
+}
+
 func (s *Server) FetchTelnetInterfaces(
 	ctx context.Context,
 	in *WompattiService.FetchTelnetInterfacesRequest,
 ) (*WompattiService.FetchTelnetInterfacesResponse, error) {
 	res := &WompattiService.FetchTelnetInterfacesResponse{}
+
 	return res, nil
 }
 

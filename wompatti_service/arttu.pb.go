@@ -42,17 +42,14 @@ It has these top-level messages:
 	RemoveCommandRequest
 	RemoveCommandResponse
 	Computer
-	ComputersEdge
-	ComputersConnection
+	FetchComputersRequest
+	FetchComputersResponse
 	FetchComputerByIdRequest
 	FetchComputerByIdResponse
-	FetchManyComputerByIdRequest
-	FetchManyComputerByIdResponse
-	FetchComputersRequest
 	CreateComputerRequest
 	CreateComputerResponse
-	EditComputerRequest
-	EditComputerResponse
+	UpdateComputerRequest
+	UpdateComputerResponse
 	RemoveComputerRequest
 	RemoveComputerResponse
 	Device
@@ -155,8 +152,8 @@ It has these top-level messages:
 	EditWolInterfaceResponse
 	RemoveWolInterfaceRequest
 	RemoveWolInterfaceResponse
-	WakeupWolInterfaceRequest
-	WakeupWolInterfaceResponse
+	WakeupRequest
+	WakeupResponse
 */
 package WompattiService
 

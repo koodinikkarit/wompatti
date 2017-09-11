@@ -3,6 +3,7 @@ package WompattiModels
 import "github.com/jinzhu/gorm"
 
 func Migrate(db *gorm.DB) {
+	db.AutoMigrate(&Computer{})
 	db.AutoMigrate(&Command{})
 	db.AutoMigrate(&Device{})
 	db.AutoMigrate(&DeviceType{})

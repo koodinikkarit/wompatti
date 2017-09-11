@@ -3,8 +3,49 @@ package WompattiServiceServer
 import (
 	"golang.org/x/net/context"
 
+	"github.com/ghthor/gowol"
+	"github.com/koodinikkarit/wompatti/models"
 	WompattiService "github.com/koodinikkarit/wompatti/wompatti_service"
 )
+
+func (s *Server) CreateComputer(
+	ctx context.Context,
+	in *WompattiService.CreateComputerRequest,
+) (*WompattiService.CreateComputerResponse, error) {
+	res := &WompattiService.CreateComputerResponse{}
+	context := s.newContext()
+	res.Computer = NewComputer(context.CreateComputer(in.Name))
+	context.Commit()
+	return res, nil
+}
+
+func (s *Server) UpdateComputer(
+	ctx context.Context,
+	in *WompattiService.UpdateComputerRequest,
+) (*WompattiService.UpdateComputerResponse, error) {
+	res := &WompattiService.UpdateComputerResponse{}
+	context := s.newContext()
+	res.Computer = NewComputer(context.UpdateComputer(
+		in.ComputerId,
+		in.Name,
+		in.WolInterfaceId,
+		in.Ip,
+		in.Mac,
+	))
+	context.Commit()
+	return res, nil
+}
+
+func (s *Server) RemoveComputer(
+	ctx context.Context,
+	in *WompattiService.RemoveComputerRequest,
+) (*WompattiService.RemoveComputerResponse, error) {
+	res := &WompattiService.RemoveComputerResponse{}
+	c := s.newContext()
+	res.Success = c.RemoveComputer(in.ComputerId)
+	c.Commit()
+	return res, nil
+}
 
 func (s *Server) CreateTelnetInterface(
 	ctx context.Context,
@@ -192,10 +233,20 @@ func (s *Server) RemoveWolInterface(
 	return res, nil
 }
 
-func (s *Server) WakeupWolInterface(
+func (s *Server) Wakeup(
 	ctx context.Context,
-	in *WompattiService.WakeupWolInterfaceRequest,
-) (*WompattiService.WakeupWolInterfaceResponse, error) {
-	res := &WompattiService.WakeupWolInterfaceResponse{}
+	in *WompattiService.WakeupRequest,
+) (*WompattiService.WakeupResponse, error) {
+	res := &WompattiService.WakeupResponse{}
+	context := s.newContext()
+	var wolInterface WompattiModels.WolInterface
+	context.GetDb().First(&wolInterface, in.WolInterfaceId)
+	if wolInterface.ID > 0 {
+		wol.MagicWake(wolInterface.Mac, "255.255.255.255")
+		res.Success = true
+	} else {
+		res.Success = false
+	}
+
 	return res, nil
 }
