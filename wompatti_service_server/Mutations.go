@@ -1,8 +1,10 @@
 package WompattiServiceServer
 
 import (
+	"fmt"
 	"net"
 	"strconv"
+	"strings"
 
 	"github.com/koodinikkarit/wompatti/models"
 	"golang.org/x/net/context"
@@ -255,7 +257,14 @@ func (s *Server) Wakeup(
 			}
 			defer conn.Close()
 
-			mac := []byte{0x00, 0x18, 0xfe, 0x6c, 0x2c, 0xae}
+			var mac []byte
+
+			macParts := strings.Split(computer.Mac, ":")
+			for i := 0; i < len(macParts); i++ {
+				x, _ := strconv.ParseInt(macParts[i], 16, 0)
+				fmt.Println(x)
+				mac = append(mac, byte(x))
+			}
 
 			var buff []byte
 			buff = append(buff, 255)
@@ -266,7 +275,7 @@ func (s *Server) Wakeup(
 			buff = append(buff, 255)
 
 			for i := 0; i < 16; i++ {
-				for j := 0; j < 6; j++ {
+				for j := 0; j < len(mac); j++ {
 					//buff[6+(i*6)+j] = mac[j]
 					buff = append(buff, mac[j])
 				}
