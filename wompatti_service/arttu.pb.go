@@ -16,6 +16,7 @@ It is generated from these files:
 	keijo.proto
 	key_value.proto
 	page_info.proto
+	ping.proto
 	serial_interface.proto
 	severi.proto
 	telnet_interface.proto
@@ -52,6 +53,8 @@ It has these top-level messages:
 	UpdateComputerResponse
 	RemoveComputerRequest
 	RemoveComputerResponse
+	WakeupRequest
+	WakeupResponse
 	Device
 	FetchDevicesRequest
 	FetchDevicesResponse
@@ -105,6 +108,8 @@ It has these top-level messages:
 	RemoveKeyValueRequest
 	RemoveKeyValueResponse
 	PageInfo
+	PingRequest
+	PingResponse
 	SerialInterface
 	SerialInterfacesEdge
 	SerialInterfacesConnection
@@ -148,12 +153,10 @@ It has these top-level messages:
 	FetchWolInterfaceByIdResponse
 	CreateWolInterfaceRequest
 	CreateWolInterfaceResponse
-	EditWolInterfaceRequest
-	EditWolInterfaceResponse
+	UpdateWolInterfaceRequest
+	UpdateWolInterfaceResponse
 	RemoveWolInterfaceRequest
 	RemoveWolInterfaceResponse
-	WakeupRequest
-	WakeupResponse
 */
 package WompattiService
 

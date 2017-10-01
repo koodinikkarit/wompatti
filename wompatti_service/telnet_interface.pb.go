@@ -33,7 +33,7 @@ func (x EditTelnetInterfaceResponse_State) String() string {
 	return proto.EnumName(EditTelnetInterfaceResponse_State_name, int32(x))
 }
 func (EditTelnetInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor12, []int{10, 0}
+	return fileDescriptor13, []int{10, 0}
 }
 
 type RemoveTelnetInterfaceResponse_State int32
@@ -56,7 +56,7 @@ func (x RemoveTelnetInterfaceResponse_State) String() string {
 	return proto.EnumName(RemoveTelnetInterfaceResponse_State_name, int32(x))
 }
 func (RemoveTelnetInterfaceResponse_State) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor12, []int{12, 0}
+	return fileDescriptor13, []int{12, 0}
 }
 
 type TelnetInterface struct {
@@ -68,7 +68,7 @@ type TelnetInterface struct {
 func (m *TelnetInterface) Reset()                    { *m = TelnetInterface{} }
 func (m *TelnetInterface) String() string            { return proto.CompactTextString(m) }
 func (*TelnetInterface) ProtoMessage()               {}
-func (*TelnetInterface) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{0} }
+func (*TelnetInterface) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{0} }
 
 func (m *TelnetInterface) GetId() uint32 {
 	if m != nil {
@@ -100,7 +100,7 @@ type TelnetInterfacesConnection struct {
 func (m *TelnetInterfacesConnection) Reset()                    { *m = TelnetInterfacesConnection{} }
 func (m *TelnetInterfacesConnection) String() string            { return proto.CompactTextString(m) }
 func (*TelnetInterfacesConnection) ProtoMessage()               {}
-func (*TelnetInterfacesConnection) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{1} }
+func (*TelnetInterfacesConnection) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{1} }
 
 func (m *TelnetInterfacesConnection) GetPageInfo() *PageInfo {
 	if m != nil {
@@ -131,7 +131,7 @@ type TelnetInterfacesEdge struct {
 func (m *TelnetInterfacesEdge) Reset()                    { *m = TelnetInterfacesEdge{} }
 func (m *TelnetInterfacesEdge) String() string            { return proto.CompactTextString(m) }
 func (*TelnetInterfacesEdge) ProtoMessage()               {}
-func (*TelnetInterfacesEdge) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{2} }
+func (*TelnetInterfacesEdge) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{2} }
 
 func (m *TelnetInterfacesEdge) GetNode() *TelnetInterface {
 	if m != nil {
@@ -153,7 +153,7 @@ type FetchTelnetInterfacesRequest struct {
 func (m *FetchTelnetInterfacesRequest) Reset()                    { *m = FetchTelnetInterfacesRequest{} }
 func (m *FetchTelnetInterfacesRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchTelnetInterfacesRequest) ProtoMessage()               {}
-func (*FetchTelnetInterfacesRequest) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{3} }
+func (*FetchTelnetInterfacesRequest) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{3} }
 
 type FetchTelnetInterfacesResponse struct {
 }
@@ -161,7 +161,7 @@ type FetchTelnetInterfacesResponse struct {
 func (m *FetchTelnetInterfacesResponse) Reset()                    { *m = FetchTelnetInterfacesResponse{} }
 func (m *FetchTelnetInterfacesResponse) String() string            { return proto.CompactTextString(m) }
 func (*FetchTelnetInterfacesResponse) ProtoMessage()               {}
-func (*FetchTelnetInterfacesResponse) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{4} }
+func (*FetchTelnetInterfacesResponse) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{4} }
 
 type FetchTelnetInterfaceByIdRequest struct {
 	TelnetInterfaceId []uint32 `protobuf:"varint,1,rep,packed,name=telnetInterfaceId" json:"telnetInterfaceId,omitempty"`
@@ -171,7 +171,7 @@ func (m *FetchTelnetInterfaceByIdRequest) Reset()         { *m = FetchTelnetInte
 func (m *FetchTelnetInterfaceByIdRequest) String() string { return proto.CompactTextString(m) }
 func (*FetchTelnetInterfaceByIdRequest) ProtoMessage()    {}
 func (*FetchTelnetInterfaceByIdRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor12, []int{5}
+	return fileDescriptor13, []int{5}
 }
 
 func (m *FetchTelnetInterfaceByIdRequest) GetTelnetInterfaceId() []uint32 {
@@ -189,7 +189,7 @@ func (m *FetchTelnetInterfaceByIdResponse) Reset()         { *m = FetchTelnetInt
 func (m *FetchTelnetInterfaceByIdResponse) String() string { return proto.CompactTextString(m) }
 func (*FetchTelnetInterfaceByIdResponse) ProtoMessage()    {}
 func (*FetchTelnetInterfaceByIdResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor12, []int{6}
+	return fileDescriptor13, []int{6}
 }
 
 func (m *FetchTelnetInterfaceByIdResponse) GetTelnetInterfaces() []*TelnetInterface {
@@ -207,7 +207,7 @@ type CreateTelnetInterfaceRequest struct {
 func (m *CreateTelnetInterfaceRequest) Reset()                    { *m = CreateTelnetInterfaceRequest{} }
 func (m *CreateTelnetInterfaceRequest) String() string            { return proto.CompactTextString(m) }
 func (*CreateTelnetInterfaceRequest) ProtoMessage()               {}
-func (*CreateTelnetInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{7} }
+func (*CreateTelnetInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{7} }
 
 func (m *CreateTelnetInterfaceRequest) GetIp() string {
 	if m != nil {
@@ -230,7 +230,7 @@ type CreateTelnetInterfaceResponse struct {
 func (m *CreateTelnetInterfaceResponse) Reset()                    { *m = CreateTelnetInterfaceResponse{} }
 func (m *CreateTelnetInterfaceResponse) String() string            { return proto.CompactTextString(m) }
 func (*CreateTelnetInterfaceResponse) ProtoMessage()               {}
-func (*CreateTelnetInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{8} }
+func (*CreateTelnetInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{8} }
 
 func (m *CreateTelnetInterfaceResponse) GetTelnetInterface() *TelnetInterface {
 	if m != nil {
@@ -248,7 +248,7 @@ type EditTelnetInterfaceRequest struct {
 func (m *EditTelnetInterfaceRequest) Reset()                    { *m = EditTelnetInterfaceRequest{} }
 func (m *EditTelnetInterfaceRequest) String() string            { return proto.CompactTextString(m) }
 func (*EditTelnetInterfaceRequest) ProtoMessage()               {}
-func (*EditTelnetInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{9} }
+func (*EditTelnetInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{9} }
 
 func (m *EditTelnetInterfaceRequest) GetId() uint32 {
 	if m != nil {
@@ -279,7 +279,7 @@ type EditTelnetInterfaceResponse struct {
 func (m *EditTelnetInterfaceResponse) Reset()                    { *m = EditTelnetInterfaceResponse{} }
 func (m *EditTelnetInterfaceResponse) String() string            { return proto.CompactTextString(m) }
 func (*EditTelnetInterfaceResponse) ProtoMessage()               {}
-func (*EditTelnetInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{10} }
+func (*EditTelnetInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{10} }
 
 func (m *EditTelnetInterfaceResponse) GetState() EditTelnetInterfaceResponse_State {
 	if m != nil {
@@ -302,7 +302,7 @@ type RemoveTelnetInterfaceRequest struct {
 func (m *RemoveTelnetInterfaceRequest) Reset()                    { *m = RemoveTelnetInterfaceRequest{} }
 func (m *RemoveTelnetInterfaceRequest) String() string            { return proto.CompactTextString(m) }
 func (*RemoveTelnetInterfaceRequest) ProtoMessage()               {}
-func (*RemoveTelnetInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{11} }
+func (*RemoveTelnetInterfaceRequest) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{11} }
 
 func (m *RemoveTelnetInterfaceRequest) GetTelnetInterfaceId() uint32 {
 	if m != nil {
@@ -318,7 +318,7 @@ type RemoveTelnetInterfaceResponse struct {
 func (m *RemoveTelnetInterfaceResponse) Reset()                    { *m = RemoveTelnetInterfaceResponse{} }
 func (m *RemoveTelnetInterfaceResponse) String() string            { return proto.CompactTextString(m) }
 func (*RemoveTelnetInterfaceResponse) ProtoMessage()               {}
-func (*RemoveTelnetInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{12} }
+func (*RemoveTelnetInterfaceResponse) Descriptor() ([]byte, []int) { return fileDescriptor13, []int{12} }
 
 func (m *RemoveTelnetInterfaceResponse) GetState() RemoveTelnetInterfaceResponse_State {
 	if m != nil {
@@ -345,9 +345,9 @@ func init() {
 	proto.RegisterEnum("WompattiService.RemoveTelnetInterfaceResponse_State", RemoveTelnetInterfaceResponse_State_name, RemoveTelnetInterfaceResponse_State_value)
 }
 
-func init() { proto.RegisterFile("telnet_interface.proto", fileDescriptor12) }
+func init() { proto.RegisterFile("telnet_interface.proto", fileDescriptor13) }
 
-var fileDescriptor12 = []byte{
+var fileDescriptor13 = []byte{
 	// 487 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0x4d, 0x6f, 0xd3, 0x40,
 	0x10, 0xc5, 0x4e, 0x53, 0xe8, 0x44, 0x69, 0xc2, 0x0a, 0x55, 0x21, 0x24, 0xad, 0xb5, 0x08, 0x29,

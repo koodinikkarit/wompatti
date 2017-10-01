@@ -57,7 +57,7 @@ func (c *Context) UpdateComputer(
 			computer.IP = ip
 		}
 		if mac != "" {
-			computer.mac = mac
+			computer.Mac = mac
 		}
 		c.db.Save(&computer)
 	}
@@ -75,26 +75,28 @@ func (c *Context) RemoveComputer(computerID uint32) bool {
 }
 
 func (c *Context) CreateWolInterface(
-	EthernetInterfaceID uint32,
-	Mac string,
+	ip string,
+	port uint32,
 ) *WompattiModels.WolInterface {
 	wolInterface := &WompattiModels.WolInterface{
-		EthernetInterfaceID: EthernetInterfaceID,
-		Mac:                 Mac,
+		IP:   ip,
+		Port: port,
 	}
 	c.db.Create(&wolInterface)
 	return wolInterface
 }
 
-func (c *Context) EditWolInterface(
+func (c *Context) UpdateWolInterface(
 	ID uint32,
-	EthernetInterfaceID uint32,
-	Mac string,
+	ip string,
+	port uint32,
 ) *WompattiModels.WolInterface {
 	var wolInterface WompattiModels.WolInterface
 	c.db.First(&wolInterface, ID)
 	if wolInterface.ID > 0 {
-		c.db.Model(&wolInterface).Update("mac", Mac)
+		wolInterface.IP = ip
+		wolInterface.Port = port
+		c.db.Save(&wolInterface)
 	}
 	return &wolInterface
 }

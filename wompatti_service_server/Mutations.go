@@ -1,10 +1,12 @@
 package WompattiServiceServer
 
 import (
+	"net"
+	"strconv"
+
+	"github.com/koodinikkarit/wompatti/models"
 	"golang.org/x/net/context"
 
-	"github.com/ghthor/gowol"
-	"github.com/koodinikkarit/wompatti/models"
 	WompattiService "github.com/koodinikkarit/wompatti/wompatti_service"
 )
 
@@ -198,24 +200,24 @@ func (s *Server) CreateWolInterface(
 	res := &WompattiService.CreateWolInterfaceResponse{}
 	context := s.newContext()
 	wolInterface := context.CreateWolInterface(
-		in.EthernetInterfaceId,
-		in.Mac,
+		in.Ip,
+		in.Port,
 	)
 	context.Commit()
 	res.WolInterface = NewWolInterface(wolInterface)
 	return res, nil
 }
 
-func (s *Server) EditWolInterface(
+func (s *Server) UpdateWolInterface(
 	ctx context.Context,
-	in *WompattiService.EditWolInterfaceRequest,
-) (*WompattiService.EditWolInterfaceResponse, error) {
-	res := &WompattiService.EditWolInterfaceResponse{}
+	in *WompattiService.UpdateWolInterfaceRequest,
+) (*WompattiService.UpdateWolInterfaceResponse, error) {
+	res := &WompattiService.UpdateWolInterfaceResponse{}
 	context := s.newContext()
-	wolInterface := context.EditWolInterface(
+	wolInterface := context.UpdateWolInterface(
 		in.WolInterfaceId,
-		in.EthernetInterfaceId,
-		in.Mac,
+		in.Ip,
+		in.Port,
 	)
 	context.Commit()
 	res.WolInterface = NewWolInterface(wolInterface)
@@ -238,15 +240,54 @@ func (s *Server) Wakeup(
 	in *WompattiService.WakeupRequest,
 ) (*WompattiService.WakeupResponse, error) {
 	res := &WompattiService.WakeupResponse{}
+
 	context := s.newContext()
-	var wolInterface WompattiModels.WolInterface
-	context.GetDb().First(&wolInterface, in.WolInterfaceId)
-	if wolInterface.ID > 0 {
-		wol.MagicWake(wolInterface.Mac, "255.255.255.255")
-		res.Success = true
-	} else {
-		res.Success = false
+
+	var computer WompattiModels.Computer
+	context.GetDb().First(&computer, in.ComputerId)
+	if computer.ID > 0 {
+		var wolInterface WompattiModels.WolInterface
+		context.GetDb().First(&wolInterface, computer.WolInterfaceID)
+		if wolInterface.ID > 0 {
+			conn, err := net.Dial("udp", wolInterface.IP+":"+strconv.Itoa(int(wolInterface.Port)))
+			if err != nil {
+				return nil, nil
+			}
+			defer conn.Close()
+
+			mac := []byte{0x00, 0x18, 0xfe, 0x6c, 0x2c, 0xae}
+
+			var buff []byte
+			buff = append(buff, 255)
+			buff = append(buff, 255)
+			buff = append(buff, 255)
+			buff = append(buff, 255)
+			buff = append(buff, 255)
+			buff = append(buff, 255)
+
+			for i := 0; i < 16; i++ {
+				for j := 0; j < 6; j++ {
+					//buff[6+(i*6)+j] = mac[j]
+					buff = append(buff, mac[j])
+				}
+			}
+
+			conn.Write(buff)
+			res.Success = true
+		}
 	}
+
+	res.Success = false
+
+	// context := s.newContext()
+	// var wolInterface WompattiModels.WolInterface
+	// context.GetDb().First(&wolInterface, in.WolInterfaceId)
+	// if wolInterface.ID > 0 {
+	// 	wol.MagicWake(wolInterface.Mac, "255.255.255.255")
+	// 	res.Success = true
+	// } else {
+	// 	res.Success = false
+	// }
 
 	return res, nil
 }

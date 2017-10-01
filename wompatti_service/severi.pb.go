@@ -22,7 +22,7 @@ type Severi struct {
 func (m *Severi) Reset()                    { *m = Severi{} }
 func (m *Severi) String() string            { return proto.CompactTextString(m) }
 func (*Severi) ProtoMessage()               {}
-func (*Severi) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{0} }
+func (*Severi) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{0} }
 
 func (m *Severi) GetId() uint32 {
 	if m != nil {
@@ -51,7 +51,7 @@ type FetchSeverisRequest struct {
 func (m *FetchSeverisRequest) Reset()                    { *m = FetchSeverisRequest{} }
 func (m *FetchSeverisRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchSeverisRequest) ProtoMessage()               {}
-func (*FetchSeverisRequest) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{1} }
+func (*FetchSeverisRequest) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{1} }
 
 type FetchSeverisResponse struct {
 }
@@ -59,7 +59,7 @@ type FetchSeverisResponse struct {
 func (m *FetchSeverisResponse) Reset()                    { *m = FetchSeverisResponse{} }
 func (m *FetchSeverisResponse) String() string            { return proto.CompactTextString(m) }
 func (*FetchSeverisResponse) ProtoMessage()               {}
-func (*FetchSeverisResponse) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{2} }
+func (*FetchSeverisResponse) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{2} }
 
 type FetchSeveriByIdRequest struct {
 }
@@ -67,7 +67,7 @@ type FetchSeveriByIdRequest struct {
 func (m *FetchSeveriByIdRequest) Reset()                    { *m = FetchSeveriByIdRequest{} }
 func (m *FetchSeveriByIdRequest) String() string            { return proto.CompactTextString(m) }
 func (*FetchSeveriByIdRequest) ProtoMessage()               {}
-func (*FetchSeveriByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{3} }
+func (*FetchSeveriByIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{3} }
 
 type FetchSeveriByIdResponse struct {
 }
@@ -75,7 +75,7 @@ type FetchSeveriByIdResponse struct {
 func (m *FetchSeveriByIdResponse) Reset()                    { *m = FetchSeveriByIdResponse{} }
 func (m *FetchSeveriByIdResponse) String() string            { return proto.CompactTextString(m) }
 func (*FetchSeveriByIdResponse) ProtoMessage()               {}
-func (*FetchSeveriByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{4} }
+func (*FetchSeveriByIdResponse) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{4} }
 
 type CreateSeveriRequest struct {
 }
@@ -83,7 +83,7 @@ type CreateSeveriRequest struct {
 func (m *CreateSeveriRequest) Reset()                    { *m = CreateSeveriRequest{} }
 func (m *CreateSeveriRequest) String() string            { return proto.CompactTextString(m) }
 func (*CreateSeveriRequest) ProtoMessage()               {}
-func (*CreateSeveriRequest) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{5} }
+func (*CreateSeveriRequest) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{5} }
 
 type CreateSeveriResponse struct {
 }
@@ -91,7 +91,7 @@ type CreateSeveriResponse struct {
 func (m *CreateSeveriResponse) Reset()                    { *m = CreateSeveriResponse{} }
 func (m *CreateSeveriResponse) String() string            { return proto.CompactTextString(m) }
 func (*CreateSeveriResponse) ProtoMessage()               {}
-func (*CreateSeveriResponse) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{6} }
+func (*CreateSeveriResponse) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{6} }
 
 type EditSeveriRequest struct {
 }
@@ -99,7 +99,7 @@ type EditSeveriRequest struct {
 func (m *EditSeveriRequest) Reset()                    { *m = EditSeveriRequest{} }
 func (m *EditSeveriRequest) String() string            { return proto.CompactTextString(m) }
 func (*EditSeveriRequest) ProtoMessage()               {}
-func (*EditSeveriRequest) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{7} }
+func (*EditSeveriRequest) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{7} }
 
 type EditSeveriResponse struct {
 }
@@ -107,7 +107,7 @@ type EditSeveriResponse struct {
 func (m *EditSeveriResponse) Reset()                    { *m = EditSeveriResponse{} }
 func (m *EditSeveriResponse) String() string            { return proto.CompactTextString(m) }
 func (*EditSeveriResponse) ProtoMessage()               {}
-func (*EditSeveriResponse) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{8} }
+func (*EditSeveriResponse) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{8} }
 
 type RemoveSeveriRequest struct {
 }
@@ -115,7 +115,7 @@ type RemoveSeveriRequest struct {
 func (m *RemoveSeveriRequest) Reset()                    { *m = RemoveSeveriRequest{} }
 func (m *RemoveSeveriRequest) String() string            { return proto.CompactTextString(m) }
 func (*RemoveSeveriRequest) ProtoMessage()               {}
-func (*RemoveSeveriRequest) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{9} }
+func (*RemoveSeveriRequest) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{9} }
 
 type RemoveSeveriResponse struct {
 }
@@ -123,7 +123,7 @@ type RemoveSeveriResponse struct {
 func (m *RemoveSeveriResponse) Reset()                    { *m = RemoveSeveriResponse{} }
 func (m *RemoveSeveriResponse) String() string            { return proto.CompactTextString(m) }
 func (*RemoveSeveriResponse) ProtoMessage()               {}
-func (*RemoveSeveriResponse) Descriptor() ([]byte, []int) { return fileDescriptor11, []int{10} }
+func (*RemoveSeveriResponse) Descriptor() ([]byte, []int) { return fileDescriptor12, []int{10} }
 
 func init() {
 	proto.RegisterType((*Severi)(nil), "WompattiService.Severi")
@@ -139,9 +139,9 @@ func init() {
 	proto.RegisterType((*RemoveSeveriResponse)(nil), "WompattiService.RemoveSeveriResponse")
 }
 
-func init() { proto.RegisterFile("severi.proto", fileDescriptor11) }
+func init() { proto.RegisterFile("severi.proto", fileDescriptor12) }
 
-var fileDescriptor11 = []byte{
+var fileDescriptor12 = []byte{
 	// 203 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x90, 0x3b, 0x6b, 0xc3, 0x30,
 	0x14, 0x85, 0xb1, 0x5a, 0x0c, 0xbd, 0xf4, 0x41, 0xe5, 0x47, 0xd5, 0xcd, 0x68, 0xf2, 0xd4, 0xa5,

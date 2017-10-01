@@ -9,11 +9,13 @@ import (
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/reflection"
 
+	"github.com/koodinikkarit/wompatti/pinger"
 	WompattiService "github.com/koodinikkarit/wompatti/wompatti_service"
 )
 
 type WompattiServiceServer struct {
 	newContext func() *WompattiContext
+	pinger     *Pinger
 }
 
 func CreateWompattiService(newContext func() *WompattiContext, port string) *grpc.Server {
@@ -30,6 +32,7 @@ func CreateWompattiService(newContext func() *WompattiContext, port string) *grp
 	s := grpc.NewServer(grpc.Creds(creds))
 	WompattiService.RegisterWompattiServer(s, &WompattiServiceServer{
 		newContext: newContext,
+		pinger: WompattiPinger.NewPinger()
 	})
 	// Register reflection service on gRPC server.
 	reflection.Register(s)

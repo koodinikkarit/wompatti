@@ -189,13 +189,13 @@ func (s *Server) FetchWolInterfaceById(
 	context := s.newContext()
 
 	wolInterfaces := []WompattiModels.WolInterface{}
-	context.GetDb().Where("id in (?)", in.WolInterfaceIdt).
+	context.GetDb().Where("id in (?)", in.WolInterfaceIds).
 		Find(&wolInterfaces)
 
-	for i := 0; i < len(in.WolInterfaceIdt); i++ {
+	for i := 0; i < len(in.WolInterfaceIds); i++ {
 		found := false
 		for j := 0; j < len(wolInterfaces); j++ {
-			if in.WolInterfaceIdt[i] == wolInterfaces[j].ID {
+			if in.WolInterfaceIds[i] == wolInterfaces[j].ID {
 				found = true
 				res.WolInterfaces = append(
 					res.WolInterfaces,
@@ -214,4 +214,15 @@ func (s *Server) FetchWolInterfaceById(
 	}
 
 	return res, nil
+}
+
+func (s *Server) Ping(
+	ctx context.Context,
+	in *WompattiService.PingRequest,
+) (
+	*WompattiService.PingResponse,
+	error,
+) {
+	res := <-s.pinger.Ping(in.IpAddress)
+	return &res, nil
 }

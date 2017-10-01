@@ -430,3 +430,24 @@ func (s *WompattiServiceServer) FetchSerialInterfaceById(ctx context.Context, in
 
 	return res, nil
 }
+
+// func (s *WompattiServiceServer) Ping(in *WompattiService.PingRequest, stream WompattiService.Wompatti_PingServer) error {
+// 	c <- s.pinger.Ping(in.IpAddress)
+
+// 	for pingResponse <- c {
+// 		if err := stream.Send(pingResponse); err != nil {
+// 			return err;
+// 		}
+// 	}
+// 	return nil;
+// }
+
+func (s *WompattiServiceServer) Ping(
+	ctx context.Context, 
+	in *WompattiService.PingRequest,
+) (
+	*WompattiService.PingResponse,
+	error
+) {
+	return c <- s.pinger.Ping(in.IpAddress)
+}

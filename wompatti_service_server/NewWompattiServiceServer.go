@@ -9,6 +9,7 @@ import (
 	"google.golang.org/grpc/reflection"
 
 	"github.com/koodinikkarit/wompatti/context"
+	"github.com/koodinikkarit/wompatti/pinger"
 
 	WompattiService "github.com/koodinikkarit/wompatti/wompatti_service"
 )
@@ -35,6 +36,7 @@ func NewWompattiService(
 		s,
 		&Server{
 			newContext: newContext,
+			pinger:     WompattiPinger.NewPinger(),
 		},
 	)
 	// Register reflection service on gRPC server.

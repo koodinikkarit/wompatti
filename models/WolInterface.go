@@ -1,7 +1,7 @@
 package WompattiModels
 
 type WolInterface struct {
-	ID                  uint32
-	EthernetInterfaceID uint32
-	Mac                 string
+	ID   uint32
+	IP   string
+	Port uint32
 }
