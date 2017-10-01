@@ -1,22 +1,24 @@
 package main
 
 import (
+	"os"
+
 	"github.com/koodinikkarit/wompatti/context"
 	"github.com/koodinikkarit/wompatti/wompatti_service_server"
 )
 
 func main() {
 	contextGenerator := WompattiContext.NewContextGenerator(
-		"jaska",
-		"asdf321",
-		"localhost",
-		"3306",
-		"wompatti",
+		os.Getenv("WOMPATTI_DB_USERNAME"),
+		os.Getenv("WOMPATTI_DB_PASSWORD"),
+		os.Getenv("WOMPATTI_DB_IP"),
+		os.Getenv("WOMPATTI_DB_PORT"),
+		os.Getenv("WOMPATTI_DB_NAME"),
 		true,
 	)
 
 	WompattiServiceServer.NewWompattiService(
 		contextGenerator.NewContext,
-		"3112",
+		os.Getenv("WOMPATTI_PORT"),
 	)
 }
