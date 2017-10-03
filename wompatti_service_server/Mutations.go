@@ -19,7 +19,7 @@ func (s *Server) CreateComputer(
 	res := &WompattiService.CreateComputerResponse{}
 	context := s.newContext()
 	res.Computer = NewComputer(context.CreateComputer(in.Name))
-	context.Commit()
+	//context.Commit()
 	return res, nil
 }
 
@@ -36,7 +36,7 @@ func (s *Server) UpdateComputer(
 		in.Ip,
 		in.Mac,
 	))
-	context.Commit()
+	//context.Commit()
 	return res, nil
 }
 
@@ -205,7 +205,7 @@ func (s *Server) CreateWolInterface(
 		in.Ip,
 		in.Port,
 	)
-	context.Commit()
+	//context.Commit()
 	res.WolInterface = NewWolInterface(wolInterface)
 	return res, nil
 }
@@ -221,7 +221,7 @@ func (s *Server) UpdateWolInterface(
 		in.Ip,
 		in.Port,
 	)
-	context.Commit()
+	//context.Commit()
 	res.WolInterface = NewWolInterface(wolInterface)
 	return res, nil
 }
@@ -233,7 +233,7 @@ func (s *Server) RemoveWolInterface(
 	res := &WompattiService.RemoveWolInterfaceResponse{}
 	context := s.newContext()
 	res.Success = context.RemoveWolInterface(in.WolInterfaceId)
-	context.Commit()
+	//context.Commit()
 	return res, nil
 }
 

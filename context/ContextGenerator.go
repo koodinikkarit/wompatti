@@ -38,6 +38,6 @@ func (cg *ContextGenerator) getDb() *gorm.DB {
 
 func (cg *ContextGenerator) NewContext() *Context {
 	return &Context{
-		db: cg.getDb().Begin(),
+		db: cg.getDb(),
 	}
 }
