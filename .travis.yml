@@ -10,7 +10,7 @@ install:
   - docker build -t $DOCKER_ID_USER/wompatti .
   - docker tag $DOCKER_ID_USER/wompatti $DOCKER_ID_USER/wompatti:$TAG
 script:
-  - env GOOS=linux GOARCH=arm go main.go -o wompatti-arm
+  - env GOOS=linux GOARCH=arm go build -o wompatti-arm
 after_success:
   - docker push $DOCKER_ID_USER/wompatti
 deploy:
