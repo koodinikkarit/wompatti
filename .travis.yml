@@ -4,9 +4,19 @@ services:
 go:
   1.8.3
 install:
+  - make install
   - docker login -u $DOCKER_ID_USER -p $DOCKER_USER_PASSWORD
   - export TAG=${TRAVIS_TAG:-latest}
   - docker build -t $DOCKER_ID_USER/wompatti .
   - docker tag $DOCKER_ID_USER/wompatti $DOCKER_ID_USER/wompatti:$TAG
+script:
+  - env GOOS=linux GOARCH=arm go main.go -o wompatti-arm
 after_success:
   - docker push $DOCKER_ID_USER/wompatti
+deploy:
+  provider: releases
+  api_key: $GITHUB_API_KEY
+  file: wompatti-arm
+  skip_cleanup: true
+  on:
+    tags: true
