@@ -11,12 +11,23 @@ install:
   - docker tag $DOCKER_ID_USER/wompatti $DOCKER_ID_USER/wompatti:$TAG
 script:
   - env GOOS=linux GOARCH=arm go build -o wompatti-arm
+  - env GOOS=linux GOARCH=arm64 go build -o wompatti-arm-x64
+  - env GOOS=linux GOARCH=ppc64 go build -o wompatti-linux-x64
+  - env GOOS=linux GOARCH=386 go build -o wompatti-linux-x86
+  - env GOOS=windows GOARCH=ppc64 go build -o wompatti-windows-x64
+  - env GOOS=windows GOARCH=386 go build -o wompatti-windows-x86
 after_success:
   - docker push $DOCKER_ID_USER/wompatti
 deploy:
   provider: releases
   api_key: $GITHUB_API_KEY
-  file: wompatti-arm
+  file: 
+    - "wompatti-arm"
+    - "wompatti-arm-x64"
+    - "wompatti-linux-x64"
+    - "wompatti-linux-x86"
+    - "wompatti-windows-x64"
+    - "wompatti-windows-x86"
   skip_cleanup: true
   on:
     tags: true
